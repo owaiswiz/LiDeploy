@@ -1,0 +1,14 @@
+<% if !@instances.blank? %>
+	<div class="container feature-box">
+	<h1> Create An Instance </h1>
+	<i class="fa fa-server fa-5x"></i>
+	<h2> You don't seem to have any instances </h2>
+	<h3> Create One Now with just a Few Clicks ! </h3>
+	<a class="btn btn-default signupbutton" href="new/" style="width: 50% !important;" role="button">Create Instance</a>
+	</div>
+
+<% else %>
+	<% Array(@instances).each do |inst| %>
+	<%= inst.name %>
+	<% end %>
+<% end %>

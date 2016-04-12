@@ -1,0 +1,240 @@
+<% content_for :head do %>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("label.distro").on("click", function() {
+ 			$("label.distro").removeClass("active");
+ 			$("div.ver").hide("fadeOut");
+    		$(this).addClass("active");
+  			});
+  		$(".ubuntu").click(function() { $(".ubuntuver").show("fadeIn"); });
+		$(".fedora").click(function() { $(".fedoraver").show("fadeIn"); });
+		$(".centos").click(function() { $(".centosver").show("fadeIn"); });
+		$(".debian").click(function() { $(".debianver").show("fadeIn"); });
+		});
+	</script>
+<% end %>
+<div class="container">
+<%= simple_form_for(@instance, defaults: {label: false,error_html: { class: 'rederror'}}) do |f| %>
+	<%= f.error_notification %>
+   	<div class="form-inputs">
+  		<h2 style="font-family: 'quicksandbold";>Create An Instance</h2>   
+  		<div class="container feature-box">
+	  		<h3>Select Your Distribution</h3>
+	  	</div>
+		<div class="btn" data-toggle="buttons">
+	  		<label class="btn distro active ubuntu">
+	  			<%= f.radio_button :image, 'ubuntu' %>
+				<p>
+	    		Ubuntu
+	    		</p>
+	    	</label>
+	  		<label class="btn distro fedora">
+	  			<%= f.radio_button :image, 'fedora' %>
+				<p>
+	    		Fedora
+	    		</p>
+	  		</label>
+	  		<label class="btn distro centos">
+	  			<%= f.radio_button :image, 'centos' %>
+				<p>
+	    		Cent OS
+	    		</p>
+	    	</label>
+	  		<label class="btn distro debian">
+	  			<%= f.radio_button :image, 'debian' %>
+				<p>
+	    		Debian
+	    		</p>
+	  		</label>	  		
+	  	</div>
+
+	  	<div class="container feature-box distrover">
+	  		<h3>Select Your Distribution Version and Architecture</h3>
+	  		<div class="ubuntuver ver">
+	  			<div class="btn-group-vertical" data-toggle="buttons" role="group" >
+		  			<label class="btn btn-primary active">
+			  			<%= f.radio_button :image, '14.04.4 x64' %>
+			    		14.04.4 x64
+		    		</label>
+		  			<label class="btn btn-primary">
+			  			<%= f.radio_button :image, '14.04.4 x32' %>
+			    		14.04.4 x32
+		    		</label>
+			    	<label class="btn btn-primary">
+		  				<%= f.radio_button :image, '15.10 x64' %>
+		    			15.10 x64
+		    		</label>
+		    		<label class="btn btn-primary">
+		  				<%= f.radio_button :image, '15.10 x32' %>
+		    			15.10 x32
+		    		</label>
+			    	<label class="btn btn-primary">
+		  				<%= f.radio_button :image, '12.04.5 x64' %>
+		    			12.04.5 x64
+		    		</label>
+		    		<label class="btn btn-primary">
+		  				<%= f.radio_button :image, '12.04.5 x32' %>
+		    			12.04.5 x32
+		    		</label>
+	  			</div>
+	  		</div>
+	  		<div class="fedoraver ver">
+	  			<div class="btn-group-vertical" data-toggle="buttons" role="group" >
+		  			<label class="btn btn-primary active">
+			  			<%= f.radio_button :image, '23 x64' %>
+			    		23 x64
+		    		</label>
+		  			<label class="btn btn-primary">
+			  			<%= f.radio_button :image, '22 x64' %>
+			    		22 x64
+		    		</label>
+	  			</div>
+	  		</div>
+	  		<div class="centosver ver">
+	  			<div class="btn-group-vertical" data-toggle="buttons" role="group" >
+		  			<label class="btn btn-primary active">
+			  			<%= f.radio_button :image, '7.2 x64' %>
+			    		7.2 x64
+		    		</label>
+		  			<label class="btn btn-primary">
+			  			<%= f.radio_button :image, '6.7 x64' %>
+			    		6.7 x64
+		    		</label>
+			    	<label class="btn btn-primary">
+		  				<%= f.radio_button :image, '6.7 x32' %>
+		    			6.7 x32
+		    		</label>
+		    		<label class="btn btn-primary">
+		  				<%= f.radio_button :image, '5.10 x64' %>
+		    			5.10 x64
+		    		</label>
+			    	<label class="btn btn-primary">
+		  				<%= f.radio_button :image, '5.10 x32' %>
+		    			5.10 x32
+		    		</label>
+	  			</div>	  			
+	  		</div>
+	  		<div class="debianver ver">
+	  			<div class="btn-group-vertical" data-toggle="buttons" role="group" >
+		  			<label class="btn btn-primary active">
+			  			<%= f.radio_button :image, '8.3 x64' %>
+			    		8.3 x64
+		    		</label>
+		  			<label class="btn btn-primary">
+			  			<%= f.radio_button :image, '8.3 x32' %>
+			    		8.3 x32
+		    		</label>
+			    	<label class="btn btn-primary">
+		  				<%= f.radio_button :image, '7.10 x64' %>
+		    			7.10 x64
+		    		</label>
+		    		<label class="btn btn-primary">
+		  				<%= f.radio_button :image, '7.10 x32' %>
+		    			7.10 x32
+		    		</label>
+	  			</div>
+	  		</div>
+	  	</div>
+	  	<div class="container feature-box">
+	  		<h3>Select Your Plan</h3>
+	  	</div>
+	  	<div class="btn" data-toggle="buttons">
+	  		<div class="btn sizes">
+	  			<div class="prices text">
+	  			<h4><sup>$</sup>3.99/First Month</h4>
+	  			<h5><sup>$</sup>6/Thereafter</h5>
+	  			</div>
+	  			<div class="specs">
+	  			<ul>
+	  			<li><span>512 MB</span> RAM</li>
+	  			<li><span>2.4 GHz</span> Single Core CPU</li>
+	  			<li><span>20 GB SSD</span> Disk</li>
+	  			<li><span>1000 GB</span>Transfer</li>
+	  			
+	  			</ul>
+	  			</div>
+	  			<%= f.radio_button :size, '512mb' %>
+		    </div>
+		    <div class="btn active sizes">
+	  			<div class="prices text">
+	  			<h4><sup>$</sup>6.99/First Month</h4>
+	  			<h5><sup>$</sup>11/Thereafter</h5>
+	  			</div>
+	  			<div class="specs">
+	  			<ul>
+	  			<li><span>1 GB</span> RAM</li>
+	  			<li><span>2.4 GHz</span> Single Core CPU</li>
+	  			<li><span>30 GB SSD</span> Disk</li>
+	  			<li><span>2000 GB</span>Transfer</li>
+	  			
+	  			</ul>
+	  			</div>
+	  			<%= f.radio_button :size, '1gb' %>
+		    </div>
+		    <div class="btn sizes">
+	  			<div class="prices text">
+	  			<h4><sup>$</sup>13.99/First Month</h4>
+	  			<h5><sup>$</sup>22/Thereafter</h5>
+	  			</div>
+	  			<div class="specs">
+	  			<ul>
+	  			<li><span>2 GB</span> RAM</li>
+	  			<li><span>2.4 GHz</span> Dual Core CPU</li>
+	  			<li><span>40 GB SSD</span> Disk</li>
+	  			<li><span>3000 GB</span>Transfer</li>
+	  		
+	  			</ul>
+	  			</div>
+	  			<%= f.radio_button :size, '2gb' %>
+		    </div>
+	  	</div>
+	  	<div class="container feature-box">
+	  		<h3>Select Server's Location</h3>
+	  	</div>
+	  	<div class="btn" data-toggle="buttons">
+	  		<div class="btn netherland region">
+	  			<%= f.radio_button :region, 'nyc-1' %>
+	  			<p>Amsterdam</p>
+	  		</div>
+	  		 <div class="btn germany region">
+	  			<%= f.radio_button :region, 'nyc-1' %>
+	  			<p>Frankfurt</p>
+		    </div>
+		    <div class="btn uk region">
+	  			<%= f.radio_button :region, 'nyc-1' %>
+	  			<p>London</p>
+		    </div>
+		    <div class="btn america active region">
+	  			<%= f.radio_button :region, 'nyc-1' %>
+	  			<p>New York</p>
+		    </div>
+		    <div class="btn singapore region">
+	  			<%= f.radio_button :region, 'nyc-1' %>
+	  			<p>Singapore</p>
+		    </div>
+		     <div class="btn america region">
+	  			<%= f.radio_button :region, 'nyc-1' %>
+	  			<p>San Francisco</p>
+		    </div>
+		     <div class="btn canada region">
+	  			<%= f.radio_button :region, 'nyc-1' %>
+	  			<p>Toronto</p>
+		    </div>		   		    
+		</div>
+		<div class="container feature-box">
+	  		<h3>Enter Your Instance's Name</h3>
+	  		<h4>The Name you would like to give to your instance.<br>The name can only contain alphanumeric characters,periods and dashes</h4>
+	  		 <%= f.input :name,placeholder: 'Example: myubuntuserver',required: true,autofocus: true %>
+	  	</div>
+
+		<div class="form-actions">
+    	<%= f.button :submit, "Create Instance", :class => 'signupbutton' %>
+  		</div>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+<% end %>
+
+
+

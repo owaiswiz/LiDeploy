@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Demo</title>
+  <%= stylesheet_link_tag    'application', params[:controller], media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', params[:controller], 'data-turbolinks-track' => true %>
+  <%= yield :head %>
+  <%= csrf_meta_tags %>
+</head>
+<!--<body class="page-top" class="index">-->
+<% if (controller_name == "registrations" || controller_name == "passwords" || controller_name == "confirmations" || controller_name == "sessions") && (action_name == 'new' || action_name == 'create') %>
+	<body class="bluer">
+<% elsif %>
+	<body class="page-top">
+		<%= render 'shared/navbar' %>
+<% end %>
+		<%- flash.each do |name, msg| -%>
+		 	<% if name == "notice" %>
+	    		<%= content_tag :div, msg,:class => "alert alert-success", :id => "flash_#{name}" if msg.is_a?(String) %>
+	    	<% elsif name == "alert" %>
+	    		<%= content_tag :div, msg,:class => "alert alert-danger", :id => "flash_#{name}" if msg.is_a?(String) %>
+	    	<% end %>
+	  	<%- end -%>
+
+<%= yield %>
+<% if ((controller_name == "registrations" || controller_name == "passwords" || controller_name == "confirmations" || controller_name == "sessions") && (action_name == 'new' || action_name == 'create')) || (controller_name == "instances") %>
+
+<% else %>
+	<footer>
+		<div class = "row">
+			<div class = "col-md-4 footb">
+				<h4>Copyright © 2016<br>
+				</h4>
+			</div>
+			
+			<div class = "col-md-4 footb">
+				<h4>HELP</h4><br>
+				<br>
+			</div>
+			<div class = "col-md-4 footb">
+				<h4>SOCIAL</h4><br>
+			</div>
+		</div>
+		<div class = "row">
+			<div class ="col-md-4 footb">
+				<a href="/aboutus">About Us</a><br>
+				<a href="/tos">Terms of Service</a><br>
+				<a href="/privacypol">Privacy Policy</a><br>
+			</div>
+			<div class ="col-md-4 footb">
+				<a href="/gettingstarted">Getting Started</a><br>
+				<a href="/tutorials">Tutorials</a><br>
+				<a href="/faq">Frequently Asked Questions</a><br>		
+			</div>
+			<div class ="col-md-4 footb">
+				<i class="fa fa-twitter"></i>
+				<a href="https://twitter.com/HeapHost">
+				Twitter
+				</a>&nbsp;&nbsp;&nbsp;
+				<br>
+				<i class="fa fa-facebook"></i>
+				<a href="https://facebook.com/HeapHost">
+				Facebook
+				</a><br>
+				<i class="fa fa-google-plus"></i>
+				<a href="#">
+				Google+
+				</a><br>
+			</div>
+		</div>
+	</footer>
+<% end %>
+</body>
+</html>

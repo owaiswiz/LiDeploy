@@ -1,0 +1,14 @@
+<%= simple_form_for(resource,defaults: {label: false,error_html: { class: 'rederror'}}, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.full_error :confirmation_token %>
+
+  <div class="form-inputs">
+  	<h2 style="font-size: 27px;font-family: 'quicksandbold";>Resend Confirmation Instructions</h2>
+    <%= f.input :email,placeholder: 'Email Address',required: true, autofocus: true %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Send Confirmation Mail",:class => 'signupbutton btn-lg' %>
+  </div>
+<% end %>
+<%= render "devise/shared/links" %>

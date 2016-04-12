@@ -1,0 +1,367 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome";
+/*Begin Quicksand Font Declarations */
+
+@font-face {
+    font-family: 'quicksandregular';
+    src: font_url('quicksand-regular-webfont.eot');
+    src: font_url('quicksand-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         font_url('quicksand-regular-webfont.woff2') format('woff2'),
+         font_url('quicksand-regular-webfont.woff') format('woff'),
+         font_url('quicksand-regular-webfont.ttf') format('truetype'),
+         font_url('quicksand-regular-webfont.svg#quicksandregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'quicksandbold';
+    src: font_url('quicksand-bold-webfont.eot');
+    src: font_url('quicksand-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         font_url('quicksand-bold-webfont.woff2') format('woff2'),
+         font_url('quicksand-bold-webfont.woff') format('woff'),
+         font_url('quicksand-bold-webfont.ttf') format('truetype'),
+         font_url('quicksand-bold-webfont.svg#quicksandbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'quicksanditalic';
+    src: font_url('quicksand-italic-webfont.eot');
+    src: font_url('quicksand-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         font_url('quicksand-italic-webfont.woff2') format('woff2'),
+         font_url('quicksand-italic-webfont.woff') format('woff'),
+         font_url('quicksand-italic-webfont.ttf') format('truetype'),
+         font_url('quicksand-italic-webfont.svg#quicksanditalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'quicksandlight';
+    src: font_url('quicksand-light-webfont.eot');
+    src: font_url('quicksand-light-webfont.eot?#iefix') format('embedded-opentype'),
+         font_url('quicksand-light-webfont.woff2') format('woff2'),
+         font_url('quicksand-light-webfont.woff') format('woff'),
+         font_url('quicksand-light-webfont.ttf') format('truetype'),
+         font_url('quicksand-light-webfont.svg#quicksandlight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+/*End Quicksand Font Declaration*/
+
+/*beging pricing table's css */
+.btn-custom {
+  color: #bdc3c7;
+  font-size: 18px;
+  border: 1px solid #bdc3c7;
+}
+.btn-custom:hover {
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}
+#pricing-table {
+  padding-top: 50px;
+}
+#pricing-table .pricing {
+  marign: 0;
+  padding: 0;
+  font-family: 'quicksandbold', sans-serif;
+}
+#pricing-table .pricing .pricing-table {
+  padding-bottom: 30px;
+}
+#pricing-table .pricing .pricing-table .pricing-header {
+  position: relative;
+  background: #34495e;
+  padding: 22px 22px;
+  text-align: center;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+#pricing-table .pricing .pricing-table .pricing-header .pricing-title {
+  color: #ffffff;
+  letter-spacing: 2px;
+  font-size: 24px;
+  text-align: center;
+  font-weight: 700;
+}
+#pricing-table .pricing .pricing-table .pricing-header .pricing-rate {
+  font-size: 50px;
+  font-weight: 700;
+  color: #ffffff;
+  position: relative;
+  text-align: center;
+}
+#pricing-table .pricing .pricing-table .pricing-header .pricing-rate sup {
+  font-size: 21px;
+  position: relative;
+  top: -30px;
+  color: #bdc3c7;
+}
+#pricing-table .pricing .pricing-table .pricing-header .pricing-rate span {
+  font-size: 16px;
+  color: #bdc3c7;
+}
+#pricing-table .pricing .pricing-list {
+  padding: 20px 0 40px 0;
+  background: #ffffff;
+  border: 1px solid #e3e3e3;
+  text-align: center;
+}
+#pricing-table .pricing .pricing-list ul {
+  padding: 0px;
+  display: table;
+  margin: 0px auto;
+}
+#pricing-table .pricing .pricing-list ul li {
+  list-style: none;
+  border-bottom: 1px solid #EAECEB;
+  color: #bdc3c7;
+  font-size: 16px;
+  line-height: 42px;
+}
+#pricing-table .pricing .pricing-list ul li:last-child {
+  border: none;
+}
+#pricing-table .pricing .pricing-list ul li i {
+  margin-right: 12px;
+  color: #bdc3c7;
+}
+#pricing-table .pricing .pricing-list ul li span {
+  color: #34495e;
+}
+
+/* end pricing table's main.css*/
+
+.page-top {
+  margin-top: 51px;
+}
+.btn-primary{
+	background-color: #ffffff;
+	border-style: solid;
+	color: #3190e7;
+  font-family: 'quicksandregular';
+  font-size: 15px;
+	border-color: #3190e7;
+	border-radius: 3px;
+  position: relative;
+  font-weight: 600;
+  -o-transition: color 0.5s linear;
+  -moz-transition: color 0.5s linear;
+	-khtml-transition: color 0.5s linear;
+	-webkit-transition: color 0.5s linear;
+	-ms-transition: color 0.5s linear;
+	transition: color 0.5s linear;
+}
+
+.btn-primary:hover {
+
+	background-color: #3190e7;
+
+}
+
+.myimg {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+    border: 0;
+}
+
+.feature-box {
+    margin-top: 60px;
+    text-align: center;
+    font-weight: 400;
+}
+
+.span4 {
+	width: 370px;
+	float: left;
+    min-height: 1px;
+    margin-left: 30px;
+}
+
+.muhcontainer
+{
+	width: 1170px;
+	margin-right: auto;;
+	margin-left: auto;
+	font-family: quicksandbold;
+	font-size: 15px;
+
+}
+
+.muhmaincontent{
+  max-width: 1400px;
+  display: block;
+  padding: 60px 80px 90px;
+}
+.muhsup
+{
+  font-size: 15px;
+  color: #34495E;
+}
+
+.muhleft{
+  width: 45%;
+  margin-right: 2.5%;
+  float: left;
+  display: block;
+  text-align: left;
+}
+
+.muhright{
+  width: 52.5%;
+  float: left;
+  display: block;
+  text-align: center;
+}
+
+hr{
+  border-color: #666;
+  width: 100%;
+}
+body{
+  font-family: 'quicksandregular';
+}
+
+.bold{
+  font-family: 'quicksandbold';
+}
+
+.light{
+  font-family: 'quicksandlight';
+}
+.muhleft h1{
+    line-height: 56px;
+    font-size: 46px;
+}
+.muhleft h1:after{
+    height: 1px;
+    background-color: #bbb;
+    margin: 30px 0;
+    display: block;
+    width: 150px;
+    content: " ";
+}
+
+.new_user{
+    margin: 0 auto;
+    width: 400px;
+    padding: 40px;
+    border-radius: 3px;
+    background: #3190e7;
+}
+.bluer{
+  background: #3190e7;
+  height: 100%;
+  color: #34495E;
+}
+.register
+{
+  text-align: left;
+}
+.required input{
+  background: #fcfcfc;
+    border: 2px solid #e7e7e7;
+    margin: 20px auto;
+    padding: 15px;
+    width: 100%;
+    display: block;
+    border-radius: 3px;
+    font-size: 18px;
+    transition: opacity 0.4s;
+    text-align: left;
+    height: auto;
+    -webkit-appearance: none;
+}
+.help-block{
+  font-family: 'quicksandbold';
+  font-size:15px;
+  color:#34495E;
+
+}
+.rederror {
+  color: red !important;
+}
+.autherror{
+  font-family: 'quicksandbold';
+  font-size: 20px;
+  text-align: center;
+}
+.signupbutton{
+  color: white;
+  background: #2BCA58;
+  font-weight: 500;
+  font-size: 20px;
+  border: 0;
+  text-align: center;
+  align-items: flex-start;
+  cursor: pointer;
+  margin-bottom: 0;
+  height: auto;
+  -webkit-appearance: none;
+  margin: 20px auto;
+  padding: 15px;
+  width: 100%;
+  display: block;
+  border-radius: 3px;
+  font-family: 'quicksandbold';
+  /*font-family: 'quicksandregular';*/
+}
+.signupbutton:hover {
+  color: #2BCA58; 
+}
+.form-inputs{
+  text-align: center;
+
+}
+.links,.links a{
+  text-align: center;
+  color:white;
+  font-family: 'quicksandbold' !important;
+}
+
+.alert {
+  text-align: center;
+  font-family: 'quicksandbold';
+
+}
+footer {
+    background: #2e3234;
+    padding: 100px 0 60px 0;
+    color: #747474;
+    float: left;
+    width: 100%;
+    text-align: center;
+}
+.footb {
+  font-family: 'quicksandbold';
+  line-height: 200%;
+}
+.fa {
+      background-position: 0 6px;
+}
+.footb a{
+  padding-left: 30px;
+}
+
+.btn-half{
+  width: 50% !important;
+}

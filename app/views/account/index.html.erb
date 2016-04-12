@@ -1,0 +1,21 @@
+<%content_for :head do %>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		$('input[name="instance[region]"]').click(function () {
+    		if (this.id == "watch-me") {
+        		$("#show-me").show('slow');
+    		} else {
+        		$("#show-me").hide('slow');
+    		}
+		});
+		});
+	</script>
+<% end %>
+<form id='form-id'>
+    <input id='watch-me' name='instance[region]' type='radio' />Show Div
+    <br />
+    <input name='instance[region]' type='radio' />
+    <br />
+    <input name='instance[region]' type='radio' />
+</form>
+<div id='show-me' style='display:none'>Hello</div>

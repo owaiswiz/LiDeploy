@@ -1,0 +1,15 @@
+<div class="container">
+<%= simple_form_for(resource,defaults: {label: false,error_html: { class: 'rederror'}}, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+  	<h2 style="font-size: 27px;font-family: 'quicksandbold";>Forgot Your Password?</h2>
+    <%= f.input :email,placeholder: 'Email Address', required: true, autofocus: true %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Reset Password",:class => 'signupbutton btn-lg'  %>
+  </div>
+<% end %>
+</div>
+<%= render "devise/shared/links" %>

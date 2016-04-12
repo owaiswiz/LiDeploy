@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <nav class="navbar navbar-default navbar-fixed-top navbar-nav Nav">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header page-scroll">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#page-top" style="font-size: 25px;font-family: 'quicksandbold' ">HeapHost</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <% if !user_signed_in? %>
+                            <li class="hidden active">
+                                <a href="#page-top"></a>
+                            </li>
+                            <li class="page-scroll">
+                                <a href="/pricing">Pricing</a>
+                            </li>
+                            <li class="page-scroll">
+                                <a href="/features">Features</a>
+                            </li>
+                            <li class="page-scroll">
+                                <a href="/contact">Contact</a>
+                            </li>
+                            <li>
+                                <div class="navbar-btn">
+                                   <a href="/login" class="btn btn-primary" role="button">Login</a>
+                                    <a href="/register" class="btn btn-primary" role="button">Register</a>
+                                </div>
+                            </li>    
+                        <% else %>
+                            <li class="page-scroll">
+                                <a href="instances/">Instances</a>
+                            <li>
+                            <div class="navbar-btn">
+                                <a href="/logout" class="btn btn-primary" role="button">
+                                Logout</a>
+                                </div>
+                            </li>
+                        <% end %>
+                    </ul>
+                </div>
+            </div>
+                <!-- /.navbar-collapse -->
+            <!-- /.container-fluid -->
+    </nav>
+</div>

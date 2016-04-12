@@ -1,0 +1,19 @@
+<div class="container">
+<%= simple_form_for(resource, defaults: {label: false,error_html: { class: 'rederror'}}, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+  	<h2 style="font-family: 'quicksandbold";>Register</h2>
+    <%= f.input :username,placeholder: 'Username',required: true,autofocus: true %>
+    <%= f.input :email, placeholder: 'Email Address',required: true, autofocus: true %>
+    <%= f.input :password,placeholder: 'Password', required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+    <%= f.input :password_confirmation, placeholder: 'Re-Enter Password', required: true %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Sign up", :class => 'signupbutton btn-lg' %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+</div>

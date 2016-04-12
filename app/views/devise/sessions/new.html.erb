@@ -1,0 +1,17 @@
+<div class="container">
+<%= simple_form_for(resource,defaults: {label: false,error_html: { class: 'rederror'}}, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="form-inputs">
+  <h2 style="font-family: 'quicksandbold";>Login</h2>
+    <%= f.input :login,placeholder: 'Username or E-Mail',required: true,autofocus: true %>
+  <!-- <%= f.input :email,placeholder: 'Email Address',required: true, autofocus: true %> -->
+    <%= f.input :password,placeholder: 'Password',required: true %>
+    <%= f.input :remember_me,label:'Remember me',label_html:{class: 'help-block'}, as: :boolean if devise_mapping.rememberable? %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Log in", :class => 'signupbutton btn-lg' %>
+  </div>
+  <%= render "devise/shared/links" %>
+<% end %>
+
+</div>
