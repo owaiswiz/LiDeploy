@@ -1,6 +1,31 @@
 <% content_for :head do %>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			$("#instance_name").on('keyup change',function(){
+			var inst_regex = /^[a-zA-Z0-9]?[a-z0-9A-Z.-]*[a-z0-9A-Z.]$/g;
+			var inst_name = $("#instance_name").val();
+			if(!inst_regex.test(inst_name)) {
+    			$(".signupbutton").prop('disabled',true);
+    			$("#invalidhost").show("fadeIn");
+    		}
+			else {
+				$(".signupbutton").prop('disabled',false);
+				$("#invalidhost").hide("fadeOut");
+			}
+
+		});
+		/*$("#instance_name").change(function(){
+			var inst_regex = /^[a-zA-Z0-9]?[a-z0-9A-Z.-]*[a-z0-9A-Z.]$/g;
+			var inst_name = $("#instance_name").val();
+			if(!inst_regex.test(inst_name)) {
+    			$(".signupbutton").prop('disabled',true);
+    			$("#invalidhost").show();
+    		}
+			else {
+				$(".signupbutton").prop('disabled',false);
+				$("#invalidhost").hide();
+			}
+		}); */
 			$("label.distro").on("click", function() {
  			$("label.distro").removeClass("active");
  			$("div.ver").hide("fadeOut");
@@ -224,8 +249,9 @@
 		<div class="container feature-box">
 	  		<h3>Enter Your Instance's Name</h3>
 	  		<h4>The Name you would like to give to your instance.<br>The name can only contain alphanumeric characters,periods and dashes</h4>
-	  		 <%= f.input :name,placeholder: 'Example: myubuntuserver',required: true,autofocus: true %>
+	  		 <%= f.input :name,id: "instancename",placeholder: 'Example: myubuntuserver',pattern:"^[a-zA-Z0-9]?[a-z0-9A-Z.-]*[a-z0-9A-Z.]$",required: true,autofocus: true %>
 	  	</div>
+	  	<div id="invalidhost" class="help-block rederror" style="display: none;font-family: 'quicksandlight'; font-size: 20px;">Invalid Host Name</div>
 
 		<div class="form-actions">
     	<%= f.button :submit, "Create Instance", :class => 'signupbutton' %>
