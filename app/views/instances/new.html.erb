@@ -17,10 +17,10 @@
 		});
 		//show hide and highlight selected distros
 			$("label.distro").on("click", function() {
- 			$("label.distro").removeClass("active");
- 			$("div.ver").hide("fadeOut");
-    		$(this).addClass("active");
-  			});
+	 			$("label.distro").removeClass("active");
+	 			$("div.ver").hide("fadeOut");
+	    	$(this).addClass("active");
+	  	});
   		$(".ubuntu").click(function() { $(".ubuntuver").show("fadeIn"); });
 		 	$(".fedora").click(function() { $(".fedoraver").show("fadeIn"); });
 			$(".centos").click(function() { $(".centosver").show("fadeIn"); });
@@ -29,20 +29,20 @@
 	</script>
 <% end %>
 <div class="container">
-<%= simple_form_for(@instance, defaults: {label: false,error_html: { class: 'rederror'}}) do |f| %>
-	<%= f.error_notification %>
-   	<div class="form-inputs">
-  		<h2 style="font-family: 'quicksandbold'";>Create An Instance</h2>
-  		<div class="container feature-box">
-	  		<h3>Select Your Distribution</h3>
-	  	</div>
-		<div class="btn" data-toggle="buttons">
-	  		<label class="btn distro active ubuntu">
-	  			<%= f.radio_button :image, 'ubuntu' %>
+	<%= simple_form_for(@instance, defaults: {label: false,error_html: { class: 'rederror'}}) do |f| %>
+		<%= f.error_notification %>
+		<div class="form-inputs">
+	  	<h2 style="font-family: 'quicksandbold'";>Create An Instance</h2>
+	  	<div class="container feature-box">
+		  	<h3>Select Your Distribution</h3>
+		  </div>
+			<div class="btn" data-toggle="buttons">
+		  	<label class="btn distro active ubuntu">
+		  		<%= f.radio_button :image, 'ubuntu' %>
 					<p>
-	    		Ubuntu
-	    		</p>
-	    	</label>
+		    	Ubuntu
+		    	</p>
+		    </label>
 	  		<label class="btn distro fedora">
 	  			<%= f.radio_button :image, 'fedora' %>
 					<p>
@@ -61,7 +61,7 @@
 	    		Debian
 	    		</p>
 	  		</label>
-	  	</div>
+		  </div>
 	  	<div class="container feature-box distrover">
 	  		<h3>Select Your Distribution Version and Architecture</h3>
 	  		<div class="ubuntuver ver">
@@ -147,72 +147,69 @@
 		    			7.10 x32
 		    		</label>
 	  			</div>
-	  		</div>
-	  	</div>
+		  	</div>
+		  </div>
 	  	<div class="container feature-box">
 	  		<h3>Select Your Plan</h3>
 	  	</div>
 	  	<div class="btn" data-toggle="buttons">
 	  		<div class="btn sizes">
 	  			<div class="prices text">
-	  			<h4><sup>$</sup>3.99/First Month</h4>
-	  			<h5><sup>$</sup>6/Thereafter</h5>
+		  			<h4><sup>$</sup>3.99/First Month</h4>
+		  			<h5><sup>$</sup>6/Thereafter</h5>
 	  			</div>
 	  			<div class="specs">
-	  			<ul>
-	  			<li><span>512 MB</span> RAM</li>
-	  			<li><span>2.4 GHz</span> Single Core CPU</li>
-	  			<li><span>20 GB SSD</span> Disk</li>
-	  			<li><span>1000 GB</span>Transfer</li>
-
-	  			</ul>
+		  			<ul>
+			  			<li><span>512 MB</span> RAM</li>
+			  			<li><span>2.4 GHz</span> Single Core CPU</li>
+			  			<li><span>20 GB SSD</span> Disk</li>
+			  			<li><span>1000 GB</span>Transfer</li>
+		  			</ul>
 	  			</div>
 	  			<%= f.radio_button :size, '512mb' %>
 		    </div>
 		    <div class="btn active sizes">
 	  			<div class="prices text">
-	  			<h4><sup>$</sup>6.99/First Month</h4>
-	  			<h5><sup>$</sup>11/Thereafter</h5>
+	  				<h4><sup>$</sup>6.99/First Month</h4>
+	  				<h5><sup>$</sup>11/Thereafter</h5>
 	  			</div>
 	  			<div class="specs">
-	  			<ul>
-	  			<li><span>1 GB</span> RAM</li>
-	  			<li><span>2.4 GHz</span> Single Core CPU</li>
-	  			<li><span>30 GB SSD</span> Disk</li>
-	  			<li><span>2000 GB</span>Transfer</li>
-
-	  			</ul>
+		  			<ul>
+			  			<li><span>1 GB</span> RAM</li>
+			  			<li><span>2.4 GHz</span> Single Core CPU</li>
+			  			<li><span>30 GB SSD</span> Disk</li>
+			  			<li><span>2000 GB</span>Transfer</li>
+		  			</ul>
 	  			</div>
 	  			<%= f.radio_button :size, '1gb' %>
 		    </div>
 		    <div class="btn sizes">
 	  			<div class="prices text">
-	  			<h4><sup>$</sup>13.99/First Month</h4>
-	  			<h5><sup>$</sup>22/Thereafter</h5>
+		  			<h4><sup>$</sup>13.99/First Month</h4>
+		  			<h5><sup>$</sup>22/Thereafter</h5>
 	  			</div>
 	  			<div class="specs">
-	  			<ul>
-	  			<li><span>2 GB</span> RAM</li>
-	  			<li><span>2.4 GHz</span> Dual Core CPU</li>
-	  			<li><span>40 GB SSD</span> Disk</li>
-	  			<li><span>3000 GB</span>Transfer</li>
-
-	  			</ul>
+		  			<ul>
+			  			<li><span>2 GB</span> RAM</li>
+			  			<li><span>2.4 GHz</span> Dual Core CPU</li>
+			  			<li><span>40 GB SSD</span> Disk</li>
+			  			<li><span>3000 GB</span>Transfer</li>
+		  			</ul>
 	  			</div>
 	  			<%= f.radio_button :size, '2gb' %>
 		    </div>
 	  	</div>
-	  	<div class="container feature-box">
-	  		<h3>Select Server's Location</h3>
+		  <div class="container feature-box">
+				<h3>Select Server's Location</h3>
 	  	</div>
 	  	<div class="btn" data-toggle="buttons">
 	  		<div class="btn netherland region">
 	  			<%= f.radio_button :region, 'nyc-1' %>
 	  			<p>Amsterdam</p>
 	  		</div>
-	  		 <div class="btn germany region">
-	  			<%= f.radio_button :region, 'nyc-1' %>
-	  			<p>Frankfurt</p>
+	  		<div class="btn germany region">
+		  		<%= f.radio_button :region, 'nyc-1' %>
+		  		<p>Frankfurt</p>
 		    </div>
 		    <div class="btn uk region">
 	  			<%= f.radio_button :region, 'nyc-1' %>
@@ -226,27 +223,27 @@
 	  			<%= f.radio_button :region, 'nyc-1' %>
 	  			<p>Singapore</p>
 		    </div>
-		     <div class="btn america region">
+		    <div class="btn america region">
 	  			<%= f.radio_button :region, 'nyc-1' %>
 	  			<p>San Francisco</p>
 		    </div>
-		     <div class="btn canada region">
+		    <div class="btn canada region">
 	  			<%= f.radio_button :region, 'nyc-1' %>
 	  			<p>Toronto</p>
 		    </div>
-		</div>
-		<div class="container feature-box">
-	  		<h3>Enter Your Instance's Name</h3>
-	  		<h4>The Name you would like to give to your instance.<br>The name can only contain alphanumeric characters,periods and dashes</h4>
-	  		 <%= f.input :name,id: "instancename",placeholder: 'Example: myubuntuserver',pattern:"^[a-zA-Z0-9]?[a-z0-9A-Z.-]*[a-z0-9A-Z.]$",required: true,autofocus: true %>
+			</div>
+			<div class="container feature-box">
+		  	<h3>Enter Your Instance's Name</h3>
+		  	<h4>The Name you would like to give to your instance.<br>The name can only contain alphanumeric characters,periods and dashes</h4>
+		  	<%= f.input :name,id: "instancename",placeholder: 'Example: myubuntuserver',pattern:"^[a-zA-Z0-9]?[a-z0-9A-Z.-]*[a-z0-9A-Z.]$",required: true,autofocus: true %>
+		  </div>
+		  <div id="invalidhost" class="help-block rederror" style="display: none;font-family: 'quicksandlight'; font-size: 20px;">
+				Invalid Host Name
+			</div>
+			<div class="form-actions">
+	    	<%= f.button :submit, "Create Instance", :class => 'signupbutton' %>
 	  	</div>
-	  	<div id="invalidhost" class="help-block rederror" style="display: none;font-family: 'quicksandlight'; font-size: 20px;">Invalid Host Name</div>
-
-		<div class="form-actions">
-    	<%= f.button :submit, "Create Instance", :class => 'signupbutton' %>
-  		</div>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-<% end %>
+	  	<br> <br> <br> <br>
+		</div>
+	<% end %>
+</div>
