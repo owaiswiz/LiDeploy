@@ -22,9 +22,9 @@
     		$(this).addClass("active");
   			});
   		$(".ubuntu").click(function() { $(".ubuntuver").show("fadeIn"); });
-		$(".fedora").click(function() { $(".fedoraver").show("fadeIn"); });
-		$(".centos").click(function() { $(".centosver").show("fadeIn"); });
-		$(".debian").click(function() { $(".debianver").show("fadeIn"); });
+		 	$(".fedora").click(function() { $(".fedoraver").show("fadeIn"); });
+			$(".centos").click(function() { $(".centosver").show("fadeIn"); });
+			$(".debian").click(function() { $(".debianver").show("fadeIn"); });
 		});
 	</script>
 <% end %>
@@ -39,25 +39,25 @@
 		<div class="btn" data-toggle="buttons">
 	  		<label class="btn distro active ubuntu">
 	  			<%= f.radio_button :image, 'ubuntu' %>
-				<p>
+					<p>
 	    		Ubuntu
 	    		</p>
 	    	</label>
 	  		<label class="btn distro fedora">
 	  			<%= f.radio_button :image, 'fedora' %>
-				<p>
+					<p>
 	    		Fedora
 	    		</p>
 	  		</label>
 	  		<label class="btn distro centos">
 	  			<%= f.radio_button :image, 'centos' %>
-				<p>
+					<p>
 	    		Cent OS
 	    		</p>
 	    	</label>
 	  		<label class="btn distro debian">
 	  			<%= f.radio_button :image, 'debian' %>
-				<p>
+					<p>
 	    		Debian
 	    		</p>
 	  		</label>
