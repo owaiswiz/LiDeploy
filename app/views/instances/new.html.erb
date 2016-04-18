@@ -1,6 +1,7 @@
 <% content_for :head do %>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			//checks to see if host name is valid
 			$("#instance_name").on('keyup change',function(){
 			var inst_regex = /^[a-zA-Z0-9]?[a-z0-9A-Z.-]*[a-z0-9A-Z.]$/g;
 			var inst_name = $("#instance_name").val();
@@ -14,18 +15,7 @@
 			}
 
 		});
-		/*$("#instance_name").change(function(){
-			var inst_regex = /^[a-zA-Z0-9]?[a-z0-9A-Z.-]*[a-z0-9A-Z.]$/g;
-			var inst_name = $("#instance_name").val();
-			if(!inst_regex.test(inst_name)) {
-    			$(".signupbutton").prop('disabled',true);
-    			$("#invalidhost").show();
-    		}
-			else {
-				$(".signupbutton").prop('disabled',false);
-				$("#invalidhost").hide();
-			}
-		}); */
+		//show hide and highlight selected distros
 			$("label.distro").on("click", function() {
  			$("label.distro").removeClass("active");
  			$("div.ver").hide("fadeOut");
@@ -42,7 +32,7 @@
 <%= simple_form_for(@instance, defaults: {label: false,error_html: { class: 'rederror'}}) do |f| %>
 	<%= f.error_notification %>
    	<div class="form-inputs">
-  		<h2 style="font-family: 'quicksandbold";>Create An Instance</h2>   
+  		<h2 style="font-family: 'quicksandbold";>Create An Instance</h2>
   		<div class="container feature-box">
 	  		<h3>Select Your Distribution</h3>
 	  	</div>
@@ -70,9 +60,8 @@
 				<p>
 	    		Debian
 	    		</p>
-	  		</label>	  		
+	  		</label>
 	  	</div>
-
 	  	<div class="container feature-box distrover">
 	  		<h3>Select Your Distribution Version and Architecture</h3>
 	  		<div class="ubuntuver ver">
@@ -137,7 +126,7 @@
 		  				<%= f.radio_button :image, '5.10 x32' %>
 		    			5.10 x32
 		    		</label>
-	  			</div>	  			
+	  			</div>
 	  		</div>
 	  		<div class="debianver ver">
 	  			<div class="btn-group-vertical" data-toggle="buttons" role="group" >
@@ -175,7 +164,7 @@
 	  			<li><span>2.4 GHz</span> Single Core CPU</li>
 	  			<li><span>20 GB SSD</span> Disk</li>
 	  			<li><span>1000 GB</span>Transfer</li>
-	  			
+
 	  			</ul>
 	  			</div>
 	  			<%= f.radio_button :size, '512mb' %>
@@ -191,7 +180,7 @@
 	  			<li><span>2.4 GHz</span> Single Core CPU</li>
 	  			<li><span>30 GB SSD</span> Disk</li>
 	  			<li><span>2000 GB</span>Transfer</li>
-	  			
+
 	  			</ul>
 	  			</div>
 	  			<%= f.radio_button :size, '1gb' %>
@@ -207,7 +196,7 @@
 	  			<li><span>2.4 GHz</span> Dual Core CPU</li>
 	  			<li><span>40 GB SSD</span> Disk</li>
 	  			<li><span>3000 GB</span>Transfer</li>
-	  		
+
 	  			</ul>
 	  			</div>
 	  			<%= f.radio_button :size, '2gb' %>
@@ -244,7 +233,7 @@
 		     <div class="btn canada region">
 	  			<%= f.radio_button :region, 'nyc-1' %>
 	  			<p>Toronto</p>
-		    </div>		   		    
+		    </div>
 		</div>
 		<div class="container feature-box">
 	  		<h3>Enter Your Instance's Name</h3>
@@ -261,6 +250,3 @@
   		<br>
   		<br>
 <% end %>
-
-
-
