@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 devise_for :users, :skip => [:sessions,:registrations,:confirmations]
 as :user do
   #User Signin/Signout
-  get '/account/:username/' => "account#index", as: :user_root
+# get '/account/:username/' => "account#index", as: :user_root
   get "/login" => "sessions#new", :as => :new_user_session
   post "/login" => "sessions#create", :as => :user_session
   get "/logout" => "sessions#destroy"
@@ -32,12 +32,16 @@ end
   post '/instance/new' => "instances#create"
   root 'home#index'
   get '/instances/destroy' => "instances#destroy"
-  post '/instances/destroy' => "instances#destroy"  
+  post '/instances/destroy' => "instances#destroy"
   delete '/instances/destroy' => "instances#destroy"
   get '/instances/show' => "instances#show"
   delete '/instances/show' => "instances#destroy"
   get '/' => 'home#index'
 
+  #Paypal Related routes
+  post "/hook" => "instances#hook"
+  post '/instances/:id/' => "instances#hook"
+  get '/instances/:id/' => "instances#show"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

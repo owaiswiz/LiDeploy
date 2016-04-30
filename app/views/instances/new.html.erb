@@ -67,27 +67,27 @@
 	  		<div class="ubuntuver ver">
 	  			<div class="btn-group-vertical" data-toggle="buttons" role="group" >
 		  			<label class="btn btn-primary active">
-			  			<%= f.radio_button :image, '14.04.4 x64' %>
+			  			<%= f.radio_button :image, 'ubuntu-14-04-x64',:checked => true %>
 			    		14.04.4 x64
 		    		</label>
 		  			<label class="btn btn-primary">
-			  			<%= f.radio_button :image, '14.04.4 x32' %>
+			  			<%= f.radio_button :image, 'ubuntu-14-04-x32' %>
 			    		14.04.4 x32
 		    		</label>
 			    	<label class="btn btn-primary">
-		  				<%= f.radio_button :image, '15.10 x64' %>
+		  				<%= f.radio_button :image, 'ubuntu-15-10-x64' %>
 		    			15.10 x64
 		    		</label>
 		    		<label class="btn btn-primary">
-		  				<%= f.radio_button :image, '15.10 x32' %>
+		  				<%= f.radio_button :image, 'ubuntu-15-10-x32' %>
 		    			15.10 x32
 		    		</label>
 			    	<label class="btn btn-primary">
-		  				<%= f.radio_button :image, '12.04.5 x64' %>
+		  				<%= f.radio_button :image, 'ubuntu-12-04-x64' %>
 		    			12.04.5 x64
 		    		</label>
 		    		<label class="btn btn-primary">
-		  				<%= f.radio_button :image, '12.04.5 x32' %>
+		  				<%= f.radio_button :image, 'ubuntu-12-04-x32' %>
 		    			12.04.5 x32
 		    		</label>
 	  			</div>
@@ -95,11 +95,11 @@
 	  		<div class="fedoraver ver">
 	  			<div class="btn-group-vertical" data-toggle="buttons" role="group" >
 		  			<label class="btn btn-primary active">
-			  			<%= f.radio_button :image, '23 x64' %>
+			  			<%= f.radio_button :image, 'fedora-23-x64' %>
 			    		23 x64
 		    		</label>
 		  			<label class="btn btn-primary">
-			  			<%= f.radio_button :image, '22 x64' %>
+			  			<%= f.radio_button :image, 'fedora-22-x64' %>
 			    		22 x64
 		    		</label>
 	  			</div>
@@ -107,23 +107,23 @@
 	  		<div class="centosver ver">
 	  			<div class="btn-group-vertical" data-toggle="buttons" role="group" >
 		  			<label class="btn btn-primary active">
-			  			<%= f.radio_button :image, '7.2 x64' %>
+			  			<%= f.radio_button :image, 'centos-7-0-x64' %>
 			    		7.2 x64
 		    		</label>
 		  			<label class="btn btn-primary">
-			  			<%= f.radio_button :image, '6.7 x64' %>
+			  			<%= f.radio_button :image, 'centos-6-5-x64' %>
 			    		6.7 x64
 		    		</label>
 			    	<label class="btn btn-primary">
-		  				<%= f.radio_button :image, '6.7 x32' %>
+		  				<%= f.radio_button :image, 'centos-6-5-x32' %>
 		    			6.7 x32
 		    		</label>
 		    		<label class="btn btn-primary">
-		  				<%= f.radio_button :image, '5.10 x64' %>
+		  				<%= f.radio_button :image, 'centos-5-8-x64' %>
 		    			5.10 x64
 		    		</label>
 			    	<label class="btn btn-primary">
-		  				<%= f.radio_button :image, '5.10 x32' %>
+		  				<%= f.radio_button :image, 'centos-5-8-x32' %>
 		    			5.10 x32
 		    		</label>
 	  			</div>
@@ -131,19 +131,19 @@
 	  		<div class="debianver ver">
 	  			<div class="btn-group-vertical" data-toggle="buttons" role="group" >
 		  			<label class="btn btn-primary active">
-			  			<%= f.radio_button :image, '8.3 x64' %>
+			  			<%= f.radio_button :image, 'debian-8-x64' %>
 			    		8.3 x64
 		    		</label>
 		  			<label class="btn btn-primary">
-			  			<%= f.radio_button :image, '8.3 x32' %>
+			  			<%= f.radio_button :image, 'debian-8-x32' %>
 			    		8.3 x32
 		    		</label>
 			    	<label class="btn btn-primary">
-		  				<%= f.radio_button :image, '7.10 x64' %>
+		  				<%= f.radio_button :image, 'debian-7-0-x64' %>
 		    			7.10 x64
 		    		</label>
 		    		<label class="btn btn-primary">
-		  				<%= f.radio_button :image, '7.10 x32' %>
+		  				<%= f.radio_button :image, 'debian-7-0-x32' %>
 		    			7.10 x32
 		    		</label>
 	  			</div>
@@ -181,7 +181,7 @@
 			  			<li><span>2000 GB</span>Transfer</li>
 		  			</ul>
 	  			</div>
-	  			<%= f.radio_button :size, '1gb' %>
+	  			<%= f.radio_button :size, '1gb',:checked => true %>
 		    </div>
 		    <div class="btn sizes">
 	  			<div class="prices text">
@@ -204,31 +204,31 @@
 	  	</div>
 	  	<div class="btn" data-toggle="buttons">
 	  		<div class="btn netherland region">
-	  			<%= f.radio_button :region, 'nyc-1' %>
+	  			<%= f.radio_button :region,'ams2' %>
 	  			<p>Amsterdam</p>
 	  		</div>
 	  		<div class="btn germany region">
-		  		<%= f.radio_button :region, 'nyc-1' %>
+		  		<%= f.radio_button :region,'fra1' %>
 		  		<p>Frankfurt</p>
 		    </div>
 		    <div class="btn uk region">
-	  			<%= f.radio_button :region, 'nyc-1' %>
+	  			<%= f.radio_button :region,'lon1' %>
 	  			<p>London</p>
 		    </div>
 		    <div class="btn america active region">
-	  			<%= f.radio_button :region, 'nyc-1' %>
+	  			<%= f.radio_button :region, 'nyc1',:checked => true %>
 	  			<p>New York</p>
 		    </div>
 		    <div class="btn singapore region">
-	  			<%= f.radio_button :region, 'nyc-1' %>
+	  			<%= f.radio_button :region,'sgp1' %>
 	  			<p>Singapore</p>
 		    </div>
 		    <div class="btn america region">
-	  			<%= f.radio_button :region, 'nyc-1' %>
+	  			<%= f.radio_button :region, 'sfo1' %>
 	  			<p>San Francisco</p>
 		    </div>
 		    <div class="btn canada region">
-	  			<%= f.radio_button :region, 'nyc-1' %>
+	  			<%= f.radio_button :region, 'tor1' %>
 	  			<p>Toronto</p>
 		    </div>
 			</div>
