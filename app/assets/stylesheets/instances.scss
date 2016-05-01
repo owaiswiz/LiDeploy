@@ -54,7 +54,7 @@
 
 .sizes{
   height: 200px;
-  width: 250px;  
+  width: 250px;
   padding: 0;
   border-color: #298eea;
   border: solid 1px #298eea;
@@ -147,4 +147,7 @@
 }
 .signupbutton{
   width: 70%
+}
+.nodis,.maxdis{
+  display:none;
 }

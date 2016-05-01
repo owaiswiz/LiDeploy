@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160429201343) do
+ActiveRecord::Schema.define(version: 20160501133531) do
 
   create_table "instances", force: :cascade do |t|
     t.integer  "user_id"
@@ -22,9 +22,17 @@ ActiveRecord::Schema.define(version: 20160429201343) do
     t.integer  "memory"
     t.integer  "vcpus"
     t.integer  "disk"
-    t.datetime "created_at", null: false
+    t.datetime "created_at",          null: false
     t.string   "image"
-    t.datetime "updated_at", null: false
+    t.datetime "updated_at",          null: false
+    t.text     "notification_params"
+    t.string   "status"
+    t.string   "transaction_id"
+    t.datetime "purchased_at"
+    t.string   "ip_address"
+    t.string   "api_key"
+    t.integer  "duration"
+    t.datetime "expires"
   end
 
   add_index "instances", ["user_id"], name: "index_instances_on_user_id"

@@ -40,7 +40,7 @@ end
 
   #Paypal Related routes
   post "/hook" => "instances#hook"
-  post '/instances/:id/' => "instances#hook"
+  post '/instances/show' => "instances#show"
   get '/instances/:id/' => "instances#show"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

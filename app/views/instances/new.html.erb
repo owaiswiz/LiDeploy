@@ -25,9 +25,23 @@
 		 	$(".fedora").click(function() { $(".fedoraver").show("fadeIn"); });
 			$(".centos").click(function() { $(".centosver").show("fadeIn"); });
 			$(".debian").click(function() { $(".debianver").show("fadeIn"); });
+			$("label.onemonth").click(function(){
+				$("div.prices").hide();
+				$("div.nodis").show();
+			});
+			$("label.threemonth").click(function(){
+				$("div.prices").hide();
+				$("div.dis").show();
+			});
+			$("label.sixmonth").click(function(){
+				$("div.prices").hide();
+				$("div.maxdis").show();
+			});
+
 		});
 	</script>
 <% end %>
+
 <div class="container">
 	<%= simple_form_for(@instance, defaults: {label: false,error_html: { class: 'rederror'}}) do |f| %>
 		<%= f.error_notification %>
@@ -65,15 +79,8 @@
 	  	<div class="container feature-box distrover">
 	  		<h3>Select Your Distribution Version and Architecture</h3>
 	  		<div class="ubuntuver ver">
-	  			<div class="btn-group-vertical" data-toggle="buttons" role="group" >
-		  			<label class="btn btn-primary active">
-			  			<%= f.radio_button :image, 'ubuntu-14-04-x64',:checked => true %>
-			    		14.04.4 x64
-		    		</label>
-		  			<label class="btn btn-primary">
-			  			<%= f.radio_button :image, 'ubuntu-14-04-x32' %>
-			    		14.04.4 x32
-		    		</label>
+	  			<div class="btn-group" data-toggle="buttons" role="group" >
+
 			    	<label class="btn btn-primary">
 		  				<%= f.radio_button :image, 'ubuntu-15-10-x64' %>
 		    			15.10 x64
@@ -81,6 +88,14 @@
 		    		<label class="btn btn-primary">
 		  				<%= f.radio_button :image, 'ubuntu-15-10-x32' %>
 		    			15.10 x32
+		    		</label>
+						<label class="btn btn-primary active">
+			  			<%= f.radio_button :image, 'ubuntu-14-04-x64',:checked => true %>
+			    		14.04.4 x64
+		    		</label>
+		  			<label class="btn btn-primary">
+			  			<%= f.radio_button :image, 'ubuntu-14-04-x32' %>
+			    		14.04.4 x32
 		    		</label>
 			    	<label class="btn btn-primary">
 		  				<%= f.radio_button :image, 'ubuntu-12-04-x64' %>
@@ -93,7 +108,7 @@
 	  			</div>
 	  		</div>
 	  		<div class="fedoraver ver">
-	  			<div class="btn-group-vertical" data-toggle="buttons" role="group" >
+	  			<div class="btn-group" data-toggle="buttons" role="group" >
 		  			<label class="btn btn-primary active">
 			  			<%= f.radio_button :image, 'fedora-23-x64' %>
 			    		23 x64
@@ -105,11 +120,7 @@
 	  			</div>
 	  		</div>
 	  		<div class="centosver ver">
-	  			<div class="btn-group-vertical" data-toggle="buttons" role="group" >
-		  			<label class="btn btn-primary active">
-			  			<%= f.radio_button :image, 'centos-7-0-x64' %>
-			    		7.2 x64
-		    		</label>
+	  			<div class="btn-group" data-toggle="buttons" role="group" >
 		  			<label class="btn btn-primary">
 			  			<%= f.radio_button :image, 'centos-6-5-x64' %>
 			    		6.7 x64
@@ -117,6 +128,10 @@
 			    	<label class="btn btn-primary">
 		  				<%= f.radio_button :image, 'centos-6-5-x32' %>
 		    			6.7 x32
+		    		</label>
+						<label class="btn btn-primary active">
+			  			<%= f.radio_button :image, 'centos-7-0-x64' %>
+			    		7.2 x64
 		    		</label>
 		    		<label class="btn btn-primary">
 		  				<%= f.radio_button :image, 'centos-5-8-x64' %>
@@ -129,15 +144,7 @@
 	  			</div>
 	  		</div>
 	  		<div class="debianver ver">
-	  			<div class="btn-group-vertical" data-toggle="buttons" role="group" >
-		  			<label class="btn btn-primary active">
-			  			<%= f.radio_button :image, 'debian-8-x64' %>
-			    		8.3 x64
-		    		</label>
-		  			<label class="btn btn-primary">
-			  			<%= f.radio_button :image, 'debian-8-x32' %>
-			    		8.3 x32
-		    		</label>
+	  			<div class="btn-group" data-toggle="buttons" role="group" >
 			    	<label class="btn btn-primary">
 		  				<%= f.radio_button :image, 'debian-7-0-x64' %>
 		    			7.10 x64
@@ -146,18 +153,48 @@
 		  				<%= f.radio_button :image, 'debian-7-0-x32' %>
 		    			7.10 x32
 		    		</label>
+						<label class="btn btn-primary active">
+			  			<%= f.radio_button :image, 'debian-8-x64' %>
+			    		8.3 x64
+		    		</label>
+		  			<label class="btn btn-primary">
+			  			<%= f.radio_button :image, 'debian-8-x32' %>
+			    		8.3 x32
+		    		</label>
 	  			</div>
 		  	</div>
 		  </div>
 	  	<div class="container feature-box">
 	  		<h3>Select Your Plan</h3>
 	  	</div>
+			<div class="btn-group" data-toggle="buttons">
+				<label class="btn btn-primary onemonth">
+					<%= f.radio_button :duration,1 %>
+					1 Month
+				</label>
+				<label class="btn btn-primary threemonth active">
+					<%= f.radio_button :duration,3,:checked => true %>
+					3 Months
+				</label>
+				<label class="btn btn-primary sixmonth">
+					<%= f.radio_button :duration,6 %>
+					6 Month
+				</label>
+			</div>
 	  	<div class="btn" data-toggle="buttons">
+				<br>
 	  		<div class="btn sizes">
-	  			<div class="prices text">
+					<div class="nodis prices text">
+						<h3><sup>$</sup>6/Month</h3>
+					</div>
+	  			<div class="dis prices text">
 		  			<h4><sup>$</sup>3.99/First Month</h4>
 		  			<h5><sup>$</sup>6/Thereafter</h5>
 	  			</div>
+					<div class="maxdis prices text">
+						<h4><sup>$</sup>1.99/First Month</h4>
+						<h5><sup>$</sup>6/Thereafter</h5>
+					</div>
 	  			<div class="specs">
 		  			<ul>
 			  			<li><span>512 MB</span> RAM</li>
@@ -169,10 +206,17 @@
 	  			<%= f.radio_button :size, '512mb' %>
 		    </div>
 		    <div class="btn active sizes">
-	  			<div class="prices text">
+					<div class="nodis prices text">
+						<h3><sup>$</sup>11/Month</h3>
+					</div>
+	  			<div class="dis prices text">
 	  				<h4><sup>$</sup>6.99/First Month</h4>
 	  				<h5><sup>$</sup>11/Thereafter</h5>
 	  			</div>
+					<div class="maxdis prices text">
+						<h4><sup>$</sup>4.99/First Month</h4>
+						<h5><sup>$</sup>11/Thereafter</h5>
+					</div>
 	  			<div class="specs">
 		  			<ul>
 			  			<li><span>1 GB</span> RAM</li>
@@ -184,10 +228,17 @@
 	  			<%= f.radio_button :size, '1gb',:checked => true %>
 		    </div>
 		    <div class="btn sizes">
-	  			<div class="prices text">
+					<div class="nodis prices text">
+						<h3><sup>$</sup>22/Month</h3>
+					</div>
+	  			<div class="dis prices text">
 		  			<h4><sup>$</sup>13.99/First Month</h4>
 		  			<h5><sup>$</sup>22/Thereafter</h5>
 	  			</div>
+					<div class="maxdis prices text">
+						<h4><sup>$</sup>11.99/First Month</h4>
+						<h5><sup>$</sup>22/Thereafter</h5>
+					</div>
 	  			<div class="specs">
 		  			<ul>
 			  			<li><span>2 GB</span> RAM</li>

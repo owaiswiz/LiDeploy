@@ -9,7 +9,6 @@ class InstancesController < ApplicationController
 
 	def show
 		#
-
 	end
 
 	def create
@@ -19,29 +18,33 @@ class InstancesController < ApplicationController
 		@instance.user_id = user_id
 		if @instance.save
 			redirect_to @instance.paypal_url(instance_path(@instance),@instance)
-
 		end
 	end
 
 	def destroy
-		@drop = Instance.new
-		@drop = Instance.find_by(instanceid: 13158189)
-		client = DropletKit::Client.new(access_token: 'bfffb539a41beaa052846fa90735faabf80d33d406b51b074a7c02b2e64a96cc')
-		client.droplets.delete(id: @drop.instanceid)
+		@instance = Instance.find_by(instanceid: 13158189)
+		client = DropletKit::Client.new(access_token: @instance.api_key)
+		client.droplets.delete(id: @instance.instanceid)
 	end
 
 	protect_from_forgery except: [:hook]
 	  def hook
 	    params.permit! # Permit all Paypal input params
 	    status = params[:payment_status]
-			instid = params[:]
 	    if status == "Completed"
-	      @instance = Instance.find params[:id]
-				client = DropletKit::Client.new(access_token: 'bfffb539a41beaa052846fa90735faabf80d33d406b51b074a7c02b2e64a96cc')
-				droplet = DropletKit::Droplet.new(name: @instance.name,region: @instance.region,size: @instance.size,image: @instance.image)
-				@instance = client.droplets.create(droplet)
+	      @instance = Instance.find params[:invoice]
+				if @instance.status != "Created"
+					@instance.update_attributes notification_params: params, transaction_id: params[:txn_id], purchased_at: Time.now
+					current_do_key = ENV["DO_SECRET_KEY"]
+					client = DropletKit::Client.new(access_token: current_do_key)
+					droplet = DropletKit::Droplet.new(name: @instance.name,region: @instance.region,size: @instance.size,image: @instance.image)
+					@created = client.droplets.create(droplet)
+					@instance.update_attributes(:instanceid => @created.id,:status => "Created",:api_key => current_do_key,:expires => Time.now+@instance.duration.months)
+				else
+					flash[:notice] = "Instance Already Created"
+				end
 			else
-				flash[:notice] = "failed"
+				flash[:notice] = "Payment Not Completed.Please Contact us at support@lideploy.com for further help"
 			end
 
 	    render nothing: true
@@ -49,6 +52,7 @@ class InstancesController < ApplicationController
 
 	private
 	def instance_params
-		params.require(:instance).permit(:name,:region,:image,:size)
+		params.require(:instance).permit(:name,:region,:image,:size,:duration)
 	end
+
 end
