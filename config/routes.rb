@@ -27,21 +27,19 @@ as :user do
   get '/account/confirm' => "devise/confirmations#show"
 
 end
-  get '/instance/index' => 'instances#index'
+  get '/instances/' => 'instances#index'
   get '/instance/new' => "instances#new"
   post '/instance/new' => "instances#create"
-  root 'home#index'
-  get '/instances/destroy' => "instances#destroy"
-  post '/instances/destroy' => "instances#destroy"
-  delete '/instances/destroy' => "instances#destroy"
+
   get '/instances/show' => "instances#show"
-  delete '/instances/show' => "instances#destroy"
   get '/' => 'home#index'
 
   #Paypal Related routes
   post "/hook" => "instances#hook"
   post '/instances/show' => "instances#show"
   get '/instances/:id/' => "instances#show"
+
+  root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

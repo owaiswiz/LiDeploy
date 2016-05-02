@@ -1,6 +1,19 @@
 class InstancesController < ApplicationController
 	def index
-	 @instances = Instance.find_by(user_id: current_user.id)
+		@instances = Instance.where(user_id: current_user.id)
+		Array(@instances).each do |inst|
+			if inst.status != "active"
+			 	client = DropletKit::Client.new(access_token: inst.api_key)
+				begin
+					instance = client.droplets.find(id: inst.instanceid)
+					if instance.status == 'active'
+						inst.update_attributes(:ip_address => instance.networks.v4[0].ip_address,:status => instance.status)
+					end
+				rescue
+					puts "Resource Not Found"
+				end
+			end
+	 	end
 	end
 
 	def new
@@ -32,8 +45,8 @@ class InstancesController < ApplicationController
 	    params.permit! # Permit all Paypal input params
 	    status = params[:payment_status]
 	    if status == "Completed"
-	      @instance = Instance.find params[:invoice]
-				if @instance.status != "Created"
+	      @instance = Instance.find params[:custom]
+				if @instance.status != "Created" || @instance.status != "new" || @instance.status != "active"
 					@instance.update_attributes notification_params: params, transaction_id: params[:txn_id], purchased_at: Time.now
 					current_do_key = ENV["DO_SECRET_KEY"]
 					client = DropletKit::Client.new(access_token: current_do_key)
@@ -52,7 +65,7 @@ class InstancesController < ApplicationController
 
 	private
 	def instance_params
-		params.require(:instance).permit(:name,:region,:image,:size,:duration)
+		params.require(:instance).permit(:name,:distro,:region,:image,:size,:duration)
 	end
 
 end

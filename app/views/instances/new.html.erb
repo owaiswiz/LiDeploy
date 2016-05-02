@@ -3,7 +3,7 @@
 		$(document).ready(function() {
 			//checks to see if host name is valid
 			$("#instance_name").on('keyup change',function(){
-			var inst_regex = /^[a-zA-Z0-9]?[a-z0-9A-Z.-]*[a-z0-9A-Z.]$/g;
+			var inst_regex = /^^\S+[a-zA-Z0-9]?[a-z0-9A-Z.-]*[a-z0-9A-Z.]$/g;
 			var inst_name = $("#instance_name").val();
 			if(!inst_regex.test(inst_name)) {
     			$(".signupbutton").prop('disabled',true);
@@ -19,12 +19,13 @@
 			$("label.distro").on("click", function() {
 	 			$("label.distro").removeClass("active");
 	 			$("div.ver").hide("fadeOut");
+
 	    	$(this).addClass("active");
 	  	});
-  		$(".ubuntu").click(function() { $(".ubuntuver").show("fadeIn"); });
-		 	$(".fedora").click(function() { $(".fedoraver").show("fadeIn"); });
-			$(".centos").click(function() { $(".centosver").show("fadeIn"); });
-			$(".debian").click(function() { $(".debianver").show("fadeIn"); });
+  		$(".ubuntu").click(function() { $(".ubuntuver").show("fadeIn").find('input.def').prop('checked',true); });
+		 	$(".fedora").click(function() { $(".fedoraver").show("fadeIn").find('input.def').prop('checked',true); });
+			$(".centos").click(function() { $(".centosver").show("fadeIn").find('input.def').prop('checked',true); });
+			$(".debian").click(function() { $(".debianver").show("fadeIn").find('input.def').prop('checked',true); });
 			$("label.onemonth").click(function(){
 				$("div.prices").hide();
 				$("div.nodis").show();
@@ -52,25 +53,25 @@
 		  </div>
 			<div class="btn" data-toggle="buttons">
 		  	<label class="btn distro active ubuntu">
-		  		<%= f.radio_button :image, 'ubuntu' %>
+		  		<%= f.radio_button :distro, 'Ubuntu',:checked => true %>
 					<p>
 		    	Ubuntu
 		    	</p>
 		    </label>
 	  		<label class="btn distro fedora">
-	  			<%= f.radio_button :image, 'fedora' %>
+	  			<%= f.radio_button :distro, 'Fedora' %>
 					<p>
 	    		Fedora
 	    		</p>
 	  		</label>
 	  		<label class="btn distro centos">
-	  			<%= f.radio_button :image, 'centos' %>
+	  			<%= f.radio_button :distro, 'Cent Os' %>
 					<p>
 	    		Cent OS
 	    		</p>
 	    	</label>
 	  		<label class="btn distro debian">
-	  			<%= f.radio_button :image, 'debian' %>
+	  			<%= f.radio_button :distro, 'Debian' %>
 					<p>
 	    		Debian
 	    		</p>
@@ -90,7 +91,7 @@
 		    			15.10 x32
 		    		</label>
 						<label class="btn btn-primary active">
-			  			<%= f.radio_button :image, 'ubuntu-14-04-x64',:checked => true %>
+			  			<%= f.radio_button :image, 'ubuntu-14-04-x64',:class => "def",:checked => true %>
 			    		14.04.4 x64
 		    		</label>
 		  			<label class="btn btn-primary">
@@ -110,7 +111,7 @@
 	  		<div class="fedoraver ver">
 	  			<div class="btn-group" data-toggle="buttons" role="group" >
 		  			<label class="btn btn-primary active">
-			  			<%= f.radio_button :image, 'fedora-23-x64' %>
+			  			<%= f.radio_button :image, 'fedora-23-x64',:class => "def" %>
 			    		23 x64
 		    		</label>
 		  			<label class="btn btn-primary">
@@ -130,7 +131,7 @@
 		    			6.7 x32
 		    		</label>
 						<label class="btn btn-primary active">
-			  			<%= f.radio_button :image, 'centos-7-0-x64' %>
+			  			<%= f.radio_button :image, 'centos-7-0-x64',:class => "def" %>
 			    		7.2 x64
 		    		</label>
 		    		<label class="btn btn-primary">
@@ -154,7 +155,7 @@
 		    			7.10 x32
 		    		</label>
 						<label class="btn btn-primary active">
-			  			<%= f.radio_button :image, 'debian-8-x64' %>
+			  			<%= f.radio_button :image, 'debian-8-x64',:class => "def" %>
 			    		8.3 x64
 		    		</label>
 		  			<label class="btn btn-primary">
