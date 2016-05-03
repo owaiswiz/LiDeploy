@@ -1,3 +1,31 @@
+<% content_for :head do %>
+ 	<style>
+	.dropdown-menu {
+		width: 100%;
+		padding: 0px;
+		border-left: 5px;
+		border-right: 5px;
+		}
+		.dropdown-toggle{
+			min-width: 160px;
+		}
+		.dropdown-item.btn-primary{
+			border: 0px;
+			border-radius: 0px;
+		}
+		.destroy.btn-primary{
+			color: red;
+		}
+		.destroy.btn-primary:hover{
+			background-color: red;
+			color: white;
+		}
+	.btn{
+		width: 100%;
+		}
+ 	</style>
+<% end %>
+
 <% if @instances.blank? %>
 	<div class="container feature-box">
 		<h1> Create An Instance </h1>
@@ -9,7 +37,7 @@
 <% else %>
 
 
-	<div class="container feature-box table-responsive">
+	<div class="container feature-box">
 		<table class="table table-sm">
 			<thead>
 				<tr class="theader">
@@ -19,7 +47,7 @@
 					<th>Status</th>
 					<th>Memory</th>
 					<th>Disk</th>
-					<th>Action</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -35,13 +63,29 @@
 								<%= inst.status.capitalize %>
 							<%end%>
 						</td>
-						<td><%= inst.disk && mkinst.size.upcase %></td>
+
+						<td><%= inst.disk && inst.size.upcase %></td>
 						<td><%= inst.disk && "#{inst.disk}GB" %></td>
-						<td>Placeholder</td>
+						<td>
+						<% if inst.disk? %>
+							<div class="btn-group">
+								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+								<div class="dropdown-menu">
+									<button class="btn btn-primary dropdown-item" href="#">Restart</button>
+									<button class="btn btn-primary dropdown-item" href="#">Power Off</button>
+									<button class="btn btn-primary dropdown-item" href="#">Renew</button>
+									<div class="dropdown-divider" style="border: 1px red solid" color="red"></div>
+									<button class="btn btn-primary destroy dropdown-item" href="#">Destroy</button>
+								</div>
+							</div>
+						<% end %>
+						</td>
 					</tr>
+
 				<% end %>
 			</tbody>
 		</table>
+
 	</div>
 
 
