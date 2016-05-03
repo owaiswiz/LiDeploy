@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160501180016) do
+ActiveRecord::Schema.define(version: 20160502141105) do
 
   create_table "instances", force: :cascade do |t|
     t.integer  "user_id"
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20160501180016) do
     t.string   "name"
     t.string   "region"
     t.string   "size"
-    t.integer  "memory"
     t.integer  "vcpus"
     t.integer  "disk"
     t.datetime "created_at",          null: false

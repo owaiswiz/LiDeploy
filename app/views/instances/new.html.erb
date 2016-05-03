@@ -38,9 +38,9 @@
 				$("div.prices").hide();
 				$("div.maxdis").show();
 			});
-
 		});
 	</script>
+
 <% end %>
 
 <div class="container">
@@ -65,7 +65,7 @@
 	    		</p>
 	  		</label>
 	  		<label class="btn distro centos">
-	  			<%= f.radio_button :distro, 'Cent Os' %>
+	  			<%= f.radio_button :distro, 'CentOs' %>
 					<p>
 	    		Cent OS
 	    		</p>
@@ -287,7 +287,7 @@
 			<div class="container feature-box">
 		  	<h3>Enter Your Instance's Name</h3>
 		  	<h4>The Name you would like to give to your instance.<br>The name can only contain alphanumeric characters,periods and dashes</h4>
-		  	<%= f.input :name,id: "instancename",placeholder: 'Example: myubuntuserver',pattern:"^[a-zA-Z0-9]?[a-z0-9A-Z.-]*[a-z0-9A-Z.]$",required: true,autofocus: true %>
+		  	<%= f.input :name,id: "instancename",placeholder: 'Example: myubuntuserver',pattern:"^[a-zA-Z0-9]?[a-z0-9A-Z.-]*[a-z0-9A-Z.]$",required: true%>
 		  </div>
 		  <div id="invalidhost" class="help-block rederror" style="display: none;font-family: 'quicksandlight'; font-size: 20px;">
 				Invalid Host Name

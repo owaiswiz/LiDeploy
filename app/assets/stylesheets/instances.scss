@@ -151,3 +151,24 @@
 .nodis,.maxdis{
   display:none;
 }
+.theader>th{
+  text-align: center;
+  font-family: 'quicksandbold';
+  font-size: 135%;
+  color: #535151;
+}
+.trow>td{
+  font-family: 'quicksandregular';
+  font-size: 120%;
+  font-weight: 600;
+  vertical-align: middle !important;
+}
+.Active{
+  color: #4CAF50 !important;
+}
+.New{
+  color: #FFEB3B !important;
+}
+.Def{
+  color: #F44336;
+}

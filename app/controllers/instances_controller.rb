@@ -1,4 +1,5 @@
 class InstancesController < ApplicationController
+	before_action :authenticate_user!,:except => [:hook]
 	def index
 		@instances = Instance.where(user_id: current_user.id)
 		Array(@instances).each do |inst|
@@ -7,9 +8,10 @@ class InstancesController < ApplicationController
 				begin
 					instance = client.droplets.find(id: inst.instanceid)
 					if instance.status == 'active'
-						inst.update_attributes(:ip_address => instance.networks.v4[0].ip_address,:status => instance.status)
+						inst.update_attributes(:ip_address => instance.networks.v4[0].ip_address,:vcpus => instance.vcpus,:disk => instance.disk,:status => instance.status)
 					end
 				rescue
+					inst.update_attributes(:status => "Error Occured While Retrieving Status")
 					puts "Resource Not Found"
 				end
 			end
@@ -46,13 +48,13 @@ class InstancesController < ApplicationController
 	    status = params[:payment_status]
 	    if status == "Completed"
 	      @instance = Instance.find params[:custom]
-				if @instance.status != "Created" || @instance.status != "new" || @instance.status != "active"
+				if @instance.status != "new" || @instance.status != "active"
 					@instance.update_attributes notification_params: params, transaction_id: params[:txn_id], purchased_at: Time.now
 					current_do_key = ENV["DO_SECRET_KEY"]
 					client = DropletKit::Client.new(access_token: current_do_key)
 					droplet = DropletKit::Droplet.new(name: @instance.name,region: @instance.region,size: @instance.size,image: @instance.image)
 					@created = client.droplets.create(droplet)
-					@instance.update_attributes(:instanceid => @created.id,:status => "Created",:api_key => current_do_key,:expires => Time.now+@instance.duration.months)
+					@instance.update_attributes(:instanceid => @created.id,:status => @created.status,:api_key => current_do_key,:expires => Time.now+@instance.duration.months)
 				else
 					flash[:notice] = "Instance Already Created"
 				end

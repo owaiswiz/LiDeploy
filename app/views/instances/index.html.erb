@@ -9,10 +9,41 @@
 <% else %>
 
 
-	<% Array(@instances).each do |inst| %>
+	<div class="container feature-box table-responsive">
+		<table class="table table-sm">
+			<thead>
+				<tr class="theader">
+					<th>Distribution</th>
+					<th>Name</th>
+					<th>IP Addres</th>
+					<th>Status</th>
+					<th>Memory</th>
+					<th>Disk</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% Array(@instances).each do |inst| %>
+					<tr class="trow">
+						<td><img src="/assets/<%= inst.distro.downcase %>-32.png" alt="<%=inst.distro%>"></label></td>
+						<td><%= inst.name %></td>
+						<td><%= inst.ip_address %></td>
+						<td class="Def <%= inst.status.capitalize %>">
+							<%if inst.status.capitalize == "New" %>
+								Creating. Come back in a couple of minutes.
+							<%else%>
+								<%= inst.status.capitalize %>
+							<%end%>
+						</td>
+						<td><%= inst.disk && mkinst.size.upcase %></td>
+						<td><%= inst.disk && "#{inst.disk}GB" %></td>
+						<td>Placeholder</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
 
-		<h1> <%= inst.id %> <%= inst.name %> <%= inst.ip_address %> <%= inst.status %> </h1>
-	<% end %>
 
 
 
