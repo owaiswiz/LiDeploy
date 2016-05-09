@@ -1,6 +1,6 @@
 <% content_for :head do %>
 	<script type="text/javascript">
-		$(document).ready(function() {
+		$(document).on("ready page:load turbolinks:load",function() {
 			//checks to see if host name is valid
 			$("#instance_name").on('keyup change',function(){
 			var inst_regex = /^^\S+[a-zA-Z0-9]?[a-z0-9A-Z.-]*[a-z0-9A-Z.]$/g;
@@ -179,7 +179,7 @@
 				</label>
 				<label class="btn btn-primary sixmonth">
 					<%= f.radio_button :duration,6 %>
-					6 Month
+					6 Months
 				</label>
 			</div>
 	  	<div class="btn" data-toggle="buttons">

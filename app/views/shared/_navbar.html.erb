@@ -37,13 +37,20 @@
                                 </div>
                             </li>
                         <% else %>
+                            <li>
+                              <div class="navbar-btn">
+                                  <a href="/instances/new" class="btn navbar-btn greenbutton" role="button">
+                                  Create New Instances</a>
+                              </div>
+                            </li>
                             <li class="page-scroll">
                                 <a href="/instances/">Instances</a>
+                            </li>
                             <li>
-                            <div class="navbar-btn">
-                                <a href="/logout" class="btn btn-primary" role="button">
-                                Logout</a>
-                                </div>
+                              <div class="navbar-btn">
+                                  <a href="/logout" class="btn btn-primary" role="button">
+                                  Logout</a>
+                              </div>
                             </li>
                         <% end %>
                     </ul>

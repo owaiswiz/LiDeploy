@@ -151,6 +151,11 @@
 .nodis,.maxdis{
   display:none;
 }
+
+.nodis.prices.text {
+    padding-bottom: 19px;
+}
+//index page related scss
 .theader>th{
   text-align: center;
   font-family: 'quicksandbold';
@@ -171,4 +176,17 @@
 }
 .Def{
   color: #F44336;
+}
+//Renew
+.renew{
+  text-align: center;
+  vertical-align: middle;
+}
+.details{
+  font-family: 'quicksandlight';
+  font-size: 150%;
+}
+.header{
+  font-family: 'quicksandbold' !important;
+
 }

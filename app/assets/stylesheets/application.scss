@@ -66,6 +66,10 @@
 /*End Quicksand Font Declaration*/
 
 /*beging pricing table's css */
+.btn{
+  border-radius: 0 !important;
+  outline: none;
+}
 .btn-custom {
   color: #bdc3c7;
   font-size: 18px;
@@ -79,7 +83,7 @@
   padding-top: 50px;
 }
 #pricing-table .pricing {
-  marign: 0;
+  margin: 0;
   padding: 0;
   font-family: 'quicksandbold', sans-serif;
 }
@@ -170,10 +174,9 @@
 	transition: color 0.5s linear;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,.btn-primary:active,.btn-primary:focus {
 
-	background-color: #3190e7;
-
+	background-color: #3190e7 !important;
 }
 
 .myimg {
@@ -327,6 +330,23 @@ body{
 }
 .signupbutton:hover {
   color: #2BCA58;
+  background: white !important;
+}
+.greenbutton{
+  color: white;
+  background: #2BCA58;
+  font-weight: 500;
+  border: 0;
+  text-align: center;
+  align-items: flex-start;
+  cursor: pointer;
+  display: block;
+  border-radius: 3px;
+  font-family: 'quicksandbold';
+}
+.greenbutton:hover{
+  color: #2BCA58;
+  background: white !important
 }
 .form-inputs{
   text-align: center;

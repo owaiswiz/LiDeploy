@@ -6,6 +6,16 @@
 		border-left: 5px;
 		border-right: 5px;
 		}
+    .commit.destroy.btn-primary{
+      margin-left: 0 !important;
+      margin-top: 5px;
+      border: 1px red solid;
+    }
+
+    .modal-title,.modal-body p{
+      text-align: center;
+      font-family: 'quicksandbold'
+    }
 		.dropdown-toggle{
 			min-width: 160px;
 		}
@@ -14,18 +24,17 @@
 			border-radius: 0px;
 		}
 		.destroy.btn-primary{
-			color: red;
+			color: red !important;
 		}
-		.destroy.btn-primary:hover{
-			background-color: red;
-			color: white;
+		.destroy.btn-primary:focus,.destroy.btn-primary:hover{
+			background-color: red !important;
+			color: white !important;
 		}
-	.btn{
-		width: 100%;
-		}
+  	.dropdown-item.btn,.cancel.btn-default,.destroy.btn{
+  		width: 100%;
+  		}
  	</style>
 <% end %>
-
 <% if @instances.blank? %>
 	<div class="container feature-box">
 		<h1> Create An Instance </h1>
@@ -35,8 +44,6 @@
 		<a class="btn btn-default signupbutton" href="/instances/new/" style="width: 50% !important;" role="button">Create Instance</a>
 	</div>
 <% else %>
-
-
 	<div class="container feature-box">
 		<table class="table table-sm">
 			<thead>
@@ -53,12 +60,12 @@
 			<tbody>
 				<% Array(@instances).each do |inst| %>
 					<tr class="trow">
-						<td><img src="/assets/<%= inst.distro.downcase %>-32.png" alt="<%=inst.distro%>"></label></td>
+						<td><img src="/assets/<%= inst.distro.downcase %>-32.png" alt="<%=inst.distro%>"></td>
 						<td><%= inst.name %></td>
 						<td><%= inst.ip_address %></td>
 						<td class="Def <%= inst.status.capitalize %>">
 							<%if inst.status.capitalize == "New" %>
-								Creating. Come back in a couple of minutes.
+								Creating Instance
 							<%else%>
 								<%= inst.status.capitalize %>
 							<%end%>
@@ -71,25 +78,21 @@
 							<div class="btn-group">
 								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
 								<div class="dropdown-menu">
-									<button class="btn btn-primary dropdown-item" href="#">Restart</button>
-									<button class="btn btn-primary dropdown-item" href="#">Power Off</button>
-									<button class="btn btn-primary dropdown-item" href="#">Renew</button>
-									<div class="dropdown-divider" style="border: 1px red solid" color="red"></div>
-									<button class="btn btn-primary destroy dropdown-item" href="#">Destroy</button>
-								</div>
+                  <%= button_to "Restart",restart_instance_path(:id => inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Restart Instance" %>
+                  <%= button_to "Shutdown",shutdown_instance_path(:id=>inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Shutdown Instance" %>
+                  <%= button_to "Renew",renew_put_instance_path(:id => inst.id),method: :put,:class => "btn btn-primary dropdown-item",:title => "Renew Instance" %>
+									<div class="dropdown-divider" style="border-top: 1px red solid;"color="red"></div>
+                  <%= button_to "Destroy",instances_path(:id => inst.id),method: :delete,:class => "btn btn-primary destroy dropdown-item",:title => "Destroy this Instance?",data: {:confirm => "This Action is irreversible<br/>Be Certain!"}%>
+                </div>
 							</div>
-						<% end %>
+              <% else%>
+                  <%= button_to "Delete",instances_path(:id => inst.id),method: :delete,:class => "btn btn-primary destroy dropdown-item" %>
+            <% end %>
+
 						</td>
 					</tr>
-
 				<% end %>
 			</tbody>
 		</table>
-
 	</div>
-
-
-
-
-
 <% end %>

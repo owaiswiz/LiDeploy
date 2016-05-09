@@ -14,58 +14,58 @@
 	<body class="page-top">
 		<%= render 'shared/navbar' %>
 <% end %>
-		<%- flash.each do |name, msg| -%>
-		 	<% if name == "notice" %>
-	    		<%= content_tag :div, msg,:class => "alert alert-success", :id => "flash_#{name}" if msg.is_a?(String) %>
-	    	<% elsif name == "alert" %>
-	    		<%= content_tag :div, msg,:class => "alert alert-danger", :id => "flash_#{name}" if msg.is_a?(String) %>
-	    	<% end %>
-	  	<%- end -%>
+<% flash.each do |key, value| %>
+  <% if value.length > 0 %>
+    <% if key == "notice" then alert_class = "success" elsif key == "alert" then alert_class = "danger" else alert_class = key end %>
+    <%= content_tag :div, class: "alert alert-#{alert_class}" do %>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <%= value%>
+    <% end %>
+  <% end %>
+<% end %>
 
 <%= yield %>
 <% if ((controller_name == "registrations" || controller_name == "passwords" || controller_name == "confirmations" || controller_name == "sessions") && (action_name == 'new' || action_name == 'create')) || (controller_name == "instances") %>
-
 <% else %>
 	<footer>
 		<div class = "row">
 			<div class = "col-md-4 footb">
-				<h4>Copyright © 2016<br>
+				<h4>Copyright © 2016<br/>
 				</h4>
 			</div>
-
 			<div class = "col-md-4 footb">
-				<h4>HELP</h4><br>
-				<br>
+				<h4>HELP</h4><br/>
+				<br/>
 			</div>
 			<div class = "col-md-4 footb">
-				<h4>SOCIAL</h4><br>
+				<h4>SOCIAL</h4><br/>
 			</div>
 		</div>
 		<div class = "row">
 			<div class ="col-md-4 footb">
-				<a href="/aboutus">About Us</a><br>
-				<a href="/tos">Terms of Service</a><br>
-				<a href="/privacypol">Privacy Policy</a><br>
+				<a href="/aboutus">About Us</a><br/>
+				<a href="/tos">Terms of Service</a><br/>
+				<a href="/privacypol">Privacy Policy</a><br/>
 			</div>
 			<div class ="col-md-4 footb">
-				<a href="/gettingstarted">Getting Started</a><br>
-				<a href="/tutorials">Tutorials</a><br>
-				<a href="/faq">Frequently Asked Questions</a><br>
+				<a href="/gettingstarted">Getting Started</a><br/>
+				<a href="/tutorials">Tutorials</a><br/>
+				<a href="/faq">Frequently Asked Questions</a><br/>
 			</div>
 			<div class ="col-md-4 footb">
 				<i class="fa fa-twitter"></i>
 				<a href="https://twitter.com/LiDeploy">
 				Twitter
 				</a>&nbsp;&nbsp;&nbsp;
-				<br>
+				<br/>
 				<i class="fa fa-facebook"></i>
 				<a href="https://facebook.com/LiDeploy">
 				Facebook
-				</a><br>
+        </a><br/>
 				<i class="fa fa-google-plus"></i>
 				<a href="#">
 				Google+
-      </a><br>
+        </a><br/>
 			</div>
 		</div>
 	</footer>

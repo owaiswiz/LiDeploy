@@ -27,28 +27,79 @@ class InstancesController < ApplicationController
 	end
 
 	def create
-		user_id = current_user.id
-		#@instance = Instance.create(user_id: user_id,name: name,instanceid: f.id,region: f.region.name,size: f.size,memory: f.memory,vcpus: f.vcpus,disk: f.disk,image: f.image.name)
 		@instance= Instance.new(instance_params)
-		@instance.user_id = user_id
+		@instance.user_id = current_user.id
 		if @instance.save
-			redirect_to @instance.paypal_url(instance_path(@instance),@instance)
+			redirect_to @instance.paypal_url(@instance)
 		end
 	end
 
 	def destroy
-		@instance = Instance.find_by(instanceid: 13158189)
-		client = DropletKit::Client.new(access_token: @instance.api_key)
-		client.droplets.delete(id: @instance.instanceid)
+	  @instance = Instance.find_by(user_id: current_user.id,id:params[:id])
+		begin
+			client = DropletKit::Client.new(access_token: @instance.api_key)
+			client.droplets.delete(id: @instance.instanceid)
+			flash[:notice] = "Instance Deleted Successfully"
+		rescue
+			#flash[:error] = "Error Occured while Deleting. Please Try Again Later"
+		end
+		@instance.destroy
+		redirect_to instances_path
+	end
+	def restart
+		@instance = Instance.find_by(user_id: current_user.id,id: params[:id])
+		begin
+			client = DropletKit::Client.new(access_token: @instance.api_key)
+			client.droplet_actions.reboot(droplet_id: @instance.instanceid)
+			flash[:notice] = "Restarted Successfully"
+		rescue
+			flash[:error] = "Error Occurred While Restarting. Try again after few minutes."
+		end
+		redirect_to instances_path
+	end
+	def shutdown
+		@instance = Instance.find_by(user_id: current_user.id,id:params[:id])
+		begin
+			client = DropletKit::Client.new(access_token: @instance.api_key)
+			client.droplet_actions.shutdown(droplet_id: @instance.instanceid)
+			@instance.update_attributes(:status => "Powered Off")
+			flash[:notice] = "Shutdown Initiated"
+			puts "Works"
+		rescue
+			flash[:alert] = "Error Occured While Shutting Down. Try again after few minutes."
+		end
+		redirect_to instances_path
 	end
 
+	def renew_put
+			puts params[:id]
+			@instance = Instance.find_by(user_id:current_user,id: params[:id])
+			puts @instance
+			render 'renew'
+	end
+
+	def renew_post
+		begin
+			@instance = Instance.find_by(user_id: current_user.id,id: params[:id])
+			raise "Not Found" if @instance.nil?
+			if @instance.update_attributes(:duration => params[:instance][:duration],:renew_status => "Renewing")
+				redirect_to @instance.paypal_url(@instance)
+			end
+		rescue
+			flash[:alert] = "Instance Not Found"
+			redirect_to instances_path
+		end
+
+	end
 	protect_from_forgery except: [:hook]
 	  def hook
 	    params.permit! # Permit all Paypal input params
 	    status = params[:payment_status]
 	    if status == "Completed"
 	      @instance = Instance.find params[:custom]
-				if @instance.status != "new" || @instance.status != "active"
+				if @instance.renew_status == "Renewing"
+					@instance.update_attributes(:renew_status => "Renewed",:expires => @instance.expires+@instance.duration.months)
+				elsif @instance.status != "new" || @instance.status != "active"
 					@instance.update_attributes notification_params: params, transaction_id: params[:txn_id], purchased_at: Time.now
 					current_do_key = ENV["DO_SECRET_KEY"]
 					client = DropletKit::Client.new(access_token: current_do_key)
@@ -61,13 +112,10 @@ class InstancesController < ApplicationController
 			else
 				flash[:notice] = "Payment Not Completed.Please Contact us at support@lideploy.com for further help"
 			end
-
 	    render nothing: true
 	  end
-
 	private
 	def instance_params
 		params.require(:instance).permit(:name,:distro,:region,:image,:size,:duration)
 	end
-
 end

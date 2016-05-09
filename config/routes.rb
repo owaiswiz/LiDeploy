@@ -3,7 +3,7 @@ Rails.application.routes.draw do
  # get '/signup' => 'devise/registrations#new', :as => 'new_user_registration'
  # end
  #devise_for :users
-  resources :instances
+resources :instances
 devise_for :users, :skip => [:sessions,:registrations,:confirmations]
 as :user do
   #User Signin/Signout
@@ -38,7 +38,13 @@ end
   post "/hook" => "instances#hook"
   post '/instances/show' => "instances#show"
   get '/instances/:id/' => "instances#show"
-
+  delete '/instances/' => "instances#destroy"
+  post '/instances/restart' => "instances#restart", :as => :restart_instance
+  post '/instances/shutdown' => "instances#shutdown",:as => :shutdown_instance
+  post '/instance/renew' => "instances#renew_post",:as => :renew_post_instance
+  put '/instance/renew' => "instances#renew_put",:as => :renew_put_instance
+  get '/instance/renew' => redirect('/instances/')
+  get '/instance/' => redirect('/instances/')
   root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

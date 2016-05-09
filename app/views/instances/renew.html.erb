@@ -1,0 +1,107 @@
+<% content_for :head do%>
+  <script>
+    var instSize = "<%= @instance.size%>"
+    var sizeArr = {"512mb":"low","1gb":"mid","2gb":"high"}
+
+    var monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
+    var _MS_PER_DAY = 1000 * 60 * 60 * 24;
+    var currDate = new Date();
+    function updateExp(months){
+      var exp = new Date("<%= @instance.expires%>");
+      exp.setMonth(exp.getMonth()+months);
+      $(".renewaldate").text(exp.getDate() + ' ' + monthNames[exp.getMonth()] + ' ' + exp.getFullYear());
+    }
+    $(document).on("ready page:load turbolinks:load",function(){
+    $('.' + sizeArr[instSize]).show().addClass("active");
+    $(".onemonth").on("click",function(){updateExp(1);});
+    $(".threemonth").on("click",function(){updateExp(3);});
+    $(".sixmonth").on("click",function(){updateExp(6);});
+
+    });
+  </script>
+  <style>
+    .sizes{
+      display: none;
+    }
+  </style>
+<%end%>
+<div class="container feature-box" style="margin-top:10px;">
+  <h1 class="renew header">Renew <%= @instance.name %></h1><br/>
+    <div class = "renew details">
+      Memory: <%= @instance.size.upcase %><span class="renew header">&nbsp;|&nbsp;</span><img src="/assets/<%= @instance.distro.downcase %>-32.png" alt="<%=@instance.distro%>"><span class="renew header">&nbsp;|&nbsp;</span>Disk: <%= @instance.disk %>GB<br/>
+      Current Expiry Date: <%= @instance.expires.strftime('%-d %B %Y') %><br/>
+      Current Plan Expires in : <span class="header"><%= ((@instance.expires - Time.now).to_i/86400)%> Days</span><br/>
+      <br/>
+    </div>
+    <h2 class ="renew header">Current Plan</h2>
+    <div class="btn" data-toggle="buttons">
+      <div class="btn low sizes">
+        <div class="dis prices text">
+          <h3><sup>$</sup>6/Month</h3>
+        </div>
+        <div class="specs">
+          <ul>
+            <li><span>512 MB</span> RAM</li>
+            <li><span>2.4 GHz</span> Single Core CPU</li>
+            <li><span>20 GB SSD</span> Disk</li>
+            <li><span>1000 GB</span> Transfer</li>
+          </ul>
+        </div>
+        </div>
+      <div class="btn mid active sizes">
+        <div class="dis prices text">
+          <h3><sup>$</sup>11/Month</h3>
+        </div>
+        <div class="specs">
+          <ul>
+            <li><span>1 GB</span> RAM</li>
+            <li><span>2.4 GHz</span> Single Core CPU</li>
+            <li><span>30 GB SSD</span> Disk</li>
+            <li><span>2000 GB</span> Transfer</li>
+          </ul>
+        </div>
+      </div>
+      <div class="btn high sizes">
+        <div class="dis prices text">
+          <h3><sup>$</sup>22/Month</h3>
+        </div>
+        <div class="specs">
+          <ul>
+            <li><span>2 GB</span> RAM</li>
+            <li><span>2.4 GHz</span> Dual Core CPU</li>
+            <li><span>40 GB SSD</span> Disk</li>
+            <li><span>3000 GB</span> Transfer</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="renew header">Select Renew Duration</h2>
+    <%= simple_form_for(@instance,:url => renew_post_instance_path(id: @instance.id),method: :post, defaults: {label: false,error_html: { class: 'rederror'}},html: { autocomplete: 'off' }) do |f| %>
+      <%= f.error_notification %>
+      <div class = "duration">
+        <div class="btn-group" data-toggle="buttons">
+  				<label class="btn btn-primary onemonth">
+  					<%= f.radio_button :duration,1,:checked => false %>
+  					1 Month
+  				</label>
+  				<label class="btn btn-primary threemonth active">
+  					<%= f.radio_button :duration,3,:checked => true %>
+  					3 Months
+  				</label>
+  				<label class="btn btn-primary sixmonth">
+  					<%= f.radio_button :duration,6,:checked => false %>
+  					6 Months
+  				</label>
+  			</div>
+        <br/><br/>
+        <div class = "renew details">
+          After Renewal Expiry Date: <span class="renewaldate"><%= (@instance.expires+3.month).strftime('%-d %B %Y')%></span><br/>
+          <br/>
+        </div>
+  			<div class="form-actions">
+  	    	<%= f.button :submit, "Renew Instance", :class => 'signupbutton' %>
+  	  	</div>
+      </div>
+    <% end %>
+</div>
