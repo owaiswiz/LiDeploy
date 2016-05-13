@@ -2,16 +2,14 @@
   <script>
     var instSize = "<%= @instance.size%>"
     var sizeArr = {"512mb":"low","1gb":"mid","2gb":"high"}
-
     var monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
-    var _MS_PER_DAY = 1000 * 60 * 60 * 24;
     var currDate = new Date();
     function updateExp(months){
       var exp = new Date("<%= @instance.expires%>");
       exp.setMonth(exp.getMonth()+months);
       $(".renewaldate").text(exp.getDate() + ' ' + monthNames[exp.getMonth()] + ' ' + exp.getFullYear());
     }
-    $(document).on("ready page:load turbolinks:load",function(){
+    $(document).ready(function(){
     $('.' + sizeArr[instSize]).show().addClass("active");
     $(".onemonth").on("click",function(){updateExp(1);});
     $(".threemonth").on("click",function(){updateExp(3);});
@@ -47,7 +45,7 @@
             <li><span>1000 GB</span> Transfer</li>
           </ul>
         </div>
-        </div>
+      </div>
       <div class="btn mid active sizes">
         <div class="dis prices text">
           <h3><sup>$</sup>11/Month</h3>

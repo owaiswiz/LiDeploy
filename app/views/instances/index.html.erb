@@ -1,11 +1,11 @@
 <% content_for :head do %>
  	<style>
-	.dropdown-menu {
-		width: 100%;
-		padding: 0px;
-		border-left: 5px;
-		border-right: 5px;
-		}
+	  .dropdown-menu {
+  		width: 100%;
+  		padding: 0px;
+  		border-left: 5px;
+  		border-right: 5px;
+  		}
     .commit.destroy.btn-primary{
       margin-left: 0 !important;
       margin-top: 5px;
@@ -25,14 +25,46 @@
 		}
 		.destroy.btn-primary{
 			color: red !important;
+      outline: 1px solid red !important;
 		}
 		.destroy.btn-primary:focus,.destroy.btn-primary:hover{
 			background-color: red !important;
 			color: white !important;
 		}
   	.dropdown-item.btn,.cancel.btn-default,.destroy.btn{
-  		width: 100%;
-  		}
+  		width: 100% !important;
+  	}
+    .Active{
+      color: #26A65B !important;
+    }
+    .New,.Creating,.Starting,.Restarting{
+      color: #F57C00 !important;
+    }
+    .Def{
+      font-family: 'quicksandbold' !important;ol;;;;
+      color: #D91E18;
+    }
+    /*tablecss*/
+    .theader>th{
+      text-align: center;
+      font-family: 'quicksandbold';
+      font-size: 135%;
+      color: #535151;
+    }
+    .trow>td{
+      font-family: 'quicksandregular';
+      font-size: 120%;
+      font-weight: 600;
+      vertical-align: middle !important;
+    }
+    .instname{
+      font-family: 'quicksandbold';
+      color: #337ab7;
+    }
+    .instdetails{
+      font-family: 'quicksandlight';
+      font-size: 80%;
+    }
  	</style>
 <% end %>
 <% if @instances.blank? %>
@@ -50,10 +82,9 @@
 				<tr class="theader">
 					<th>Distribution</th>
 					<th>Name</th>
-					<th>IP Addres</th>
+					<th>IP Address</th>
 					<th>Status</th>
-					<th>Memory</th>
-					<th>Disk</th>
+          <th>Expires</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -61,27 +92,42 @@
 				<% Array(@instances).each do |inst| %>
 					<tr class="trow">
 						<td><img src="/assets/<%= inst.distro.downcase %>-32.png" alt="<%=inst.distro%>"></td>
-						<td><%= inst.name %></td>
+						<td>
+              <%if inst.disk? %>
+                <span class="instname"><%= inst.name%></span><br/>
+                <span class ="instdetails"><%=inst.size.upcase%> Memory / <%= inst.disk%>GB Disk</span>
+              <%else%>
+                <span class="instname"><%= inst.name%>
+              <%end%>
+            </td>
 						<td><%= inst.ip_address %></td>
-						<td class="Def <%= inst.status.capitalize %>">
+						<td class="Def <%= inst.status.capitalize.delete(' ') %>">
 							<%if inst.status.capitalize == "New" %>
 								Creating Instance
 							<%else%>
 								<%= inst.status.capitalize %>
 							<%end%>
 						</td>
-
-						<td><%= inst.disk && inst.size.upcase %></td>
-						<td><%= inst.disk && "#{inst.disk}GB" %></td>
-						<td>
+            <td>
+              <% if inst.disk? %>
+                <%= inst.expires.strftime('%-d %B %Y') %>
+              <%else%>
+                <span class="Def">-</span>
+              <%end%>
+            </td>
+            <td>
 						<% if inst.disk? %>
 							<div class="btn-group">
 								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
 								<div class="dropdown-menu">
+                  <% if inst.status == "Powered Off" %>
+                    <%= button_to "Start",start_instance_path(:id=> inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Start Instance" %>
+                  <% else %>
+                    <%= button_to "Shutdown",shutdown_instance_path(:id=>inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Shutdown Instance" %>
+                  <% end %>
                   <%= button_to "Restart",restart_instance_path(:id => inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Restart Instance" %>
-                  <%= button_to "Shutdown",shutdown_instance_path(:id=>inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Shutdown Instance" %>
                   <%= button_to "Renew",renew_put_instance_path(:id => inst.id),method: :put,:class => "btn btn-primary dropdown-item",:title => "Renew Instance" %>
-									<div class="dropdown-divider" style="border-top: 1px red solid;"color="red"></div>
+
                   <%= button_to "Destroy",instances_path(:id => inst.id),method: :delete,:class => "btn btn-primary destroy dropdown-item",:title => "Destroy this Instance?",data: {:confirm => "This Action is irreversible<br/>Be Certain!"}%>
                 </div>
 							</div>

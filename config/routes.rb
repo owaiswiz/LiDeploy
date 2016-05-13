@@ -30,16 +30,13 @@ end
   get '/instances/' => 'instances#index'
   get '/instance/new' => "instances#new"
   post '/instance/new' => "instances#create"
-
-  get '/instances/show' => "instances#show"
   get '/' => 'home#index'
 
   #Paypal Related routes
   post "/hook" => "instances#hook"
-  post '/instances/show' => "instances#show"
-  get '/instances/:id/' => "instances#show"
   delete '/instances/' => "instances#destroy"
   post '/instances/restart' => "instances#restart", :as => :restart_instance
+  post '/instances/start' => "instances#start", :as => :start_instance
   post '/instances/shutdown' => "instances#shutdown",:as => :shutdown_instance
   post '/instance/renew' => "instances#renew_post",:as => :renew_post_instance
   put '/instance/renew' => "instances#renew_put",:as => :renew_put_instance

@@ -46,7 +46,7 @@ class Instance < ActiveRecord::Base
         cmd: "_xclick",
         upload: 1,
         return: "#{Rails.application.secrets.app_host}/instances/",
-        invoice: "#{inst.name.upcase}#{inst.id}LIDEPLOY",
+        invoice: "#{inst.name.upcase}#{inst.id}LIDEPLOY#{Time.now}",
         custom: inst.id,
         amount: price,
         item_name: "#{inst.size.upcase} Server for #{inst.duration} #{month} on Lideploy.com",
