@@ -124,15 +124,17 @@
                     <%= button_to "Start",start_instance_path(:id=> inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Start Instance" %>
                   <% else %>
                     <%= button_to "Shutdown",shutdown_instance_path(:id=>inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Shutdown Instance" %>
+                    <%= button_to "Restart",restart_instance_path(:id => inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Restart Instance" %>
                   <% end %>
-                  <%= button_to "Restart",restart_instance_path(:id => inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Restart Instance" %>
                   <%= button_to "Renew",renew_put_instance_path(:id => inst.id),method: :put,:class => "btn btn-primary dropdown-item",:title => "Renew Instance" %>
-
+                  <%= button_to "Resize",resize_instance_path(:id => inst.id),method: :post,:class => "btn btn-primary dropdown-item",:titke => "Resize Instance" %>
                   <%= button_to "Destroy",instances_path(:id => inst.id),method: :delete,:class => "btn btn-primary destroy dropdown-item",:title => "Destroy this Instance?",data: {:confirm => "This Action is irreversible<br/>Be Certain!"}%>
                 </div>
 							</div>
               <% else%>
+                <% if inst.status != "Creating" %>
                   <%= button_to "Delete",instances_path(:id => inst.id),method: :delete,:class => "btn btn-primary destroy dropdown-item" %>
+                <%end%>
             <% end %>
 
 						</td>

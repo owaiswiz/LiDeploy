@@ -1,29 +1,11 @@
-<% content_for :head do %>
-  <script>
-    $(document).ready(function(){
-      $("label.onemonth").click(function(){
-        $("div.prices").hide();
-        $("div.nodis").show();
-      });
-      $("label.threemonth").click(function(){
-        $("div.prices").hide();
-        $("div.dis").show();
-      });
-      $("label.sixmonth").click(function(){
-        $("div.prices").hide();
-        $("div.maxdis").show();
-      });
-    });
-  </script>
-<%end%>
 <%= render 'shared/frontpage' %>
 <div class="muhcontainer">
 <div class="row feature-box">
 <h1 style="margin-bottom: 50px;font-family: 'quicksandlight'"> Simple. Reliable. Flexible.</h1>
     <div class="span4">
        <img src="/assets/easytodeployvps.png" alt="Test" class="img-rounded myimg">
-       <h2>Easy To Deploy</h2>
-       <p>Launch An Instance with just a few clicks<br>Doesn't get any Simpler than this</p>
+       <h2 style="font-family: 'quicksandregular'">Easy To Deploy</h2>
+       <p>Launch a server instance with just a few clicks<br>Doesn't get any simpler than this</p>
     </div>
 
     <div class="span4">
@@ -34,18 +16,16 @@
     <div class="span4">
       <img src="/assets/simpletoscalevps.png" alt="Test" class="img-rounded myimg">
       <h2 style="font-family: quicksandbold"> Easily Scalable</h2>
-      <p> You can easily scale your servers in the future<br>All with the help of few clicks</p>
+      <p> You can easily scale your servers in the future<br>Just with a couple of clicks</p>
     </div>
 </div>
 <br>
-<hr>
 <div class="row feature-box">
     <div class="col-md-12">
-        <h1 style="font-family: 'quicksandlight' ">Reasonable Pricing Structure</h1>
+        <h1 style="margin-top: 50px;font-family: 'quicksandlight' ">Reasonable Pricing Structure</h1>
     </div>
 </div>
 
 <%= render 'shared/pricing' %>
 <br>
-<hr>
 </div>

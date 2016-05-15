@@ -1,15 +1,109 @@
-
-
-.sizes{
-  height: 200px;
-  width: 220px;
-  padding: 0;
-  border-color: #298eea;
-  border: none !important;
+.bold{
+  font-family: 'quicksandbold';
 }
 
+.light{
+  font-family: 'quicksandlight';
+}
+.span4 h2,.theme{
+  color: #298eea;
+}
+.span4 h2{
+  font-family: 'quicksandregular' !important;
+}
+.span4 {
+	width: 370px;
+	float: left;
+  min-height: 1px;
+  margin-left: 30px;
+}
+
+.muhcontainer
+{
+	width: 1170px;
+	margin-right: auto;;
+	margin-left: auto;
+	font-family: quicksandbold;
+	font-size: 15px;
+
+}
+
+.muhmaincontent{
+  max-width: 1400px;
+  display: block;
+  padding: 60px 80px 90px;
+}
+.muhsup
+{
+  font-size: 15px;
+  color: #34495E;
+}
+.feature-box{
+  margin-top: 0px;
+}
+.muhleft{
+  width: 45%;
+  margin-right: 2.5%;
+  float: left;
+  display: block;
+  text-align: left;
+}
+.muhleft h1{
+    line-height: 56px;
+    font-size: 38px;
+}
+.muhleft h1:after{
+    height: 1px;
+    background-color: #bbb;
+    margin: 30px 0;
+    display: block;
+    width: 150px;
+    content: " ";
+}
+
+
+
+.muhright{
+  width: 52.5%;
+  float: left;
+  display: block;
+  text-align: center;
+}
+
+hr{
+  border-color: #666;
+  width: 100%;
+}
+
+.sizes{
+  height: 267px;
+  width: 215px;
+  padding: 0;
+  border-radius: 4% !important;
+}
+
+.sizes.active{
+  height: 307px;
+  border: 5px solid #298eea !important;
+}
+.sizes.active .text{
+  background-color: #298eea;
+  color: white;
+}
 .sizes:nth-of-type(1),.sizes:nth-of-type(3){
-  border: 1px solid #CDCDCD !important;
+//  border: 1px solid #CDCDCD !important;
+    border: 2px solid #298eea !important;
+}
+.sizes:nth-of-type(1){
+  border-top-right-radius: 0 !important;
+  border-right: none !important;
+  border-bottom-right-radius: 0 !important;
+
+}
+.sizes:nth-of-type(3){
+  border-left: none !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
 }
 .text{
   padding-top: 10px;
@@ -20,15 +114,6 @@
 }
 .text h5{
   font-size: 15px;
-}
-.sizes.active{
-//  border-left: 1px solid #298eea !important;
-  height: 250px;
-  outline: 5px solid #298eea;
-}
-.sizes.active .text{
-  background-color: #298eea;
-  color: white;
 }
 .popular{
   background-color: #1d82dc !important;
@@ -42,7 +127,6 @@
 
 .specs {
   padding-top: 10px;
-  padding-bottom: 10px;
 }
 
 .specs ul {
@@ -54,16 +138,10 @@
   list-style: none;
   color: #bdc3c7;
   font-size: 16px;
+  padding: 5px;
 }
 
 .specs ul li span {
   color: #34495e;
   font-family: 'quicksandbold';
-}
-
-.nodis,.maxdis{
-  display:none;
-}
-.text{
-  padding-bottom: 18px;
 }

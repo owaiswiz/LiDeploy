@@ -1,5 +1,21 @@
 class InstancesController < ApplicationController
 	before_action :authenticate_user!,:except => [:hook]
+	#Allocate a new Instance model
+	def new
+		@instance = Instance.new
+	end
+
+	#Create a new Instance from Form Input
+	def create
+		@instance= Instance.new(instance_params)
+		@instance.user_id = current_user.id
+		@instance.status = 'Waiting for Payment Confirmation'
+		if @instance.save
+			redirect_to @instance.paypal_url(@instance)
+		end
+	end
+
+	#List all Instances of A Particular User
 	def index
 		@instances = Instance.where(user_id: current_user.id)
 		Array(@instances).each do |inst|
@@ -24,19 +40,21 @@ class InstancesController < ApplicationController
 		end
 	end
 
-	def new
-		@instance = Instance.new
-	end
-
-	def create
-		@instance= Instance.new(instance_params)
-		@instance.user_id = current_user.id
-		@instance.status = 'Creating'
-		if @instance.save
-			redirect_to @instance.paypal_url(@instance)
+	#Start an Instance
+	def start
+		@instance = Instance.find_by(user_id: current_user.id,id:params[:id])
+		begin
+			client = DropletKit::Client.new(access_token: @instance.api_key)
+			@droplet = client.droplet_actions.power_on(droplet_id: @instance.instanceid)
+			@instance.update_attributes(:status => "Starting")
+			flash[:notice] = "Instance Started"
+		rescue
+			flash[:alert] = "Error Occurred while Starting Instance.Try again after few minutes."
 		end
+		redirect_to instances_path
 	end
 
+	#Delete an Instance
 	def destroy
 	  @instance = Instance.find_by(user_id: current_user.id,id:params[:id])
 		begin
@@ -49,18 +67,22 @@ class InstancesController < ApplicationController
 		@instance.destroy
 		redirect_to instances_path
 	end
+
+	#Restart an Instance
 	def restart
 		@instance = Instance.find_by(user_id: current_user.id,id: params[:id])
-		#begin
+		begin
 			client = DropletKit::Client.new(access_token: @instance.api_key)
 			client.droplet_actions.reboot(droplet_id: @instance.instanceid)
 			@instance.update_attributes(:status => "Restarting")
 			flash[:notice] = "Restarted Successfully"
-		#rescue
+		rescue
 			flash[:error] = "Error Occurred While Restarting. Try again after few minutes."
-	#	end
+		end
 		redirect_to instances_path
 	end
+
+	#Power off an Instance
 	def shutdown
 		@instance = Instance.find_by(user_id: current_user.id,id:params[:id])
 		begin
@@ -74,23 +96,14 @@ class InstancesController < ApplicationController
 		end
 		redirect_to instances_path
 	end
-	def start
-		@instance = Instance.find_by(user_id: current_user.id,id:params[:id])
-		begin
-			client = DropletKit::Client.new(access_token: @instance.api_key)
-			@droplet = client.droplet_actions.power_on(droplet_id: @instance.instanceid)
-			@instance.update_attributes(:status => "Starting")
-			flash[:notice] = "Instance Started"
-		rescue
-			flash[:alert] = "Error Occurred while Starting Instance.Try again after few minutes."
-		end
-		redirect_to instances_path
-	end
+
+	#Renew Instance(Render Page part)
 	def renew_put
 			@instance = Instance.find_by(user_id:current_user,id: params[:id])
 			render 'renew'
 	end
 
+	#Renew Instance(Process Payment and redirect to payment processor)
 	def renew_post
 		begin
 			@instance = Instance.find_by(user_id: current_user.id,id: params[:id])
@@ -102,8 +115,27 @@ class InstancesController < ApplicationController
 			flash[:alert] = "Instance Not Found"
 			redirect_to instances_path
 		end
-
 	end
+
+	#Resize an Instance
+	def resize
+	#	begin
+			@instance = Instance.find_by(user_id: current_user.id,id:params[:id])
+	#		raise "Not Found" if @instance.nil?
+			if @instance.status == "Powered Off"
+				client = DropletKit::Client.new(access_token: @instance.api_key)
+				@instance.update_attributes(:status => "Resizing")
+				client.droplet_actions.resize(droplet_id: @instance.instanceid, size: '1gb')
+			else
+				shutdown
+				flash[:notice] = "Shutting down instance,try again in few minutes"
+			end
+	#	rescue
+		#	flash[:notice] = "Instance Not Found or Unknown State"
+	#	end
+		return
+	end
+
 	protect_from_forgery except: [:hook]
 	  def hook
 	    params.permit! # Permit all Paypal input params
@@ -112,7 +144,7 @@ class InstancesController < ApplicationController
 	    if status == "Completed"
 				if @instance.renew_status == "Renewing"
 					@instance.update_attributes(:renew_status => "Renewed",:expires => @instance.expires+@instance.duration.months)
-				elsif @instance.status != "new" || @instance.status != "active"
+				elsif @instance.status == "Waiting for Payment Confirmation"
 					@instance.update_attributes notification_params: params, transaction_id: params[:txn_id], purchased_at: Time.now
 					current_do_key = ENV["DO_SECRET_KEY"]
 					client = DropletKit::Client.new(access_token: current_do_key)
@@ -128,6 +160,7 @@ class InstancesController < ApplicationController
 			end
 	    render nothing: true
 	  end
+
 	private
 	def instance_params
 		params.require(:instance).permit(:name,:distro,:region,:image,:size,:duration)

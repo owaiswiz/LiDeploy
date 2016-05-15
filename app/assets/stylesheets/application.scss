@@ -66,87 +66,6 @@
   border-radius: 0 !important;
   outline: none;
 }
-.btn-custom {
-  color: #bdc3c7;
-  font-size: 18px;
-  border: 1px solid #bdc3c7;
-}
-.btn-custom:hover {
-  color: #ffffff;
-  border: 1px solid #ffffff;
-}
-#pricing-table {
-  padding-top: 50px;
-}
-#pricing-table .pricing {
-  margin: 0;
-  padding: 0;
-  font-family: 'quicksandbold', sans-serif;
-}
-#pricing-table .pricing .pricing-table {
-  padding-bottom: 30px;
-}
-#pricing-table .pricing .pricing-table .pricing-header {
-  position: relative;
-  background: #34495e;
-  padding: 22px 22px;
-  text-align: center;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
-}
-#pricing-table .pricing .pricing-table .pricing-header .pricing-title {
-  color: #ffffff;
-  letter-spacing: 2px;
-  font-size: 24px;
-  text-align: center;
-  font-weight: 700;
-}
-#pricing-table .pricing .pricing-table .pricing-header .pricing-rate {
-  font-size: 50px;
-  font-weight: 700;
-  color: #ffffff;
-  position: relative;
-  text-align: center;
-}
-#pricing-table .pricing .pricing-table .pricing-header .pricing-rate sup {
-  font-size: 21px;
-  position: relative;
-  top: -30px;
-  color: #bdc3c7;
-}
-#pricing-table .pricing .pricing-table .pricing-header .pricing-rate span {
-  font-size: 16px;
-  color: #bdc3c7;
-}
-#pricing-table .pricing .pricing-list {
-  padding: 20px 0 40px 0;
-  background: #ffffff;
-  border: 1px solid #e3e3e3;
-  text-align: center;
-}
-#pricing-table .pricing .pricing-list ul {
-  padding: 0px;
-  display: table;
-  margin: 0px auto;
-}
-#pricing-table .pricing .pricing-list ul li {
-  list-style: none;
-  border-bottom: 1px solid #EAECEB;
-  color: #bdc3c7;
-  font-size: 16px;
-  line-height: 42px;
-}
-#pricing-table .pricing .pricing-list ul li:last-child {
-  border: none;
-}
-#pricing-table .pricing .pricing-list ul li i {
-  margin-right: 12px;
-  color: #bdc3c7;
-}
-#pricing-table .pricing .pricing-list ul li span {
-  color: #34495e;
-}
-
 /* end pricing table's main.css*/
 
 .page-top {
@@ -157,8 +76,7 @@
 	border-style: solid;
 	color: #3190e7;
   font-family: 'quicksandregular';
-  font-size: 15px;
-	border-color: #3190e7;
+  border-color: #3190e7;
 	border-radius: 3px;
   position: relative;
   font-weight: 600;
@@ -167,11 +85,10 @@
 	-khtml-transition: color 0.5s linear;
 	-webkit-transition: color 0.5s linear;
 	-ms-transition: color 0.5s linear;
-	transition: color 0.5s linear;
+	 transition: color 0.5s linear;
 }
 
 .btn-primary:hover,.btn-primary:active,.btn-primary:focus {
-
 	background-color: #3190e7 !important;
 }
 
@@ -188,77 +105,10 @@
     text-align: center;
     font-weight: 400;
 }
-
-.span4 {
-	width: 370px;
-	float: left;
-    min-height: 1px;
-    margin-left: 30px;
-}
-
-.muhcontainer
-{
-	width: 1170px;
-	margin-right: auto;;
-	margin-left: auto;
-	font-family: quicksandbold;
-	font-size: 15px;
-
-}
-
-.muhmaincontent{
-  max-width: 1400px;
-  display: block;
-  padding: 60px 80px 90px;
-}
-.muhsup
-{
-  font-size: 15px;
-  color: #34495E;
-}
-
-.muhleft{
-  width: 45%;
-  margin-right: 2.5%;
-  float: left;
-  display: block;
-  text-align: left;
-}
-
-.muhright{
-  width: 52.5%;
-  float: left;
-  display: block;
-  text-align: center;
-}
-
-hr{
-  border-color: #666;
-  width: 100%;
-}
 body{
   font-family: 'quicksandregular';
 }
 
-.bold{
-  font-family: 'quicksandbold';
-}
-
-.light{
-  font-family: 'quicksandlight';
-}
-.muhleft h1{
-    line-height: 56px;
-    font-size: 46px;
-}
-.muhleft h1:after{
-    height: 1px;
-    background-color: #bbb;
-    margin: 30px 0;
-    display: block;
-    width: 150px;
-    content: " ";
-}
 
 .new_user{
     margin: 0 auto;

@@ -40,6 +40,7 @@ end
   post '/instances/shutdown' => "instances#shutdown",:as => :shutdown_instance
   post '/instance/renew' => "instances#renew_post",:as => :renew_post_instance
   put '/instance/renew' => "instances#renew_put",:as => :renew_put_instance
+  post '/instances/resize' => "instances#resize",:as => :resize_instance
   get '/instance/renew' => redirect('/instances/')
   get '/instance/' => redirect('/instances/')
   root 'home#index'
