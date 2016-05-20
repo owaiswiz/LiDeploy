@@ -1,0 +1,109 @@
+<% content_for :head do%>
+  <script>
+    var instSize = "<%= @instance.size%>";
+    var sizeArr = {"512mb":"low","1gb":"mid","2gb":"high"};
+    //function showSizes(currentsize)
+    $(document).ready(function(){
+      $('.' + sizeArr[instSize]).show().addClass("active");
+      $(".fsubmit").click(function(){
+        if (!$("input[name='instance[size]']:checked").val()){
+          $(".errornotification").show();
+          return false;
+        }
+      });
+    });
+  </script>
+  <style>
+    .sizes{
+      display: none;
+    }
+    .inform .sizes{
+      display: inline-block !important;
+    }
+    .modal-title,.modal-body p{
+      text-align: center;
+      font-family: 'quicksandbold'
+    }
+    .cancel.btn-default,.destroy.btn{
+  		width: 100% !important;
+  	}
+    .feature-box{
+      margin-top: 0px !important;
+    }
+  </style>
+<% end %>
+<div class="container feature-box" style="margin-top:10px;">
+  <h1 class="resize header">Resize <%= @instance.name %></h1><br/>
+    <div class = "resize details">
+      Memory: <%= @instance.size.upcase %><span class="resize header">&nbsp;|&nbsp;</span><img src="/assets/<%= @instance.distro.downcase %>-32.png" alt="<%=@instance.distro%>"><span class="resize header">&nbsp;|&nbsp;</span>Disk: <%= @instance.disk %>GB<br/>
+      <br/>
+    </div>
+    <h2 class ="resize header">Current Plan</h2>
+    <div class="btn" data-toggle="buttons">
+      <div class="btn low sizes">
+        <div class="dis prices text">
+          <h3><sup>$</sup>6/Month</h3>
+        </div>
+        <div class="specs">
+          <ul>
+            <li><span>512 MB</span> RAM</li>
+            <li><span>2.4 GHz</span> Single Core CPU</li>
+            <li><span>20 GB SSD</span> Disk</li>
+            <li><span>1000 GB</span> Transfer</li>
+          </ul>
+        </div>
+      </div>
+      <div class="btn mid active sizes">
+        <div class="dis prices text">
+          <h3><sup>$</sup>11/Month</h3>
+        </div>
+        <div class="specs">
+          <ul>
+            <li><span>1 GB</span> RAM</li>
+            <li><span>2.4 GHz</span> Single Core CPU</li>
+            <li><span>30 GB SSD</span> Disk</li>
+            <li><span>2000 GB</span> Transfer</li>
+          </ul>
+        </div>
+      </div>
+      <div class="btn high sizes">
+        <div class="dis prices text">
+          <h3><sup>$</sup>22/Month</h3>
+        </div>
+        <div class="specs">
+          <ul>
+            <li><span>2 GB</span> RAM</li>
+            <li><span>2.4 GHz</span> Dual Core CPU</li>
+            <li><span>40 GB SSD</span> Disk</li>
+            <li><span>3000 GB</span> Transfer</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <% if @instance.size == "2gb" %>
+      <div class= "container help-block rederror feature-box",style="font-family: 'quicksandlight';font-size:250% !important;">
+        You are already have the maximum possible instance size
+      </div>
+    <% else %>
+      <h2 class="resize header">Resize To</h2>
+      <div class="containter feature-box">
+        <%= simple_form_for(@instance,:url => resize_process_instance_path(id: @instance.id),method: :post, defaults: {label: false,error_html: { class: 'rederror'}},html: { autocomplete: 'off',id: 'resizeinstance'}) do |f| %>
+          <div class="btn inform" data-toggle="buttons">
+            <br>
+            <% if @instance.size == "512mb"%>
+              <%= render 'instances/shared/mid',f: f%>
+              <%= render 'instances/shared/high',f: f%>
+            <% elsif @instance.size == "1gb" %>
+              <%= render 'instances/shared/high',f: f%>
+            <% end %>
+          </div>
+          <div class="errornotification help-block rederror" style="display: none;font-family: 'quicksandlight'; font-size: 200% !important;">
+    				Please select new Instance size
+    			</div>
+          <div class="form-actions">
+    	    	<%= f.button :submit, "Resize Instance",:class => 'fsubmit signupbutton',:title => "Resize Instance",data: {:confirm => "This Action is irreversible<br/>You cannot revert later to a smaller size<br/>Your billing period will be reset <br/>Be Certain!"} %>
+    	  	</div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>

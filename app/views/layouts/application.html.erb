@@ -16,7 +16,7 @@
 <% end %>
 <% flash.each do |key, value| %>
   <% if value.length > 0 %>
-    <% if key == "notice" then alert_class = "success" elsif key == "alert" then alert_class = "danger" else alert_class = key end %>
+    <% if key == "notice" || key == "notice1" then alert_class = "success" elsif key == "alert" then alert_class = "danger" else alert_class = key end %>
     <%= content_tag :div, class: "alert alert-#{alert_class}" do %>
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       <%= value%>

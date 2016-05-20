@@ -10,16 +10,20 @@
       $(".renewaldate").text(exp.getDate() + ' ' + monthNames[exp.getMonth()] + ' ' + exp.getFullYear());
     }
     $(document).ready(function(){
-    $('.' + sizeArr[instSize]).show().addClass("active");
-    $(".onemonth").on("click",function(){updateExp(1);});
-    $(".threemonth").on("click",function(){updateExp(3);});
-    $(".sixmonth").on("click",function(){updateExp(6);});
+      $('.' + sizeArr[instSize]).show().addClass("active");
+
+      $(".onemonth").on("click",function(){updateExp(1);});
+      $(".threemonth").on("click",function(){updateExp(3);});
+      $(".sixmonth").on("click",function(){updateExp(6);});
 
     });
   </script>
   <style>
     .sizes{
       display: none;
+    }
+    .specs{
+        padding-bottom: 19px;
     }
   </style>
 <%end%>

@@ -75,8 +75,11 @@
   background-color: #298eea;
   color: white;
 }
-.sizes:hover .specs{
+.sizes:hover .prices{
   background-color: #EEE;
+}
+.sizes.active:hover .prices{
+  background-color: #298eea !important;
 }
 .specs {
   padding-top: 10px;
@@ -152,13 +155,10 @@
   display:none;
 }
 
-.nodis.prices.text {
-    padding-bottom: 19px;
-}
 //index page related scss
 
 //Renew
-.renew{
+.renew,.resize{
   text-align: center;
   vertical-align: middle;
 }
@@ -168,5 +168,20 @@
 }
 .header{
   font-family: 'quicksandbold' !important;
+}
 
+//confirm modal related
+
+.destroy.btn-primary{
+  color: red !important;
+  outline: 1px solid red !important;
+}
+.destroy.btn-primary:focus,.destroy.btn-primary:hover{
+  background-color: red !important;
+  color: white !important;
+}
+.commit.destroy.btn-primary{
+  margin-left: 0 !important;
+  margin-top: 5px;
+  border: 1px red solid;
 }

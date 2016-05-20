@@ -20,23 +20,37 @@ class InstancesController < ApplicationController
 		@instances = Instance.where(user_id: current_user.id)
 		Array(@instances).each do |inst|
 		 	client = DropletKit::Client.new(access_token: inst.api_key)
-			begin
+			#begin
 				instance = client.droplets.find(id: inst.instanceid)
+				puts instance.status
+				puts "--------INSTANCE---------"
+				puts instance
 				if instance.status == 'off'
-					if inst.status == 'active'
+					if inst.status == 'active' || inst.status == 'Not Found'
 						status = 'Powered Off'
 					else
-					status = inst.status
+						status = inst.status
 					end
 				else
 					status = instance.status
 				end
-					inst.update_attributes(:ip_address => instance.networks.v4[0].ip_address,:vcpus => instance.vcpus,:disk => instance.disk,:status => status)
-			rescue
-				if inst.status != 'Creating'
-					inst.update_attributes(:status => "Not Found")
+				if inst.temp_status == "Renewed"
+					flash[:notice] = "Renewed Successfully"
+					inst.update_attributes(:temp_status => nil)
+				elsif inst.temp_status == "Resized"
+					if inst.status == 'Powered Off' && (client.actions.find(id: inst.action).status == "completed")
+						client.droplet_actions.power_on(droplet_id: inst.instanceid)
+						inst.update_attributes(:status => "Starting",:temp_status => nil,:action => nil)
+						flash[:notice] = "Resized Successfully"
+						flash[:notice1] = "Instance Started"
+					end
 				end
-			end
+				inst.update_attributes(:ip_address => instance.networks.v4[0].ip_address,:vcpus => instance.vcpus,:disk => instance.disk,:status => status)
+			#rescue
+			#	if inst.status != 'Creating' && inst.status != 'Waiting for Payment Confirmation'
+			#		inst.update_attributes(:status => "Not Found",:ip_address => nil,:disk => nil)
+			#	end
+			#end
 		end
 	end
 
@@ -62,7 +76,7 @@ class InstancesController < ApplicationController
 			client.droplets.delete(id: @instance.instanceid)
 			flash[:notice] = "Instance Deleted Successfully"
 		rescue
-			flash[:error] = "Error Occured while Deleting. Please Try Again Later"
+			flash[:alert] = "Instance Deleted Successfully"
 		end
 		@instance.destroy
 		redirect_to instances_path
@@ -88,9 +102,9 @@ class InstancesController < ApplicationController
 		begin
 			client = DropletKit::Client.new(access_token: @instance.api_key)
 			client.droplet_actions.shutdown(droplet_id: @instance.instanceid)
-			client.droplet_actions.power_off(droplet_id: @instance.instanceid)
 			@instance.update_attributes(:status => "Powered Off")
-			flash[:notice] = "Shutdown Initiated"
+		#	client.droplet_actions.power_off(droplet_id: @instance.instanceid)
+			flash[:notice] = "Shutdown Initiated.It will be completed within few seconds."
 		rescue
 			flash[:alert] = "Error Occurred While Shutting Down. Try again after few minutes."
 		end
@@ -108,7 +122,7 @@ class InstancesController < ApplicationController
 		begin
 			@instance = Instance.find_by(user_id: current_user.id,id: params[:id])
 			raise "Not Found" if @instance.nil?
-			if @instance.update_attributes(:duration => params[:instance][:duration],:renew_status => "Renewing")
+			if @instance.update_attributes(:duration => params[:instance][:duration],:temp_status => "Renewing")
 				redirect_to @instance.paypal_url(@instance)
 			end
 		rescue
@@ -119,31 +133,41 @@ class InstancesController < ApplicationController
 
 	#Resize an Instance
 	def resize
-	#	begin
+		begin
 			@instance = Instance.find_by(user_id: current_user.id,id:params[:id])
-	#		raise "Not Found" if @instance.nil?
-			if @instance.status == "Powered Off"
+			raise "Not Found" if @instance.nil?
+			if @instance.status != "Powered Off"
 				client = DropletKit::Client.new(access_token: @instance.api_key)
-				@instance.update_attributes(:status => "Resizing")
-				client.droplet_actions.resize(droplet_id: @instance.instanceid, size: '1gb')
-			else
-				shutdown
-				flash[:notice] = "Shutting down instance,try again in few minutes"
+				client.droplet_actions.shutdown(droplet_id: @instance.instanceid)
+				@instance.update_attributes(:status => "Powered Off")
+				flash[:notice] = "Shutting down instance,try again in few seconds"
+				redirect_to instances_path and return
 			end
-	#	rescue
-		#	flash[:notice] = "Instance Not Found or Unknown State"
-	#	end
-		return
+		rescue
+			flash[:notice] = "Instance Not Found or Unknown State"
+			redirect_to instances_path and return
+		end
+	end
+
+	def resize_process
+		@instance = Instance.find_by(user_id: current_user.id,id: params[:id])
+		@instance.update_attributes(:temp_status => "Resizing")
+		@instance.size=params[:instance][:size]
+		redirect_to @instance.paypal_url(@instance)
 	end
 
 	protect_from_forgery except: [:hook]
 	  def hook
 	    params.permit! # Permit all Paypal input params
 	    status = params[:payment_status]
-			@instance = Instance.find params[:custom]
+			@instance = Instance.find params[:item_number]
 	    if status == "Completed"
-				if @instance.renew_status == "Renewing"
-					@instance.update_attributes(:renew_status => "Renewed",:expires => @instance.expires+@instance.duration.months)
+				if @instance.temp_status == "Renewing"
+					@instance.update_attributes(:temp_status => "Renewed",:expires => @instance.expires+@instance.duration.months)
+				elsif @instance.temp_status == "Resizing"
+					client = DropletKit::Client.new(access_token: @instance.api_key)
+					resizing = client.droplet_actions.resize(droplet_id: @instance.instanceid,size:params[:custom],disk: true)
+					@instance.update_attributes(:size => params[:custom],:temp_status => "Resized",:expires => Time.now+@instance.duration.months,:action => resizing.id)
 				elsif @instance.status == "Waiting for Payment Confirmation"
 					@instance.update_attributes notification_params: params, transaction_id: params[:txn_id], purchased_at: Time.now
 					current_do_key = ENV["DO_SECRET_KEY"]

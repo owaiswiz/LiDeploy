@@ -2,8 +2,9 @@
 	<script>
 		$(document).ready(function() {
 			//checks to see if host name is valid
+
 			$("#instance_name").on('keyup change',function(){
-			var inst_regex = /^^\S+[a-zA-Z0-9]?[a-z0-9A-Z.-]*[a-z0-9A-Z.]$/g;
+			var inst_regex = /^[a-zA-Z0-9]+[a-z0-9A-Z.-]+[a-z0-9A-Z]$/g;
 			var inst_name = $("#instance_name").val();
 			if(!inst_regex.test(inst_name)) {
     			$(".signupbutton").prop('disabled',true);
@@ -13,7 +14,13 @@
 				$(".signupbutton").prop('disabled',false);
 				$("#invalidhost").hide("fadeOut");
 			}
-
+		});
+		$(".fsubmit").click(function(){
+			var inst_name = $("#instance_name").val();
+			if (inst_name.length == 0){
+				$("#invalidhost").show();
+				return false;
+			}
 		});
 		//show hide and highlight selected distros
 			$("label.distro").on("click", function() {
@@ -286,14 +293,14 @@
 			</div>
 			<div class="container feature-box">
 		  	<h3>Enter Your Instance's Name</h3>
-		  	<h4>The Name you would like to give to your instance.<br>The name can only contain alphanumeric characters,periods and dashes</h4>
+		  	<h4>The Name you would like to give to your instance.<br>The name can only contain alphanumeric characters,periods and dashes<br>Minimum 3 Characters</h4>
 		  	<%= f.input :name,id: "instancename",placeholder: 'Example: myubuntuserver',pattern:"^[a-zA-Z0-9]?[a-z0-9A-Z.-]*[a-z0-9A-Z.]$",required: true%>
 		  </div>
 		  <div id="invalidhost" class="help-block rederror" style="display: none;font-family: 'quicksandlight'; font-size: 20px;">
 				Invalid Host Name
 			</div>
 			<div class="form-actions">
-	    	<%= f.button :submit, "Create Instance", :class => 'signupbutton' %>
+	    	<%= f.button :submit, "Create Instance", :class => 'fsubmit signupbutton' %>
 	  	</div>
 	  	<br> <br> <br><br>
 		</div>

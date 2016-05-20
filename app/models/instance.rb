@@ -1,7 +1,7 @@
 class Instance < ActiveRecord::Base
   belongs_to :user
   def paypal_url(inst)
-    if inst.renew_status.nil?
+    if inst.temp_status.nil?
       if inst.duration == 1
         if inst.size == "512mb"
           price = '6'
@@ -27,7 +27,7 @@ class Instance < ActiveRecord::Base
           price = '121.99'
         end
       end
-    elsif inst.renew_status == "Renewing"
+    elsif inst.temp_status == "Renewing" || inst.temp_status == "Resizing"
       if inst.size == "512mb"
         price = 6 * duration
       elsif inst.size == '1gb'
@@ -47,12 +47,12 @@ class Instance < ActiveRecord::Base
         upload: 1,
         return: "#{Rails.application.secrets.app_host}/instances/",
         invoice: "#{inst.name.upcase}#{inst.id}LIDEPLOY#{Time.now}",
-        custom: inst.id,
+        custom: inst.size,
         amount: price,
         item_name: "#{inst.size.upcase} Server for #{inst.duration} #{month} on Lideploy.com",
         item_number: inst.id,
         quantity: '1',
-        notify_url: "#{Rails.application.secrets.app_host}/hook"
+        notify_url: "#{Rails.application.secrets.app_host}/hooks"
     }
     "#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
   end

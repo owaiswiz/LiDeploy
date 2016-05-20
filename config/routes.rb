@@ -33,7 +33,8 @@ end
   get '/' => 'home#index'
 
   #Paypal Related routes
-  post "/hook" => "instances#hook"
+  post "/hooks" => "instances#hook"
+
   delete '/instances/' => "instances#destroy"
   post '/instances/restart' => "instances#restart", :as => :restart_instance
   post '/instances/start' => "instances#start", :as => :start_instance
@@ -41,6 +42,7 @@ end
   post '/instance/renew' => "instances#renew_post",:as => :renew_post_instance
   put '/instance/renew' => "instances#renew_put",:as => :renew_put_instance
   post '/instances/resize' => "instances#resize",:as => :resize_instance
+  post '/instances/resize_process' => "instances#resize_process",:as => :resize_process_instance
   get '/instance/renew' => redirect('/instances/')
   get '/instance/' => redirect('/instances/')
   root 'home#index'
