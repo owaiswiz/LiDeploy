@@ -59,6 +59,8 @@ GEM
       sass (>= 3.3.4)
     builder (3.2.2)
     byebug (8.2.2)
+    celluloid (0.16.0)
+      timers (~> 4.0.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     coffee-rails (4.1.1)
@@ -69,6 +71,7 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.1)
+    daemons (1.2.3)
     debug_inspector (0.0.2)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -90,10 +93,12 @@ GEM
     execjs (2.6.0)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
+    ffi (1.9.10)
     font-awesome-rails (4.5.0.1)
       railties (>= 3.2, < 5.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    hitimes (1.2.3)
     i18n (0.7.0)
     ice_nine (0.11.2)
     jbuilder (2.4.1)
@@ -105,10 +110,24 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.3)
     kartograph (0.2.4)
+    listen (2.10.1)
+      celluloid (~> 0.16.0)
+      rb-fsevent (>= 0.9.3)
+      rb-inotify (>= 0.9)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
+    maildir (2.2.1)
+    mailman (0.7.3)
+      activesupport (>= 2.3.4)
+      i18n (>= 0.4.1)
+      listen (~> 2.2)
+      mail (>= 2.0.3)
+      maildir (>= 0.5.0)
+    mailman-rails (0.0.3)
+      mailman
+      rails
     mime-types (3.0)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0221)
@@ -147,6 +166,9 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (11.1.2)
+    rb-fsevent (0.9.7)
+    rb-inotify (0.9.7)
+      ffi (>= 0.5.0)
     rdoc (4.2.2)
       json (~> 1.4)
     resource_kit (0.1.5)
@@ -178,6 +200,8 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.2)
+    timers (4.0.4)
+      hitimes
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.0)
@@ -204,12 +228,16 @@ DEPENDENCIES
   bootstrap-sass
   byebug
   coffee-rails (~> 4.1.0)
+  daemons
   data-confirm-modal!
   devise (~> 3.5, >= 3.5.6)
   droplet_kit
   font-awesome-rails
   jbuilder (~> 2.0)
   jquery-rails
+  mailman
+  mailman-rails
+  mini_portile2
   rails (= 4.2.6)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

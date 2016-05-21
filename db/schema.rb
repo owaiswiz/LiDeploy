@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160520161011) do
+ActiveRecord::Schema.define(version: 20160521181249) do
 
   create_table "instances", force: :cascade do |t|
     t.integer  "user_id"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20160520161011) do
     t.string   "distro"
     t.string   "temp_status"
     t.text     "action"
+    t.string   "password"
   end
 
   add_index "instances", ["user_id"], name: "index_instances_on_user_id"
