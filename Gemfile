@@ -34,7 +34,7 @@ gem 'droplet_kit'
 # Use Unicorn as the app server
 # gem 'unicorn'
 #Confirm Dialog as Bootstrap Modal
-gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
+gem 'data-confirm-modal', github: 'owaiswiz/data-confirm-modal'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -27,7 +27,7 @@
     .Active{
       color: #26A65B !important;
     }
-    .New,.Creating,.Starting,.Restarting{
+    .New,.Starting,.Restarting,.Shuttingdown,.Resizing{
       color: #F57C00 !important;
     }
     .Def{
@@ -108,18 +108,22 @@
             <td>
 						<% if inst.disk? %>
 							<div class="btn-group">
-								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
-								<div class="dropdown-menu">
-                  <% if inst.status == "Powered Off" %>
-                    <%= button_to "Start",start_instance_path(:id=> inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Start Instance" %>
-                  <% else %>
-                    <%= button_to "Shutdown",shutdown_instance_path(:id=>inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Shutdown Instance" %>
-                    <%= button_to "Restart",restart_instance_path(:id => inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Restart Instance" %>
-                  <% end %>
-                  <%= button_to "Renew",renew_put_instance_path(:id => inst.id),method: :put,:class => "btn btn-primary dropdown-item",:title => "Renew Instance" %>
-                  <%= button_to "Resize",resize_instance_path(:id => inst.id),method: :post,:class => "btn btn-primary dropdown-item",:titke => "Resize Instance" %>
-                  <%= button_to "Destroy",instances_path(:id => inst.id),method: :delete,:class => "btn btn-primary destroy dropdown-item",:title => "Destroy this Instance?",data: {:confirm => "This Action is irreversible<br/>Be Certain!"}%>
-                </div>
+                <% if inst.status == "New" || inst.status == "Resizing" || inst.status == "Shutting Down" || inst.status == "Starting" %>
+                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>Action</button>
+                <% else %>
+  								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+  								<div class="dropdown-menu">
+                    <% if inst.status == "Powered Off" %>
+                      <%= button_to "Start",start_instance_path(:id=> inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Start Instance" %>
+                    <% else %>
+                      <%= button_to "Shutdown",shutdown_instance_path(:id=>inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Shutdown Instance" %>
+                      <%= button_to "Restart",restart_instance_path(:id => inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Restart Instance" %>
+                    <% end %>
+                    <%= button_to "Renew",renew_put_instance_path(:id => inst.id),method: :put,:class => "btn btn-primary dropdown-item",:title => "Renew Instance" %>
+                    <%= button_to "Resize",resize_instance_path(:id => inst.id),method: :post,:class => "btn btn-primary dropdown-item",:titke => "Resize Instance" %>
+                    <%= button_to "Destroy",instances_path(:id => inst.id),method: :delete,:class => "btn btn-primary destroy dropdown-item",:title => "Destroy this Instance?",data: {:confirm => "This Action is irreversible<br/>Be Certain!"}%>
+                  </div>
+                <% end %>
 							</div>
               <% else%>
                 <% if inst.status != "Creating" %>

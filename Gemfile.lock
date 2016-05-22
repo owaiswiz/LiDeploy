@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/ifad/data-confirm-modal.git
-  revision: a2018ab8893cdeeeffaae407368ed1a20ea72b30
+  remote: git://github.com/owaiswiz/data-confirm-modal.git
+  revision: fdb78054d20132a6e8738d57221c0ed1d9f00d7c
   specs:
     data-confirm-modal (1.1.0)
       railties (>= 3.0)
