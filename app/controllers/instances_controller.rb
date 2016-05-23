@@ -152,7 +152,7 @@ class InstancesController < ApplicationController
 
 	def resize_process
 		@instance = Instance.find_by(user_id: current_user.id,id: params[:id])
-		@instance.update_attributes(:temp_status => "Resizing")
+		@instance.update_attributes(:temp_status => "Resizing",:duration => params[:instance][:duration])
 		@instance.size=params[:instance][:size]
 		redirect_to @instance.paypal_url(@instance)
 	end

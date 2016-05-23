@@ -2,19 +2,18 @@
   <script>
     var instSize = "<%= @instance.size%>"
     var sizeArr = {"512mb":"low","1gb":"mid","2gb":"high"}
-    var monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
-    var currDate = new Date();
-    function updateExp(months){
-      var exp = new Date("<%= @instance.expires%>");
-      exp.setMonth(exp.getMonth()+months);
-      $(".renewaldate").text(exp.getDate() + ' ' + monthNames[exp.getMonth()] + ' ' + exp.getFullYear());
-    }
     $(document).ready(function(){
       $('.' + sizeArr[instSize]).show().addClass("active");
 
-      $(".onemonth").on("click",function(){updateExp(1);});
-      $(".threemonth").on("click",function(){updateExp(3);});
-      $(".sixmonth").on("click",function(){updateExp(6);});
+      $(".onemonth").on("click",function(){
+        $(".renewaldate").text("<%= (@instance.expires+1.month).strftime('%e %B %Y')%>");
+      });
+      $(".threemonth").on("click",function(){
+        $(".renewaldate").text("<%= (@instance.expires+3.month).strftime('%e %B %Y')%>");
+      });
+      $(".sixmonth").on("click",function(){
+        $(".renewaldate").text("<%= (@instance.expires+6.month).strftime('%e %B %Y')%>");
+      });
 
     });
   </script>

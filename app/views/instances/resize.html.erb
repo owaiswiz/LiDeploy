@@ -1,9 +1,13 @@
 <% content_for :head do%>
   <script>
     var instSize = "<%= @instance.size%>";
+    var instDura = "<%= @instance.duration%>"
     var sizeArr = {"512mb":"low","1gb":"mid","2gb":"high"};
+    var duraArr = {"1":"onemonth","3":"threemonth","6":"sixmonth"}
     //function showSizes(currentsize)
     $(document).ready(function(){
+      $('.'+duraArr[instDura]).addClass("active");
+      $('#instance_duration_'+instDura).prop('checked',true)
       $('.' + sizeArr[instSize]).show().addClass("active");
       $(".fsubmit").click(function(){
         if (!$("input[name='instance[size]']:checked").val()){
@@ -85,17 +89,36 @@
         You are already have the maximum possible instance size
       </div>
     <% else %>
-      <h2 class="resize header">Resize To</h2>
       <div class="containter feature-box">
         <%= simple_form_for(@instance,:url => resize_process_instance_path(id: @instance.id),method: :post, defaults: {label: false,error_html: { class: 'rederror'}},html: { autocomplete: 'off',id: 'resizeinstance'}) do |f| %>
-          <div class="btn inform" data-toggle="buttons">
-            <br>
-            <% if @instance.size == "512mb"%>
-              <%= render 'instances/shared/mid',f: f%>
-              <%= render 'instances/shared/high',f: f%>
-            <% elsif @instance.size == "1gb" %>
-              <%= render 'instances/shared/high',f: f%>
-            <% end %>
+          <h2 class="resize header">Resize To</h2>
+          <div class = "size">
+            <div class="btn inform" data-toggle="buttons">
+              <br>
+              <% if @instance.size == "512mb"%>
+                <%= render 'instances/shared/mid',f: f%>
+                <%= render 'instances/shared/high',f: f%>
+              <% elsif @instance.size == "1gb" %>
+                <%= render 'instances/shared/high',f: f%>
+              <% end %>
+            </div>
+          </div>
+          <h2 class="renew header">Select New Instance Duration</h2>
+          <div class ="duration">
+            <div class="btn-group" data-toggle="buttons">
+      				<label class="btn btn-primary onemonth">
+      					<%= f.radio_button :duration,1,:checked => false %>
+      					1 Month
+      				</label>
+      				<label class="btn btn-primary threemonth">
+      					<%= f.radio_button :duration,3,:checked => false %>
+      					3 Months
+      				</label>
+      				<label class="btn btn-primary sixmonth">
+      					<%= f.radio_button :duration,6,:checked => false %>
+      					6 Months
+      				</label>
+      			</div>
           </div>
           <div class="errornotification help-block rederror" style="display: none;font-family: 'quicksandlight'; font-size: 200% !important;">
     				Please select new Instance size
