@@ -1,8 +1,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
-/*Begin Quicksand Font Declarations */
 
+/*Begin Quicksand Font Declarations */
 @font-face {
     font-family: 'quicksandregular';
     src: font_url('quicksand-regular-webfont.eot');
@@ -13,7 +13,6 @@
          font_url('quicksand-regular-webfont.svg#quicksandregular') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
 @font-face {
     font-family: 'quicksandbold';
@@ -25,28 +24,7 @@
          font_url('quicksand-bold-webfont.svg#quicksandbold') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
-
-
-
-
-@font-face {
-    font-family: 'quicksanditalic';
-    src: font_url('quicksand-italic-webfont.eot');
-    src: font_url('quicksand-italic-webfont.eot?#iefix') format('embedded-opentype'),
-         font_url('quicksand-italic-webfont.woff2') format('woff2'),
-         font_url('quicksand-italic-webfont.woff') format('woff'),
-         font_url('quicksand-italic-webfont.ttf') format('truetype'),
-         font_url('quicksand-italic-webfont.svg#quicksanditalic') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-
-
-
 @font-face {
     font-family: 'quicksandlight';
     src: font_url('quicksand-light-webfont.eot');
@@ -61,21 +39,32 @@
 }
 /*End Quicksand Font Declaration*/
 
-/*beging pricing table's css */
+body{
+  font-family: 'quicksandregular';
+}
+.page-top {
+  margin-top: 51px;
+}
+.bluer{
+  background: #3190e7;
+  height: 100%;
+  color: #34495E;
+}
+.feature-box {
+    margin-top: 60px;
+    text-align: center;
+    font-weight: 400;
+}
 .btn{
   border-radius: 0 !important;
   outline: none;
 }
-/* end pricing table's main.css*/
-
-.page-top {
-  margin-top: 51px;
-}
 .btn-primary{
+
 	background-color: #ffffff;
 	border-style: solid;
 	color: #3190e7;
-  font-family: 'quicksandregular';
+  font-family: 'quicksandbold';
   border-color: #3190e7;
 	border-radius: 3px;
   position: relative;
@@ -85,9 +74,8 @@
 	-khtml-transition: color 0.5s linear;
 	-webkit-transition: color 0.5s linear;
 	-ms-transition: color 0.5s linear;
-	 transition: color 0.5s linear;
+	transition: color 0.5s linear;
 }
-
 .btn-primary:hover,.btn-primary:active,.btn-primary:focus {
 	background-color: #3190e7 !important;
 }
@@ -100,32 +88,6 @@
     border: 0;
 }
 
-.feature-box {
-    margin-top: 60px;
-    text-align: center;
-    font-weight: 400;
-}
-body{
-  font-family: 'quicksandregular';
-}
-
-
-.new_user{
-    margin: 0 auto;
-    width: 400px;
-    padding: 40px;
-    border-radius: 3px;
-    background: #3190e7;
-}
-.bluer{
-  background: #3190e7;
-  height: 100%;
-  color: #34495E;
-}
-.register
-{
-  text-align: left;
-}
 .required input{
   background: #fcfcfc;
     border: 2px solid #e7e7e7;
@@ -154,49 +116,34 @@ body{
   font-size: 20px;
   text-align: center;
 }
-.signupbutton{
+
+.greenbutton,.signupbutton{
   color: white;
   background: #2BCA58;
   font-weight: 500;
-  font-size: 20px;
-  border: 0;
   text-align: center;
   align-items: flex-start;
   cursor: pointer;
-  margin-bottom: 0;
+  display: block;
+  font-family: 'quicksandbold';
+}
+.signupbutton{
+  font-size: 20px;
   height: auto;
-  -webkit-appearance: none;
+  width: 100%;
+  margin-bottom: 0;
   margin: 20px auto;
   padding: 15px;
-  width: 100%;
-  display: block;
-  border-radius: 3px;
-  font-family: 'quicksandbold';
-  /*font-family: 'quicksandregular';*/
-}
-.signupbutton:hover {
-  color: #2BCA58;
-  background: white !important;
-}
-.greenbutton{
-  color: white;
-  background: #2BCA58;
-  font-weight: 500;
   border: 0;
-  text-align: center;
-  align-items: flex-start;
-  cursor: pointer;
-  display: block;
-  border-radius: 3px;
-  font-family: 'quicksandbold';
+  -webkit-appearance: none;
 }
-.greenbutton:hover{
-  color: #2BCA58;
-  background: white !important
+.greenbutton:hover,.signupbutton:hover {
+  color: white;
+  background: #24A849 !important;
 }
+
 .form-inputs{
   text-align: center;
-
 }
 .links,.links a{
   text-align: center;
@@ -207,8 +154,8 @@ body{
 .alert {
   text-align: center;
   font-family: 'quicksandbold';
-
 }
+
 footer {
     background: #2e3234;
     padding: 100px 0 60px 0;
@@ -217,6 +164,7 @@ footer {
     width: 100%;
     text-align: center;
 }
+
 .footb {
   font-family: 'quicksandbold';
   line-height: 200%;

@@ -21,9 +21,6 @@
     .sizes{
       display: none;
     }
-    .specs{
-        padding-bottom: 19px;
-    }
   </style>
 <%end%>
 <div class="container feature-box" style="margin-top:10px;">
@@ -78,6 +75,7 @@
     </div>
 
     <h2 class="renew header">Select Renew Duration</h2>
+    <br>
     <%= simple_form_for(@instance,:url => renew_post_instance_path(id: @instance.id),method: :post, defaults: {label: false,error_html: { class: 'rederror'}},html: { autocomplete: 'off' }) do |f| %>
       <%= f.error_notification %>
       <div class = "duration">

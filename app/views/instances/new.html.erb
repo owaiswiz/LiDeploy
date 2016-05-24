@@ -2,7 +2,6 @@
 	<script>
 		$(document).ready(function() {
 			//checks to see if host name is valid
-
 			$("#instance_name").on('keyup change',function(){
 			var inst_regex = /^[a-zA-Z0-9]+[a-z0-9A-Z.-]+[a-z0-9A-Z]$/g;
 			var inst_name = $("#instance_name").val();
@@ -15,6 +14,7 @@
 				$("#invalidhost").hide("fadeOut");
 			}
 		});
+		//check if hostname is empty
 		$(".fsubmit").click(function(){
 			var inst_name = $("#instance_name").val();
 			if (inst_name.length == 0){
@@ -45,9 +45,14 @@
 				$("div.prices").hide();
 				$("div.maxdis").show();
 			});
+			$(".ubuntuver").show();
 		});
 	</script>
-
+	<style>
+		.ver{
+			display: none;
+		}
+	</style>
 <% end %>
 
 <div class="container">

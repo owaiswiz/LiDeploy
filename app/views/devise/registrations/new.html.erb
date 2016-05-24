@@ -1,3 +1,8 @@
+<% content_for :head do %>
+  <style>
+
+  </style>
+<% end %>
 <div class="container">
 <%= simple_form_for(resource, defaults: {label: false,error_html: { class: 'rederror'}}, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>

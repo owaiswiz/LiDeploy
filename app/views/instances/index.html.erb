@@ -108,7 +108,7 @@
             <td>
 						<% if inst.disk? %>
 							<div class="btn-group">
-                <% if inst.status == "New" || inst.status == "Resizing" || inst.status == "Shutting Down" || inst.status == "Starting" %>
+                <% if inst.status == "new" || inst.status == "Resizing" || inst.status == "Shutting Down" || inst.status == "Starting" %>
                   <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>Action</button>
                 <% else %>
   								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
