@@ -25,50 +25,5 @@
 <% end %>
 
 <%= yield %>
-<% if ((controller_name == "registrations" || controller_name == "passwords" || controller_name == "confirmations" || controller_name == "sessions") && (action_name == 'new' || action_name == 'create')) || (controller_name == "instances") %>
-<% else %>
-	<footer>
-		<div class = "row">
-			<div class = "col-md-4 footb">
-				<h4>Copyright © 2016<br/>
-				</h4>
-			</div>
-			<div class = "col-md-4 footb">
-				<h4>HELP</h4><br/>
-				<br/>
-			</div>
-			<div class = "col-md-4 footb">
-				<h4>SOCIAL</h4><br/>
-			</div>
-		</div>
-		<div class = "row">
-			<div class ="col-md-4 footb">
-				<a href="/aboutus">About Us</a><br/>
-				<a href="/tos">Terms of Service</a><br/>
-				<a href="/privacypol">Privacy Policy</a><br/>
-			</div>
-			<div class ="col-md-4 footb">
-				<a href="/gettingstarted">Getting Started</a><br/>
-				<a href="/tutorials">Tutorials</a><br/>
-				<a href="/faq">Frequently Asked Questions</a><br/>
-			</div>
-			<div class ="col-md-4 footb">
-				<i class="fa fa-twitter"></i>
-				<a href="https://twitter.com/LiDeploy">
-				Twitter
-				</a>&nbsp;&nbsp;&nbsp;
-				<br/>
-				<i class="fa fa-facebook"></i>
-				<a href="https://facebook.com/LiDeploy">
-				Facebook
-        </a><br/>
-				<i class="fa fa-google-plus"></i>
-				<a href="#">
-				Google+
-        </a><br/>
-			</div>
-		</div>
-	</footer>
-<% end %>
 </body>
 </html>

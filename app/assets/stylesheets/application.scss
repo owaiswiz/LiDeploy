@@ -116,7 +116,6 @@ body{
   font-size: 20px;
   text-align: center;
 }
-
 .greenbutton,.signupbutton{
   color: white;
   background: #2BCA58;
@@ -126,6 +125,13 @@ body{
   cursor: pointer;
   display: block;
   font-family: 'quicksandbold';
+}
+.bluebutton{
+  @extend .signupbutton;
+   background: #3190e7 !important;
+}
+.bluebutton:hover{
+  background: #1569B7 !important;
 }
 .signupbutton{
   font-size: 20px;
@@ -139,7 +145,7 @@ body{
 }
 .greenbutton:hover,.signupbutton:hover {
   color: white;
-  background: #24A849 !important;
+  background: #24A849;
 }
 
 .form-inputs{
@@ -171,9 +177,6 @@ footer {
 }
 .fa {
       background-position: 0 6px;
-}
-.footb a{
-  padding-left: 30px;
 }
 
 .btn-half{
