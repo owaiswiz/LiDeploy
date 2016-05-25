@@ -18,38 +18,21 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <% if !user_signed_in? %>
-                            <li class="hidden active">
-                                <a href="#page-top"></a>
-                            </li>
-                            <li class="page-scroll">
-                                <a href="/pricing">Pricing</a>
-                            </li>
-                            <li class="page-scroll">
-                                <a href="/features">Features</a>
-                            </li>
-                            <li class="page-scroll">
-                                <a href="/contact">Contact</a>
-                            </li>
-                            <li>
-                                <div class="navbar-btn">
-                                   <a href="/login" class="btn btn-primary" role="button">Login</a>
-                                    <a href="/register" class="btn btn-primary" role="button">Register</a>
-                                </div>
-                            </li>
+                          <li>
+                            <div class="navbar-btn">
+                              <a href="/pricing" class="btn grey">Pricing</a>
+                              <a href="/features" class="btn grey">Features</a>
+                              <a href="/contact" class="btn grey">Contact</a>
+                              <a href="/login" class="btn login" role="button">Login</a>
+                              <a href="/register" class="btn btn-primary" role="button">Register</a>
+                            </div>
+                          </li>
                         <% else %>
                             <li>
                               <div class="navbar-btn">
-                                  <a href="/instances/new" class="btn navbar-btn greenbutton" role="button">
-                                  Create New Instances</a>
-                              </div>
-                            </li>
-                            <li class="page-scroll">
-                                <a href="/instances/">Instances</a>
-                            </li>
-                            <li>
-                              <div class="navbar-btn">
-                                  <a href="/logout" class="btn btn-primary" role="button">
-                                  Logout</a>
+                                  <a href="/instances/new" class="btn greenbutton" style="display:inline-block;" role="button">Create New Instances</a>
+                                  <a href="/instances/" class="btn grey">Instances</a>
+                                  <a href="/logout" class="btn btn-primary" role="button">Logout</a>
                               </div>
                             </li>
                         <% end %>

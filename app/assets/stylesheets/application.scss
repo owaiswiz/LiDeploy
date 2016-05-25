@@ -79,7 +79,20 @@ body{
 .btn-primary:hover,.btn-primary:active,.btn-primary:focus {
 	background-color: #3190e7 !important;
 }
-
+li div a.btn-primary{
+  padding: 10px 15px !important;
+  border-radius: 2px !important;
+}
+li .navbar-btn a.btn-primary:hover{
+  border: 1px solid #3190e7;
+}
+.login{
+  font-family: 'quicksandbold';
+  color: #3190e7;
+}
+.grey{
+  color:#777;
+}
 .myimg {
     width: auto;
     height: auto;

@@ -45,6 +45,9 @@ end
   post '/instances/resize_process' => "instances#resize_process",:as => :resize_process_instance
   get '/instance/renew' => redirect('/instances/')
   get '/instance/' => redirect('/instances/')
+
+  #Pages controller
+  get '/legal/:id' => "pages#legal"
   root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
