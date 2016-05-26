@@ -51,7 +51,6 @@ body{
   color: #34495E;
 }
 .feature-box {
-    margin-top: 60px;
     text-align: center;
     font-weight: 400;
 }
@@ -69,12 +68,12 @@ body{
 	border-radius: 3px;
   position: relative;
   font-weight: 600;
-  -o-transition: color 0.5s linear;
-  -moz-transition: color 0.5s linear;
-	-khtml-transition: color 0.5s linear;
-	-webkit-transition: color 0.5s linear;
-	-ms-transition: color 0.5s linear;
-	transition: color 0.5s linear;
+  -o-transition: color 0.2s linear;
+  -moz-transition: color 0.2s linear;
+	-khtml-transition: color 0.2s linear;
+	-webkit-transition: color 0.2s linear;
+	-ms-transition: color 0.2s linear;
+	transition: color 0.2s linear;
 }
 .btn-primary:hover,.btn-primary:active,.btn-primary:focus {
 	background-color: #3190e7 !important;
@@ -89,6 +88,9 @@ li .navbar-btn a.btn-primary:hover{
 .login{
   font-family: 'quicksandbold';
   color: #3190e7;
+  &:hover{
+    color:#3190e7;
+  }
 }
 .grey{
   color:#777;
@@ -178,6 +180,7 @@ li .navbar-btn a.btn-primary:hover{
 footer {
     background: #2e3234;
     padding: 100px 0 60px 0;
+    margin-top: 25px;
     color: #747474;
     float: left;
     width: 100%;
@@ -188,10 +191,14 @@ footer {
   font-family: 'quicksandbold';
   line-height: 200%;
 }
-.fa {
-      background-position: 0 6px;
+.fa{
+    background-position: 0 6px;
+    font-size: 16px;
 }
 
 .btn-half{
   width: 50% !important;
+}
+.btn.sizes:hover,.instsize:hover{
+  color: #666 !important;
 }
