@@ -58,7 +58,7 @@
  	</style>
   <script>
     $(document).ready(function(){
-      var autoRefresh = setInterval(function(){$('.instancelist').load('/api/get/instances');console.log("Executed");},20000);
+      var autoRefresh = setInterval(function(){$('.instancelist').load('/api/get/instances');},20000);
     });
   </script>
 <% end %>

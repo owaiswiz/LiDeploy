@@ -18,48 +18,50 @@ class InstancesController < ApplicationController
 	#List all Instances of A Particular User
 	def index
 		@instances = Instance.where(user_id: current_user.id)
-		Array(@instances).each do |inst|
-		 	client = DropletKit::Client.new(access_token: inst.api_key)
-			begin
-				instance = client.droplets.find(id: inst.instanceid)
-				if instance.status == 'off'
-					if inst.status == 'active' || inst.status == 'Not Found'
-						status = 'Powered Off'
-					elsif inst.status == 'Shutting Down'
-						status = 'Powered Off'
-						inst.update_attributes(:action => nil)
-					else
+		begin
+			Array(@instances).each do |inst|
+			 	client = DropletKit::Client.new(access_token: inst.api_key)
+				begin
+					instance = client.droplets.find(id: inst.instanceid)
+					if instance.status == 'off'
+						if inst.status == 'active' || inst.status == 'Not Found'
+							status = 'Powered Off'
+						elsif inst.status == 'Shutting Down'
+							status = 'Powered Off'
+							inst.update_attributes(:action => nil)
+						else
+							status = inst.status
+						end
+					elsif inst.status == 'Shutting Down' && (client.actions.find(id: inst.action).status == 'in-progress' || client.actions.find(id:inst.action).status == 'completed')
 						status = inst.status
+					else
+						status = instance.status
 					end
-				elsif inst.status == 'Shutting Down' && (client.actions.find(id: inst.action).status == 'in-progress' || client.actions.find(id:inst.action).status == 'completed')
-					status = inst.status
-				else
-					status = instance.status
-				end
-				inst.update_attributes(:ip_address => instance.networks.v4[0].ip_address,:vcpus => instance.vcpus,:disk => instance.disk,:status => status)
-				if inst.temp_status == "Renewed"
-					flash[:notice] = "Renewed Successfully"
-					inst.update_attributes(:temp_status => nil)
-				elsif inst.temp_status == "Resized"
-					if inst.status == 'Resizing' && (client.actions.find(id: inst.action).status == "completed")
-						client.droplet_actions.power_on(droplet_id: inst.instanceid)
-						inst.update_attributes(:status => "Starting",:temp_status => nil,:action => nil)
-						flash[:notice] = "Resized Successfully"
-						flash[:notice1] = "Instance Started"
+					inst.update_attributes(:ip_address => instance.networks.v4[0].ip_address,:vcpus => instance.vcpus,:disk => instance.disk,:status => status)
+					if inst.temp_status == "Renewed"
+						flash[:notice] = "Renewed Successfully"
+						inst.update_attributes(:temp_status => nil)
+					elsif inst.temp_status == "Resized"
+						if inst.status == 'Resizing' && (client.actions.find(id: inst.action).status == "completed")
+							client.droplet_actions.power_on(droplet_id: inst.instanceid)
+							inst.update_attributes(:status => "Starting",:temp_status => nil,:action => nil)
+							flash[:notice] = "Resized Successfully"
+							flash[:notice1] = "Instance Started"
+						end
 					end
-				end
-			rescue
-				if inst.status == "Payment Failed"
-					flash[:notice] = "Payment Not Completed for #{inst.name}.Please Contact us at support@lideploy.com for further help"
-				elsif inst.status != 'Waiting for Payment Confirmation'
-					inst.update_attributes(:status => "Not Found",:ip_address => nil,:disk => nil)
+				rescue
+					if inst.status == "Payment Failed"
+						flash[:notice] = "Payment Not Completed for #{inst.name}.Please Contact us at support@lideploy.com for further help"
+					elsif inst.status != 'Waiting for Payment Confirmation'
+						inst.update_attributes(:status => "Not Found",:ip_address => nil,:disk => nil)
+					end
 				end
 			end
-			if request.original_fullpath.match(/\/api\/get\/instances/)
-				render 'instances/shared/_index',:layout => false
-			else
-				puts "Failed"
-			end
+		rescue
+
+		end
+		if request.original_fullpath.match(/\/api\/get\/instances/)
+			render 'instances/shared/_index',:layout => false
 		end
 	end
 	#Start an Instance
