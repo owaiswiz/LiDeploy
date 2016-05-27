@@ -28,6 +28,7 @@ as :user do
 
 end
   get '/instances/' => 'instances#index'
+  get '/api/get/instances' => 'instances#index'
   get '/instance/new' => "instances#new"
   post '/instance/new' => "instances#create"
   get '/' => 'home#index'

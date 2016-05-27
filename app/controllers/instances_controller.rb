@@ -55,9 +55,13 @@ class InstancesController < ApplicationController
 					inst.update_attributes(:status => "Not Found",:ip_address => nil,:disk => nil)
 				end
 			end
+			if request.original_fullpath.match(/\/api\/get\/instances/)
+				render 'instances/shared/_index',:layout => false
+			else
+				puts "Failed"
+			end
 		end
 	end
-
 	#Start an Instance
 	def start
 		instance = Instance.find_by(user_id: current_user.id,id:params[:id])
