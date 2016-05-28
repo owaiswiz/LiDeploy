@@ -111,3 +111,38 @@
 .feature-img{
   padding-top: 25px;
 }
+.help-nav{
+  padding-top: 25px;
+  li{
+    margin:0px !important;
+    color: #666;
+    font-family: 'quicksandbold';
+    font-size: 105%;
+    padding: 5px;
+    border: 1px solid #e6e6e6;
+    a{
+      color:#666;
+      &:hover{
+        background-color: white;
+        color: #454545;
+      }
+    }
+    &.current{
+      a,a:hover{
+        color: #3190e7 !important;
+      }
+    }
+  }
+}
+.help-split{
+  margin-top: 40px;
+}
+.help-content{
+  font-size:105%;
+  p{
+    padding: 5px;
+  }
+  a:hover{
+    color: #454545 !important;
+  }
+}

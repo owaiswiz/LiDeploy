@@ -1,12 +1,11 @@
 class PagesController < ApplicationController
-  def legal
+  def subpage
     render "pages/#{params[:page]}/#{params[:name]}"
   end
-  def pricing
-    render "pages/pricing"
+  def page
+    render "pages/#{params[:name]}"
   end
-  def features
-    render "pages/features"
+  def help
+    render "pages/help/help"
   end
-
 end

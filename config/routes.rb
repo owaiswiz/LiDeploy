@@ -48,9 +48,10 @@ end
   get '/instance/' => redirect('/instances/')
 
   #Pages controller
-  get '/legal/:name' => "pages#legal"
-  get '/pricing' => "pages#pricing"
-  get '/features' => "pages#features"
+  get '/help/:name' => "pages#help"
+  get '/:page/:name' => "pages#subpage"
+  get '/pricing' => "pages#page", :name => "pricing"
+  get '/features' => "pages#page", :name => "features"
   root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

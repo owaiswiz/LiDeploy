@@ -57,8 +57,12 @@
     }
  	</style>
   <script>
+    var autoRefresh;
     $(document).ready(function(){
       var autoRefresh = setInterval(function(){$('.instancelist').load('/api/get/instances');},20000);
+    });
+    $(window).unload(function(){
+      clearInterval(autoRefresh);
     });
   </script>
 <% end %>

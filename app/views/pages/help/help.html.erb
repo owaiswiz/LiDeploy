@@ -1,0 +1,28 @@
+<% content_for :head do %>
+  <script>
+    $(document).ready(function(){
+      $(".<%= params[:name] %>").addClass("current");
+    });
+  </script>
+<% end %>
+<div class="container feature-box" style="text-align: left;">
+  <div class="help-heading">
+    <h1 style="padding-bottom:25px;border-bottom: 1px solid #e6e6e6;">Help and Frequently Asked Questions</h1>
+  </div>
+  <div class="row help-split">
+    <div class="col-md-3">
+      <ul class="nav nav-pills nav-stacked help-nav">
+        <li class="introduction"><a href="introduction">Introduction</a></li>
+        <li class="gettingstarted"><a href="gettingstarted">Getting Started</a></li>
+        <li class="pricingfaq"><a href="pricingfaq">FAQs on Pricing and Billing</a></li>
+        <li class="technicalfaq"><a href="technicalfaq">Technical FAQs</a></li>
+        <li class="privacyfaq"><a href="privacyfaq">Privacy/Policy Related FAQs</a></li>
+      </ul>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-8">
+      <div class="help-content">
+        <%= render "pages/help/#{params[:name]}" %>
+      </div>
+    </div>
+</div>
