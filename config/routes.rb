@@ -47,6 +47,10 @@ end
   get '/instance/renew' => redirect('/instances/')
   get '/instance/' => redirect('/instances/')
 
+  #Support controller
+  get '/support/' => "ticket#index"
+  get 'support/new' => "ticket#new"
+  post 'support/new' => "ticket#create", :as => :tickets
   #Pages controller
   get '/help/:name' => "pages#help"
   get '/help/' => redirect('/help/introduction')

@@ -1,0 +1,41 @@
+// Place all the styles related to the ticket controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.notickets{
+  font-family:'quicksandbold';
+  color:#666;
+  font-size: 110%;
+}
+.createticket{
+  float: right !important;
+  background-color:#3190e7;
+  color: white !important;
+  border-radius: 3px !important;
+  a:hover{
+    background-color: #1569B7 !important;
+  }
+}
+.support-nav-row{
+  margin-top:50px;
+}
+.support-nav{
+  li{
+    font-family:'quicksandbold';
+    .btn{
+      padding:15px;
+    }
+  }
+  li.nav-ticket{
+    a{
+      color:#bbb;
+      &:hover{
+        color:#454545;
+        background-color: white;
+      }
+    }
+    &.current a{
+      color:#676767 !important;
+      background-color: #ececec;
+    }
+  }
+}

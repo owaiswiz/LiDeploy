@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160521181249) do
+ActiveRecord::Schema.define(version: 20160529110038) do
 
   create_table "instances", force: :cascade do |t|
     t.integer  "user_id"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 20160521181249) do
   end
 
   add_index "instances", ["user_id"], name: "index_instances_on_user_id"
+
+  create_table "tickets", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "message"
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

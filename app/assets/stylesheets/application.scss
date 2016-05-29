@@ -42,9 +42,6 @@
 body{
   font-family: 'quicksandregular';
 }
-.alert{
-  margin-top: 8px;
-}
 .page-top {
   margin-top: 51px;
 }
@@ -83,11 +80,17 @@ body{
 	background-color: #3190e7 !important;
 }
 li div a.btn-primary{
+  margin-left: 10px;
   padding: 10px 15px !important;
   border-radius: 2px !important;
 }
-li .navbar-btn a.btn-primary:hover{
+li .navbar-btn{
+  .greenbutton{
+    margin-right: 10px;
+  }
+  a.btn-primary:hover{
   border: 1px solid #3190e7;
+  }
 }
 .login{
   font-family: 'quicksandbold';
@@ -98,7 +101,15 @@ li .navbar-btn a.btn-primary:hover{
 }
 .grey{
   color:#777;
+  &.btn{
+    font-family: 'quicksandbold';
+    &:hover{
+      color:#3190e7;
+      border-top:2px solid #3190e7;
+    }
+  }
 }
+
 .myimg {
     width: auto;
     height: auto;
