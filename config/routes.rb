@@ -49,7 +49,9 @@ end
 
   #Pages controller
   get '/help/:name' => "pages#help"
-  get '/:page/:name' => "pages#subpage"
+  get '/help/' => redirect('/help/introduction')
+  get '/legal/:name' => "pages#subpage",:page => "legal"
+  get '/legal/' => redirect('/legal/terms')
   get '/pricing' => "pages#page", :name => "pricing"
   get '/features' => "pages#page", :name => "features"
   root 'home#index'
