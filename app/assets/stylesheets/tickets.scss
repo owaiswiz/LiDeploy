@@ -1,0 +1,119 @@
+// Place all the styles related to the ticket controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.alert{
+  margin-top: 8px;
+}
+.notickets{
+  font-family:'quicksandbold';
+  color:#666;
+  font-size: 110%;
+}
+.tickets{
+  font-family: 'quicksandbold';
+  color:#666;
+  text-align:left;
+  margin-top: 25px;
+  .row{
+    padding-bottom:0px;
+    margin-bottom: 0px;
+  }
+  .ticket{
+    margin-bottom:25px;
+    border-left: 2px solid #c2c2c2;
+    &:hover{
+      border-left: 2px solid #2bca58;
+    }
+    &.current{
+      border-left: 2px solid #3190e7;
+    }
+  }
+  .title{
+    font-weight: 900 !important;
+    font-family: 'quicksandregular';
+    font-size: 125%;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 3px;
+  }
+  .username{
+    color:#3190e7 !important;
+    font-size:110%;
+    float:left;
+    padding:0 10px;
+  }
+  .date{
+    font-family:'quicksandregular';
+    font-size: 80%;
+    padding:5px;
+    float:right;
+  }
+}
+.ticket-body{
+  margin-top: 25px;
+  color: #666;
+  border: 1px solid #c0e0f6;
+  border-radius: 3px;
+  .ticket-title{
+    margin-bottom:25px;
+    font-weight: 900;
+    padding: 25px;
+  }
+  .ticket-message{
+    padding:0 25px 25px 25px;
+    font-size: 110%;
+    color: #666;
+    font-family: 'quicksandbold';
+    border-bottom:1px solid #c0e0f6;
+  }
+}
+.newticket{
+  margin-top: 25px;
+  border: 1px solid #c0e0f7;
+  border-radius: 3px;
+  padding: 25px;
+  h3{
+    font-weight: bolder;
+  }
+}
+.createticket{
+  float: right !important;
+  background-color:#3190e7;
+  color: white !important;
+  border-radius: 3px !important;
+  a:hover{
+    background-color: #1569B7 !important;
+  }
+}
+.required textarea{
+  min-height: 200px;
+  resize:none;
+}
+.disabled{
+  color: #666 !important;
+  background-color: #ececec !important;
+}
+.support-nav-row{
+  margin-top:50px;
+}
+.support-nav{
+  li{
+    font-family:'quicksandbold';
+    .btn{
+      padding:15px;
+    }
+  }
+  li.nav-ticket{
+    a{
+      color:#bbb;
+      &:hover{
+        color:#454545;
+        background-color: white;
+      }
+    }
+    &.current a{
+      color:#676767 !important;
+      background-color: #ececec;
+    }
+  }
+}

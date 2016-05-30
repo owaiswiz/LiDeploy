@@ -118,19 +118,18 @@ li .navbar-btn{
     border: 0;
 }
 
-.required input{
+.required input,.required textarea{
   background: #fcfcfc;
-    border: 2px solid #e7e7e7;
-    margin: 20px auto;
-    padding: 15px;
-    width: 100%;
-    display: block;
-    border-radius: 3px;
-    font-size: 18px;
-    transition: opacity 0.4s;
-    text-align: left;
-    height: auto;
-    -webkit-appearance: none;
+  border: 2px solid #e7e7e7;
+  margin: 20px auto;
+  padding: 15px;
+  width: 100%;
+  display: block;
+  border-radius: 3px;
+  font-size: 18px;
+  transition: opacity 0.4s;
+  text-align: left;
+  height: auto;
 }
 .help-block{
   font-family: 'quicksandbold';
@@ -190,6 +189,7 @@ li .navbar-btn{
 .alert {
   text-align: center;
   font-family: 'quicksandbold';
+  border-radius: 0px;
 }
 
 footer {

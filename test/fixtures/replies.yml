@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ticket_id: 1
+  message: MyText
+  from: MyString
+
+two:
+  ticket_id: 1
+  message: MyText
+  from: MyString
