@@ -3,7 +3,7 @@ Rails.application.routes.draw do
  # get '/signup' => 'devise/registrations#new', :as => 'new_user_registration'
  # end
  #devise_for :users
-resources :instances,:tickets
+resources :instances
 devise_for :users, :skip => [:sessions,:registrations,:confirmations]
 as :user do
   #User Signin/Signout
@@ -50,8 +50,9 @@ end
   #Support controller
   get '/support/' => redirect('/support/ticket')
   get '/support/ticket' => "tickets#index",:as => :view_tickets
-  get '/support/ticket/:ticketid' => "tickets#index"
-  post 'support/ticket/*' => "tickets#create"
+  get '/support/ticket/:ticketid' => "tickets#index",:as => :tickets
+  post 'support/ticket/:ticketid' => "tickets#create"
+  put '/support/ticket/:ticketid' => "tickets#addreply"
   #Pages controller
   get '/help/:name' => "pages#help"
   get '/help/' => redirect('/help/introduction')

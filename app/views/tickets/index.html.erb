@@ -40,7 +40,7 @@
       <% else %>
       <div class="tickets">
         <% Array(@tickets).each do |ticket| %>
-          <a id="<%=ticket.id%>" class="ticket" href="/support/ticket/<%=ticket.id%>" style="display:block;text-decoration:none;color:inherit;">
+          <a id="<%=ticket.id%>" class="ticket" href="/support/ticket/<%=ticket.id%>">
             <div class="row">
               <div class="col-md-12">
               <span class="username"><%= @user.username %></span>
@@ -51,6 +51,7 @@
               <span><%= ticket.title %></span>
             </div>
           </a>
+          <div class="buttonborder"></div>
         <% end %>
       </div>
       <% end %>
@@ -58,11 +59,54 @@
     <div class="col-md-1"></div>
     <div class="col-md-8">
       <% if !@ticket.nil? %>
-        <div class="ticket-body">
-          <h2 class="ticket-title"><%= @ticket.title %></h2>
-          <div class="ticket-message">
-            <%= simple_format(@ticket.message) %>
+        <div class="ticket-body dont-break-out">
+          <div class="message-info row">
+            <div class="col-md-12">
+              <span class="message-user username">
+                <%= @user.username %>
+              </span>
+              <span class="message-date date">
+                Created <%= time_ago_in_words(@ticket.created_at) %> ago
+              </span>
+            </div>
           </div>
+          <h2 class="message-title"><%= @ticket.title %></h2>
+          <div class="messages">
+            <div class="message-message">
+              <%= simple_format(@ticket.message) %>
+            </div>
+            <% if !@replies.first.nil? %>
+              <% Array(@replies).each do |reply| %>
+                <div class="reply">
+                  <div class="message-info reply-info row">
+                    <div class="col-md-12">
+                      <span class="message-user grey username">Reply from <%= reply.from %></span>
+                      <span class="message-date date"><%= time_ago_in_words(reply.created_at).gsub('about','') %> ago </span>
+                    </div>
+                  </div>
+                  <div class="message-message reply-message">
+                    <%= simple_format(reply.reply) %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="new-reply">
+          <h4 class="reply-heading">Reply</h4>
+          <%= simple_form_for(@newreply,:url => "/support/ticket/#{params[:ticketid]}",:method => :put,defaults: {label: false,error_html: { class: 'rederror'}}) do |f| %>
+            <%= f.input :reply,placeholder: "Describe the problem you need assistance with in detail.",required: true %>
+            <div class="row reply-submit">
+              <div class="col-md-12">
+                <%= f.button :submit,:class=> "btn reply-submit-button createreply",name: "status",value:"Submit Reply"%>
+                <% if @ticket.status == "open" %>
+                  <%= f.button :submit,:class=>"btn reply-submit-button closeticket",name: "status",value: "Close Ticket"%>
+                <% else %>
+                  <%= f.button :submit,:class=>"btn reply-submit-button closeticket disabled",name: "status",value: "Close Ticket",:disabled => true%>
+                <% end %>
+              </div>
+          </div>
+          <% end %>
         </div>
       <% else %>
       <div class="newticket">

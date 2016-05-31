@@ -58,6 +58,7 @@ body{
 .btn{
   border-radius: 0 !important;
   outline: none;
+  box-shadow: none !important;
 }
 .btn-primary{
 
@@ -100,7 +101,7 @@ li .navbar-btn{
   }
 }
 .grey{
-  color:#777;
+  color:#777 !important;
   &.btn{
     font-family: 'quicksandbold';
     &:hover{
