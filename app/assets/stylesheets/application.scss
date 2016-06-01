@@ -38,7 +38,6 @@
 
 }
 /*End Quicksand Font Declaration*/
-
 body{
   font-family: 'quicksandregular';
 }
@@ -207,4 +206,7 @@ footer {
 }
 .btn.sizes:hover,.instsize:hover{
   color: #666 !important;
+}
+a,.btn{
+  outline-style: none !important;
 }

@@ -48,11 +48,12 @@ end
   get '/instance/' => redirect('/instances/')
 
   #Support controller
-  get '/support/' => redirect('/support/ticket')
-  get '/support/ticket' => "tickets#index",:as => :view_tickets
-  get '/support/ticket/:ticketid' => "tickets#index",:as => :tickets
-  post 'support/ticket/:ticketid' => "tickets#create"
+  get '/support/' => redirect('/support/tickets/')
+  get '/support/tickets/' => "tickets#index", :status => "open",:as => :view_tickets
+  get '/support/tickets/:status' => "tickets#index"
+  get '/support/ticket/:ticketid' => "tickets#index",:as => :ticket
   put '/support/ticket/:ticketid' => "tickets#addreply"
+  post '/support/tickets/create' => "tickets#create"
   #Pages controller
   get '/help/:name' => "pages#help"
   get '/help/' => redirect('/help/introduction')

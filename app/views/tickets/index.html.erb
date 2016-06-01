@@ -5,6 +5,7 @@
   <script>
     $(document).ready(function(){
       $(".ticket#<%=params[:ticketid]%>").addClass("current");
+      $(".nav-ticket.<%=params[:status]%>tickets").addClass("current");
     });
   </script>
 <% end %>
@@ -13,11 +14,11 @@
   <div class="row support-nav-row">
     <div class="col-md-12">
       <ul class="nav nav-pills support-nav">
-        <li class="nav-item nav-ticket opentickets current">
-          <a class="nav-link btn" href="#">Open Tickets</a>
+        <li class="nav-item nav-ticket opentickets">
+          <a class="nav-link btn" href="/support/tickets/open">Open Tickets</a>
         </li>
         <li class="nav-item nav-ticket closedtickets">
-          <a class="nav-link btn" href="#">Closed Tickets</a>
+          <a class="nav-link btn" href="/support/tickets/closed">Closed Tickets</a>
         </li>
         <% if params[:ticketid] == "newticket" %>
           <li class="nav-item createticket disabled">
@@ -35,7 +36,7 @@
     <div class="col-md-3">
       <% if @tickets.nil? %>
       <div class="notickets feature-box">
-        You don't seem to have any tickets
+        You don't have any <%=params[:status].capitalize %> tickets
       </div>
       <% else %>
       <div class="tickets">
@@ -111,12 +112,12 @@
       <% else %>
       <div class="newticket">
         <h3>Create New Support Ticket</h3>
-        <%= simple_form_for(@newticket, defaults: {label: false,error_html: { class: 'rederror'}}) do |f| %>
-          <%= f.input :title,placeholder: "Subject",required:true %>
-          <%= f.input :message,placeholder: "Describe the problem you need assistance with in detail.",required: true %>
-          <%= f.button :submit, "Create Ticket",:class=> "bluebutton" %>
+        <%= simple_form_for(@newticket,:url => "/support/tickets/create",:method => :post, defaults: {label: false,error_html: { class: 'rederror'}}) do |f| %>
+            <%= f.input :title,placeholder: "Subject",required:true %>
+            <%= f.input :message,placeholder: "Describe the problem you need assistance with in detail.",required: true %>
+            <%= f.button :submit, "Create Ticket",:class=> "bluebutton" %>
+          <% end %>
         <% end %>
-      <% end %>
     </div>
     </div>
   </div>
