@@ -1,0 +1,236 @@
+/* line 4, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.alert {
+  margin-top: 8px;
+}
+
+/* line 8, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.dont-break-out {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+/* line 18, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.username {
+  color: #3190e7 !important;
+  font-size: 110%;
+  float: left;
+}
+
+/* line 23, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.date {
+  font-family: 'quicksandregular';
+  font-size: 80%;
+  float: right;
+}
+
+/* line 30, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.support-nav-row {
+  margin-top: 50px;
+}
+
+/* line 34, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.support-nav li {
+  font-family: 'quicksandbold';
+}
+/* line 36, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.support-nav li .btn {
+  padding: 15px;
+}
+/* line 41, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.support-nav li.nav-ticket a {
+  color: #bbb;
+}
+/* line 43, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.support-nav li.nav-ticket a:hover {
+  color: #454545;
+  background-color: white;
+}
+/* line 48, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.support-nav li.nav-ticket.current a {
+  color: #676767 !important;
+  background-color: #ececec;
+}
+
+/* line 55, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.notickets {
+  font-family: 'quicksandbold';
+  color: #666;
+  font-size: 110%;
+}
+
+/* line 60, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.tickets {
+  font-family: 'quicksandbold';
+  color: #666;
+  text-align: left;
+  margin-top: 25px;
+}
+/* line 65, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.tickets .row {
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+/* line 69, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.tickets .ticket {
+  margin-bottom: 25px;
+  border-left: 2px solid #c2c2c2;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  margin-top: 25px;
+}
+/* line 76, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.tickets .ticket .title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 900 !important;
+  font-family: 'quicksandregular';
+  font-size: 125%;
+  padding: 10px 0px 3px 10px;
+}
+/* line 85, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.tickets .ticket:hover {
+  border-left: 2px solid #2bca58;
+}
+/* line 88, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.tickets .ticket.current {
+  border-left: 2px solid #3190e7;
+}
+/* line 92, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.tickets .buttonborder:not(:last-child) {
+  border-bottom: 1px solid #c0e6f6;
+}
+/* line 95, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.tickets .username {
+  padding: 0 10px;
+}
+/* line 98, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.tickets .date {
+  padding: 5px;
+}
+
+/* line 103, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.ticket-body, .new-reply {
+  margin-top: 25px;
+  color: #666;
+  border: 1px solid #c0e0f6;
+  border-radius: 3px;
+}
+
+/* line 110, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.ticket-body .message-info {
+  padding: 25px 25px 0 25px !important;
+}
+/* line 112, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.ticket-body .message-info .message-user {
+  font-family: 'quicksandbold';
+}
+/* line 115, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.ticket-body .message-info .message-date {
+  word-break: normal;
+  color: #666;
+  font-size: 100%;
+  font-weight: 900;
+}
+/* line 122, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.ticket-body .message-title {
+  font-weight: 900;
+  padding: 25px;
+}
+/* line 127, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.ticket-body .message-message {
+  padding: 0 25px 25px 25px;
+  font-size: 100%;
+  color: #666;
+  font-family: 'quicksandbold';
+}
+/* line 133, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.ticket-body .reply-message {
+  padding-top: 25px;
+  padding-bottom: 0px !important;
+}
+
+/* line 139, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.reply {
+  padding-bottom: 25px;
+  border-top: 1px solid #c0e0f6;
+}
+
+/* line 145, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.new-reply {
+  padding: 25px;
+}
+/* line 147, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.new-reply .reply-heading {
+  font-family: 'quicksandbold';
+}
+
+/* line 151, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.reply-submit-button {
+  padding: 15px;
+  margin: 0.5em;
+  min-width: 8em;
+  font-family: 'quicksandbold';
+  border: 1px solid #3190e7;
+}
+/* line 157, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.reply-submit-button:hover {
+  background-color: #1569B7 !important;
+  border: 1px solid #1569B7 !important;
+}
+
+/* line 162, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.closeticket {
+  float: right !important;
+  border-radius: 3px !important;
+  border: 1px solid #ececec !important;
+  color: #676767 !important;
+  background-color: #ececec !important;
+}
+/* line 168, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.closeticket:hover {
+  background-color: #c2c2c2 !important;
+  border: 1px solid #c2c2c2 !important;
+}
+
+/* line 174, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.createticket, .createreply {
+  float: right !important;
+  background-color: #3190e7;
+  color: white !important;
+  border-radius: 3px !important;
+}
+/* line 179, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.createticket a:hover, .createreply a:hover {
+  background-color: #1569B7 !important;
+}
+
+/* line 184, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.newticket {
+  margin-top: 25px;
+  border: 1px solid #c0e0f7;
+  border-radius: 3px;
+  padding: 25px;
+}
+/* line 189, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.newticket h3 {
+  font-weight: bolder;
+}
+
+/* line 193, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.required textarea {
+  min-height: 200px;
+  resize: none;
+}
+
+/* line 197, /home/owaiswiz/ruby/host/app/assets/stylesheets/tickets.scss */
+.disabled {
+  color: #666 !important;
+  background-color: #ececec !important;
+}

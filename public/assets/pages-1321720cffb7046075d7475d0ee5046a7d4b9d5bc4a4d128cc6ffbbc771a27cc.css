@@ -1,0 +1,200 @@
+/* line 4, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.bold {
+  font-family: 'quicksandbold';
+}
+
+/* line 7, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.muhcontainer {
+  max-width: 1170px;
+  margin-right: auto;
+  margin-left: auto;
+  font-family: quicksandbold;
+  font-size: 15px;
+}
+
+/* line 16, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.wrapper {
+  width: 100%;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: #f3f5f7;
+}
+
+/* line 22, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.btn.sizes {
+  height: 267px;
+  width: 215px;
+  padding: 0;
+  border-radius: 3% !important;
+}
+
+/* line 29, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.sizes.active {
+  height: 307px;
+  border: 4px solid #298eea !important;
+}
+
+/* line 33, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.sizes.active .text {
+  background-color: #298eea;
+  color: white;
+}
+
+/* line 37, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.sizes:nth-of-type(1), .sizes:nth-of-type(3) {
+  border: 2px solid #298eea !important;
+}
+
+/* line 41, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.sizes:nth-of-type(1) {
+  border-top-right-radius: 0 !important;
+  border-right: none !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+/* line 47, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.sizes:nth-of-type(3) {
+  border-left: none !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+/* line 52, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.text {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: 'quicksandbold';
+  font-size: 20px;
+  border-bottom: solid 1px #CDCDCD;
+  border-top: 3px solid #3190e7 !important;
+}
+
+/* line 60, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.text h5 {
+  font-size: 15px;
+}
+
+/* line 63, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.popular {
+  background-color: #1d82dc !important;
+  font-size: 110% !important;
+  width: 100%;
+  outline: 4px solid #1d82dc !important;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: white;
+}
+
+/* line 73, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.specs {
+  padding-top: 10px;
+}
+
+/* line 77, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.specs ul {
+  padding: 0px;
+  display: table;
+  margin: 0px auto;
+}
+
+/* line 82, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.specs ul li {
+  list-style: none;
+  color: #bdc3c7;
+  font-size: 16px;
+  padding: 5px;
+}
+
+/* line 89, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.specs ul li span {
+  color: #34495e;
+  font-family: 'quicksandbold';
+}
+
+/* line 93, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.faqs {
+  width: 1024px;
+}
+
+/* line 96, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.faq {
+  text-align: left;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+/* line 100, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.faq h5 {
+  font-family: 'quicksandbold';
+}
+/* line 103, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.faq .row {
+  padding: 10px;
+  height: 140px;
+}
+
+/* line 108, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.features {
+  text-align: left;
+}
+
+/* line 111, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.feature-img {
+  padding-top: 25px;
+}
+
+/* line 114, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.help-nav {
+  padding-top: 25px;
+}
+/* line 116, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.help-nav li {
+  margin: 0px !important;
+  color: #666;
+  font-family: 'quicksandbold';
+  font-size: 105%;
+  padding: 5px;
+  border: 1px solid #e6e6e6;
+}
+/* line 123, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.help-nav li a {
+  color: #666;
+}
+/* line 125, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.help-nav li a:hover {
+  background-color: white;
+  color: #454545;
+}
+/* line 131, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.help-nav li.current a, .help-nav li.current a:hover {
+  color: #3190e7 !important;
+}
+
+/* line 137, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.help-split {
+  margin-top: 40px;
+}
+
+/* line 140, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.help-content {
+  font-size: 105%;
+}
+/* line 142, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.help-content h2 {
+  padding-bottom: 15px;
+  font-weight: 900;
+}
+/* line 146, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.help-content p {
+  padding: 5px;
+}
+/* line 149, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.help-content a {
+  text-decoration: none;
+  font-family: 'quicksandbold';
+  color: #666;
+  border-bottom: 1px dotted black;
+}
+/* line 154, /home/owaiswiz/ruby/host/app/assets/stylesheets/pages.scss */
+.help-content a:hover {
+  color: #454545 !important;
+}

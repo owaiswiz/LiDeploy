@@ -1,0 +1,241 @@
+/* line 1, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.alert {
+  margin-top: 8px;
+}
+
+/* line 4, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.distro {
+  height: 100px;
+  width: 100px;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+/* line 9, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.distro p {
+  padding-top: 70px;
+  font-family: 'quicksandbold';
+  color: black;
+}
+
+/* line 15, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.distro.active {
+  background-color: #298eea !important;
+}
+/* line 17, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.distro.active p {
+  color: white !important;
+}
+
+/* line 21, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.ubuntu {
+  background: url("/assets/ubuntu.png") #f2f2f2;
+}
+
+/* line 24, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.ubuntu.active {
+  background-image: url("/assets/ubuntu-active.png") !important;
+}
+
+/* line 28, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.fedora {
+  background: url("/assets/fedora.png") #f2f2f2;
+}
+
+/* line 31, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.fedora.active {
+  background-image: url("/assets/fedora-active.png") !important;
+}
+
+/* line 35, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.centos {
+  background: url("/assets/centos.png") #f2f2f2;
+}
+
+/* line 38, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.centos.active {
+  background-image: url("/assets/centos-active.png") !important;
+}
+
+/* line 42, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.debian {
+  background: url("/assets/debian.png") #f2f2f2;
+}
+
+/* line 45, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.debian.active {
+  background-image: url("/assets/debian-active.png") !important;
+}
+
+/* line 48, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.btn-primary.active {
+  background-color: #298eea !important;
+}
+
+/* line 51, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.sizes {
+  height: 200px;
+  width: 250px;
+  padding: 0;
+  border-color: #298eea;
+  border: solid 1px #298eea;
+  margin: 20px;
+}
+
+/* line 60, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.text {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: 'quicksandbold';
+  font-size: 20px;
+  border-bottom: solid 0.1px #CDCDCD;
+}
+/* line 66, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.text h5 {
+  font-size: 15px;
+}
+
+/* line 70, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.sizes.active .text {
+  background-color: #298eea;
+  color: white;
+}
+
+/* line 74, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.sizes:hover .prices {
+  background-color: #EEE;
+}
+
+/* line 77, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.sizes.active:hover .prices {
+  background-color: #298eea !important;
+}
+
+/* line 80, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.specs {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+/* line 83, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.specs ul {
+  padding: 0px;
+  display: table;
+  margin: 0px auto;
+}
+/* line 87, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.specs ul li {
+  list-style: none;
+  color: #bdc3c7;
+  font-size: 16px;
+}
+/* line 91, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.specs ul li span {
+  color: #34495e;
+  font-family: 'quicksandbold';
+}
+
+/* line 99, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.region {
+  height: 110px;
+  width: 120px;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  border: solid 0.2px #298eea;
+  margin: 20px;
+  text-align: center;
+}
+/* line 107, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.region p {
+  padding-top: 75px;
+  font-family: 'quicksandbold';
+  color: #34495e;
+}
+
+/* line 113, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.region.active {
+  background-color: #298eea;
+}
+/* line 115, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.region.active p {
+  color: white;
+}
+
+/* line 120, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.america {
+  background-image: url("/assets/usa.png") !important;
+}
+
+/* line 123, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.uk {
+  background-image: url("/assets/uk.png") !important;
+}
+
+/* line 126, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.germany {
+  background-image: url("/assets/germany.png") !important;
+}
+
+/* line 129, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.canada {
+  background-image: url("/assets/canada.png") !important;
+}
+
+/* line 132, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.netherland {
+  background-image: url("/assets/netherlands.png") !important;
+}
+
+/* line 135, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.singapore {
+  background-image: url("/assets/singapore.png") !important;
+}
+
+/* line 139, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.required input[type="text"] {
+  width: 50%;
+}
+
+/* line 142, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.signupbutton {
+  width: 70%;
+}
+
+/* line 145, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.nodis, .maxdis {
+  display: none;
+}
+
+/* line 149, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.renew, .resize {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* line 153, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.details {
+  font-family: 'quicksandlight';
+  font-size: 150%;
+}
+
+/* line 157, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.header {
+  font-family: 'quicksandbold' !important;
+}
+
+/* line 163, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.destroy.btn-primary {
+  color: red !important;
+  outline: 1px solid red !important;
+}
+
+/* line 167, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.destroy.btn-primary:focus, .destroy.btn-primary:hover {
+  background-color: red !important;
+  color: white !important;
+}
+
+/* line 171, /home/owaiswiz/ruby/host/app/assets/stylesheets/instances.scss */
+.commit.destroy.btn-primary {
+  margin-left: 0 !important;
+  margin-top: 5px;
+  border: 1px red solid;
+}

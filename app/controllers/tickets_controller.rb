@@ -25,8 +25,6 @@ class TicketsController < ApplicationController
     else
       if params[:status].nil?
         params[:status] = "open"
-      else
-
       end
       @tickets = Ticket.where(user_id: current_user.id,:status => params[:status])
       if @tickets.first.nil?

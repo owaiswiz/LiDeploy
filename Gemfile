@@ -55,3 +55,7 @@ gem 'mailman-rails'
 gem 'mailman'
 gem 'daemons'
 gem 'mini_portile2'
+gem 'capistrano', '~> 3.1.0', require: false
+gem 'capistrano-bundler', '~> 1.1.2'
+gem 'capistrano-rails', '~> 1.1.1'
+gem 'capistrano-rbenv', github: "capistrano/rbenv"
