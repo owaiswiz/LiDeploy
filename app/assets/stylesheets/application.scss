@@ -201,6 +201,7 @@ li .navbar-btn{
   text-align: center;
   font-family: 'quicksandbold';
   border-radius: 0px;
+  margin-top: 19px;
 }
 
 footer {
@@ -220,4 +221,24 @@ footer {
 }
 a,.btn{
   outline-style: none !important;
+}
+.header-logo{
+  font-weight: bolder;
+  font-size: 25px;
+  text-decoration:none !important;
+  color: #3190e7;
+  &:hover{
+    color:#3190e7;
+  }
+  &.header-text,.header-text{
+    padding-left:2px !important;
+    margin-left: 0px;
+    margin-top:-1px !important;
+  }
+}
+.navbar-btn .btn{
+  margin-top:5px;
+}
+.navbar .container{
+  padding-bottom:5px;
 }

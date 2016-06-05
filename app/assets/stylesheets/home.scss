@@ -51,8 +51,13 @@ body{
   text-align: left;
 }
 .muhleft h1{
-    line-height: 56px;
-    font-size: 38px;
+  line-height: 56px;
+  font-size: 38px;
+  .lideploy-head{
+    font-weight:900;
+    font-weight:bolder;
+    color:#3190e7;
+  }
 }
 .muhleft h1:after{
     height: 1px;
@@ -155,4 +160,8 @@ hr{
 .contact-wrapper{
   margin-top:40px;
   text-align: center;
+  padding-bottom:25px;
+}
+footer{
+  margin-top: 0px;
 }
