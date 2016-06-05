@@ -3,26 +3,30 @@
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header page-scroll">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-nav-collapse">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
                     <div class="navbar-btn">
-                    <a href="/" style="font-size: 25px;font-family: 'quicksandbold' ">LiDeploy</a>
+                    <!--<a href="/" style="font-size: 25px;font-family: 'quicksandbold' ">LiDeploy</a>-->
+                    <% if controller_name == "home" %>
+                      <a href="/"><img src="/assets/Lideployicon.png" width="42px;" style="margin-left:84px;" /></a>
+                    <% else %>
+                      <a href="/"><img src="/assets/Lideploylogo.png" width="235px;"  style="margin-left:84px;" /></a>
+                    <% end %>
                     </div>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="collapse navbar-collapse" id="bs-nav-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <% if !user_signed_in? %>
                           <li>
                             <div class="navbar-btn">
                               <a href="/pricing" class="btn grey">Pricing</a>
                               <a href="/features" class="btn grey">Features</a>
-                              <a href="/contact" class="btn grey">Contact</a>
                               <a href="/login" class="btn login" role="button">Login</a>
                               <a href="/register" class="btn btn-primary" role="button">Register</a>
                             </div>

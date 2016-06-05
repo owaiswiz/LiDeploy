@@ -27,6 +27,7 @@ set :deploy_to, '/home/deploy/lideploy'
 # Default value for linked_dirs is []
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 set :bundle_binstubs, nil
+set :bundle_env_variables, { 'NOKOGIRI_USE_SYSTEM_LIBRARIES' => 1 }
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
@@ -67,5 +68,11 @@ namespace :rails do
     puts cmd
 
     exec cmd
+  end
+end
+after 'deploy:publishing', 'deploy:restart'
+namespace :deploy do
+  task :restart do
+    invoke 'delayed_job:restart'
   end
 end

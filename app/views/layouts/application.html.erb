@@ -4,6 +4,7 @@
   <title>Demo</title>
   <%= stylesheet_link_tag    'application', params[:controller], media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', params[:controller], 'data-turbolinks-track' => true %>
+  <%= favicon_link_tag 'Lideployfavicon.png',type: 'image/png' %>
   <%= yield :head %>
   <script>
     $(document).ready(function(){

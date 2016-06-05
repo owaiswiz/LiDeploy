@@ -3,18 +3,18 @@
   <div class="muhcontainer">
   <div class="row feature-box">
   <h1 style="margin-bottom: 50px;font-family: 'quicksandlight'"> Simple. Reliable. Flexible.</h1>
-      <div class="span4">
+      <div class="col-md-4 key-points">
          <img src="/assets/easytodeployvps.png" alt="Test" class="img-rounded myimg">
-         <h2 style="font-family: 'quicksandregular'">Easy To Deploy</h2>
+         <h2>Easy To Deploy</h2>
          <p>Launch a server instance with just a few clicks<br>Doesn't get any simpler than this</p>
       </div>
 
-      <div class="span4">
+      <div class="col-md-4 key-points">
           <img src="/assets/99percentuptimeserver.png" alt="Test" class="img-rounded myimg">
           <h2>99.9% Uptime</h2>
           <p>Server's Uptime is of great importance to us<br>We guarantee that you won't be dissappointed</p>
       </div>
-      <div class="span4">
+      <div class="col-md-4 key-points">
         <img src="/assets/simpletoscalevps.png" alt="Test" class="img-rounded myimg">
         <h2 style="font-family: quicksandbold"> Easily Scalable</h2>
         <p> You can easily scale your servers in the future<br>Just with a couple of clicks</p>
@@ -24,5 +24,22 @@
   </div>
 </div>
 <%= render 'shared/pricing' %>
+<div class="wrapper contact-wrapper">
+  <div class="muhcontainer">
+    <h1 class="light" style="text-align:center;margin-bottom:25px;">Support</h1>
+    <div class="contact-block">
+      <div class="row contact-content">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <img class="contact-img" src="/assets/support.png" width="128px;" />
+          <p>Get 24/7 Support on any query or issue by using the contact button below or by creating a support ticket.</p>
+          <p>You can also contact us on getting tips on how to migrate your applications or websites to us without any hassle.
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+      <a href="/contactus" class="btn btn-primary bluebutton contact-button" style="width: 25%" role="button">Contact Us</a>
+    </div>
+  </div>
+</div>
 <br>
 <%= render 'shared/footer' %>

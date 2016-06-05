@@ -8,17 +8,11 @@ body{
 .light{
   font-family: 'quicksandlight';
 }
-.span4 h2,.theme{
+.key-points.col-md-4 h2,.theme{
   color: #298eea;
 }
-.span4 h2{
+.key-points.col-md-4 h2{
   font-family: 'quicksandregular' !important;
-}
-.span4 {
-	width: 370px;
-	float: left;
-  min-height: 1px;
-  margin-left: 30px;
 }
 .wrapper{
   width: 100%;
@@ -39,7 +33,7 @@ body{
 .muhmaincontent{
   max-width: 1400px;
   display: block;
-  padding: 60px 80px 90px;
+  padding: 20px 80px 90px;
 }
 .muhsup
 {
@@ -149,4 +143,16 @@ hr{
 .specs ul li span {
   color: #34495e;
   font-family: 'quicksandbold';
+}
+.contact-block{
+  text-align: center;
+  //font-family: 'quicksandregular';
+  font-weight: bolder;
+}
+.contact-img{
+  margin-bottom: 20px;
+}
+.contact-wrapper{
+  margin-top:40px;
+  text-align: center;
 }
