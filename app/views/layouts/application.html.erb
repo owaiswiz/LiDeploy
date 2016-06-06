@@ -2,8 +2,13 @@
 <html>
 <head>
   <title>Demo</title>
-  <%= stylesheet_link_tag    'application', params[:controller], media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', params[:controller], 'data-turbolinks-track' => true %>
+  <% if devise_controller? %>
+    <%= stylesheet_link_tag 'application', 'sessions',media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  <% else %>
+    <%= stylesheet_link_tag    'application', params[:controller], media: 'all' %>
+    <%= javascript_include_tag 'application'%>
+  <% end %>
   <%= favicon_link_tag 'Lideployfavicon.png',type: 'image/png' %>
   <%= yield :head %>
   <script>
@@ -18,9 +23,11 @@
   </script>
   <%= csrf_meta_tags %>
 </head>
-
-<% if (controller_name == "registrations" || controller_name == "passwords" || controller_name == "confirmations" || controller_name == "sessions") && (action_name == 'new' || action_name == 'create') %>
+<% if ["sessions","registrations","passwords","confirmations"].include?(controller_name) %>
 	<body class="bluer">
+    <div class="form container new_user" style="text-align:center;">
+      <a href="/"><img src="/assets/lideploy.png" width="42px";></a><a href="/" class="btn header-logo header-text" style="color:#333;margin-top:6px !important;font-size:35px;">LiDeploy</a>
+    </div>
 <% elsif %>
 	<body class="page-top">
 		<%= render 'shared/navbar' %>

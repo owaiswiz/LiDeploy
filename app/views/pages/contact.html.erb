@@ -1,3 +1,10 @@
+<% content_for :head do %>
+  <style>
+    footer{
+      margin-top: 10px;
+    }
+  </style>
+<% end %>
 <div class="container" style="margin-top:40px;">
   <h1 style="font-weight:900;margin-bottom:40px">Contact Us</h1>
   <ul class="contact-ways" style="max-width:80%;">
@@ -14,3 +21,4 @@
       </li>
     </ul>
 </div>
+<%= render 'shared/footer' %>
