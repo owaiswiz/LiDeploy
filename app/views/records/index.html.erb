@@ -1,0 +1,42 @@
+<% content_for :head do %>
+	<script>
+		$(document).ready(function(){
+			$(".domaintip").tooltip();
+			$(".ipaddress").focus(function(){$(".instances-dropdown").show();}).focusout(function(){$(".instances-dropdown").hide();});
+		});
+	</script>
+<% end %>
+<div class="container feature-box" style="text-align:left;">
+	<h1 class="domain-title">Domains</h1>
+	<div class = "new-domain">
+		<h3>Add a Domain</h3>
+		<div class="info">
+			The specified IP address will be assigned as an A record (for @) for your domain. You can change this later.<span type="button" class="fa fa-question-circle-o domaintip" data-toggle="tooltip" data-placement="top" title="An @ record is the record for the root domain. For example,if you enter domain as 'example.com' and '1.2.3.4' as IP address, then 'http://example.com' will point to '1.2.3.4'"></span>
+		</div>
+		<div class="add-domain">
+			<%= simple_form_for(@newdomain,:url => domains_path,:method => :post,defaults: {label: false,error_html: { class: 'rederror'}}) do |f| %>
+				<%= f.input_field :name,placeholder: "Domain Name",required:true %>
+				<div class="instances-list dropdown" style="display:inline-block;">
+					<%= f.input_field :ip_address,placeholder: "IP Address",required: true,:class => 'ipaddress'%>
+					<div class="instances-dropdown dropdown-menu">
+						<% if @instances.blank? %>
+							<div class="result noinst">No Instance Found</div>
+						<% else %>
+							<% Array(@instances).each do |instance| %>
+								<div class="result inst inst_<%=instance.id%>" value="<%=instance.ip_address%>"><%=instance.name.capitalize%></div>
+							<% end %>
+						<% end %>
+	  			</div>
+				</div>
+				<%= f.button :submit, "Add Domain",:class => "bluebutton add-domain-submit" %>
+			<% end %>
+		</div>
+	</div>
+	<% if @domains.blank? %>
+		<div class="no-domains">
+			<h2> You haven't added any domains yet! </h2>
+		</div>
+	<% else %>
+
+	<% end %>
+</div>

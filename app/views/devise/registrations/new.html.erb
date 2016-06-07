@@ -1,6 +1,8 @@
 <% content_for :head do %>
   <style>
-
+    .signupbutton{
+      margin-bottom: 10px;
+    }
   </style>
 <% end %>
 <div class="container">
@@ -17,6 +19,9 @@
 
   <div class="form-actions">
     <%= f.button :submit, "Sign up", :class => 'signupbutton btn-lg' %>
+  </div>
+  <div class="etos">
+    By Registering, you agree to our <a href="/legal/terms">Terms of Service</a>.
   </div>
 <% end %>
 

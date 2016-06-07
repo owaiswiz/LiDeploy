@@ -35,31 +35,36 @@
   <div class="row support-split">
     <div class="col-md-3">
       <% if @tickets.nil? %>
-      <div class="notickets feature-box">
-        You don't have any <%=params[:status].capitalize %> tickets
-      </div>
+        <div class="notickets feature-box">
+          You don't have any <%=params[:status].capitalize %> tickets
+        </div>
       <% else %>
-      <div class="tickets">
-        <% Array(@tickets).each do |ticket| %>
-          <a id="<%=ticket.id%>" class="ticket" href="/support/ticket/<%=ticket.id%>">
-            <div class="row">
-              <div class="col-md-12">
-              <span class="username"><%= @user.username %></span>
-              <span class="date"><%=time_ago_in_words(ticket.updated_at).gsub('about','') %> ago </span>
+        <div class="tickets">
+          <% Array(@tickets).each do |ticket| %>
+            <a id="<%=ticket.id%>" class="ticket" href="/support/ticket/<%=ticket.id%>">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="username"><%= @user.username %></span>
+                  <span class="date"><%=time_ago_in_words(ticket.updated_at).gsub('about','') %> ago </span>
+                </div>
               </div>
-            </div>
-            <div class="title">
-              <span><%= ticket.title %></span>
-            </div>
-          </a>
-          <div class="buttonborder"></div>
-        <% end %>
-      </div>
+              <div class="title">
+                <span><%= ticket.title %></span>
+              </div>
+            </a>
+            <div class="buttonborder"></div>
+          <% end %>
+        </div>
       <% end %>
     </div>
     <div class="col-md-1"></div>
     <div class="col-md-8">
       <% if !@ticket.nil? %>
+        <% if @ticket.status=="closed" %>
+          <div class="closed-ticket">
+            This ticket is closed,to open this ticket simply click the reply button below.
+          </div>
+        <% end %>
         <div class="ticket-body dont-break-out">
           <div class="message-info row">
             <div class="col-md-12">
@@ -99,26 +104,26 @@
             <%= f.input :reply,placeholder: "Describe the problem you need assistance with in detail.",required: true %>
             <div class="row reply-submit">
               <div class="col-md-12">
-                <%= f.button :submit,:class=> "btn reply-submit-button createreply",name: "status",value:"Submit Reply"%>
                 <% if @ticket.status == "open" %>
+                  <%= f.button :submit,:class=> "btn reply-submit-button createreply",name: "status",value:"Submit Reply"%>
                   <%= f.button :submit,:class=>"btn reply-submit-button closeticket",name: "status",value: "Close Ticket"%>
                 <% else %>
-                  <%= f.button :submit,:class=>"btn reply-submit-button closeticket disabled",name: "status",value: "Close Ticket",:disabled => true%>
+                  <%= f.button :submit,:class=> "btn reply-submit-button createreply",name: "status",value:"Submit Reply and Open Ticket"%>
                 <% end %>
               </div>
           </div>
           <% end %>
         </div>
       <% else %>
-      <div class="newticket">
-        <h3>Create New Support Ticket</h3>
-        <%= simple_form_for(@newticket,:url => "/support/tickets/create",:method => :post, defaults: {label: false,error_html: { class: 'rederror'}}) do |f| %>
-            <%= f.input :title,placeholder: "Subject",required:true %>
-            <%= f.input :message,placeholder: "Describe the problem you need assistance with in detail.",required: true %>
-            <%= f.button :submit, "Create Ticket",:class=> "bluebutton" %>
+        <div class="newticket">
+          <h3>Create New Support Ticket</h3>
+          <%= simple_form_for(@newticket,:url => "/support/tickets/create",:method => :post, defaults: {label: false,error_html: { class: 'rederror'}}) do |f| %>
+              <%= f.input :title,placeholder: "Subject",required:true %>
+              <%= f.input :message,placeholder: "Describe the problem you need assistance with in detail.",required: true %>
+              <%= f.button :submit, "Create Ticket",:class=> "bluebutton" %>
           <% end %>
-        <% end %>
-    </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

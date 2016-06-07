@@ -49,17 +49,6 @@ body{
   height: 100%;
   color: #34495E;
 }
-
-//Forregister
-.new_user{
-    margin: 0 auto;
-    width: 400px;
-    padding: 40px;
-    padding-bottom: 0px !important;
-    border-radius: 3px;
-    background: #3190e7;
-}
-
 .feature-box {
     text-align: center;
     font-weight: 400;
@@ -89,6 +78,7 @@ body{
 }
 .btn-primary:hover,.btn-primary:active,.btn-primary:focus {
 	background-color: #3190e7 !important;
+  border-color:#3190e7 !important;
 }
 li div a.btn-primary{
   margin-left: 10px;
@@ -145,7 +135,6 @@ li .navbar-btn{
   font-family: 'quicksandbold';
   font-size:15px;
   color:#34495E;
-
 }
 .rederror {
   color: red !important;

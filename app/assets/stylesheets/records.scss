@@ -1,0 +1,106 @@
+// Place all the styles related to the Records controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.no-domains{
+  text-align: center;
+  margin-top: 75px;
+}
+.domain-title{
+  font-weight: bolder;
+}
+.new-domain{
+  border: 2px solid #f1f1f1;
+  border-radius: 3px;
+  padding:25px;
+  h3{
+    margin-top: 0;
+    font-weight: bolder;
+  }
+}
+.info{
+  padding-top:8px;
+  font-size: 1.3em;
+  font-family: 'quicksandregular';
+  font-weight: bolder;
+}
+input.required{
+  background: #fcfcfc;
+  border: 1px solid #e7e7e7;
+  margin: 20px auto;
+  margin-right: 15px;
+  padding: 15px;
+  width: 40%;
+  border-radius: 0px;
+  font-size: 18px;
+  transition: opacity 0.4s;
+  text-align: left;
+  height: auto;
+  &:active,&:focus{
+    border:1px solid #3190e7; //#66afe9;
+    &.ipaddress{
+      border-bottom: 0;
+    }
+    outline: 0;
+  }
+}
+div.dropdown{
+  width: 40%;
+  margin-right: 15px;
+  input{
+  width: 100%;
+  }
+}
+.add-domain-submit{
+  width: auto;
+  display:inline-block;
+  margin: 20px auto;
+  padding:15px;
+  font-size:18px;
+  vertical-align: inherit;
+  border:2px solid #3190e7;
+  border-radius: 0px !important;
+  &:hover{
+    border-color: #1569B7;
+  }
+  &:active,&:focus,&:visited{
+    color:white !important;
+    border-color: #1569B7 !important;
+  }
+}
+.domaintip{
+  margin-left:5px;
+  font-size:80%;
+}
+div.tooltip-inner{
+  max-width: 350px;
+}
+.instances-list{
+  input{
+    margin-bottom: 0px !important;
+  }
+  .dropdown-menu{
+    margin:0;
+    padding: 0;
+    width: 100%;
+    border-radius: 0px;
+  }
+ .btn{
+  width: 100%;
+  margin: 0;
+  }
+}
+div.result{
+  width: 100%;
+  border-radius: 0px;
+  padding:15px;
+  text-align: center;
+  font-size: 1.4em;
+  font-weight: bolder;
+  outline: 1px solid #3190e7;
+  &:hover{
+    background:#3190e7;
+    color:white;
+  }
+  &:last-child{
+    }
+}

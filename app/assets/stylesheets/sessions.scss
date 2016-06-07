@@ -5,10 +5,25 @@
     margin: 0 auto;
     width: 400px;
     padding: 40px;
+    padding-top:0px !important;
     padding-bottom: 0px !important;
     border-radius: 3px;
     background: #3190e7;
 }
 .alert{
   margin-top:0px !important;
+}
+.etos{
+  font-size:12px;
+  font-family: 'quicksandbold';
+  text-align: center;
+  margin: 0 auto;
+  color: #34495E;
+  margin-bottom: 25px;
+  a{
+    text-decoration:none;
+    border: none;
+    color:#34495E;
+    border-bottom: 1px dotted #34495e;
+  }
 }

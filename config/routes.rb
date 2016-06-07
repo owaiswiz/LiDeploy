@@ -62,6 +62,9 @@ end
   get '/pricing' => "pages#page", :name => "pricing"
   get '/features' => "pages#page", :name => "features"
   get '/contact' => "pages#page", :name => "contact"
+  #Networking Domain Records controller
+  get '/domains' => "records#index",:as => :domains
+  post '/domains' => "records#create"
   root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
