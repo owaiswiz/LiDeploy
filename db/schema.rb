@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160606181454) do
+ActiveRecord::Schema.define(version: 20160608080323) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20160606181454) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "api_key"
   end
 
   add_index "domains", ["user_id"], name: "index_domains_on_user_id"

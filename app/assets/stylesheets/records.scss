@@ -8,13 +8,32 @@
 .domain-title{
   font-weight: bolder;
 }
-.new-domain{
+.domains,.new-domain{
   border: 2px solid #f1f1f1;
   border-radius: 3px;
   padding:25px;
+  margin:25px;
+  margin-bottom:50px;
   h3{
     margin-top: 0;
     font-weight: bolder;
+  }
+}
+.domains{
+  h3{
+    padding-bottom:15px;
+  //  border-bottom: 2px solid #f1f1f1;
+    }
+}
+.domain-name{
+  font-weight: bolder;
+  font-size: 1.4em;
+  padding:20px;
+}
+.domain.row{
+  border-top: 2px solid #f1f1f1;
+  &:last-child{
+    border-bottom: 2px solid #f1f1f1;
   }
 }
 .info{
@@ -103,4 +122,34 @@ div.result{
   }
   &:last-child{
     }
+}
+
+.delete-domain,.view-records{
+  margin:11px;
+  //margin-top:13px;
+  padding:10px 30px;
+  font-family: 'quicksandbold';
+  font-weight: bolder;
+  font-size: 16px;
+  border:1px solid #3190e7;
+  border-radius: 3px !important;
+  display: inline-block;
+  background-color:#3190e7;
+  color:white;
+  float:right;
+  &:hover,&:active,&:focus{
+    background-color: #1569B7;
+    color:white;
+  }
+//  vertical-align: middle;
+}
+.delete-domain{
+  color:red;
+  background: white;
+  border: 1px solid red;
+  &:hover,&:active,&:focus{
+    background-color:red;
+    color:white;
+
+  }
 }

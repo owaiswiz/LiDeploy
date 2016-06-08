@@ -65,6 +65,8 @@ end
   #Networking Domain Records controller
   get '/domains' => "records#index",:as => :domains
   post '/domains' => "records#create"
+  get '/domain/:name' => "records#view_domain",:as => :view_domain,:name => /[^\/]+/
+  delete 'delete/domain/:name' => "records#delete_domain",:as => :delete_domain,:name=> /[^\/]+/
   root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
