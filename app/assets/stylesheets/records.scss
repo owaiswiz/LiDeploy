@@ -1,6 +1,9 @@
 // Place all the styles related to the Records controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$mainbordercolor:  #e4e4e4;
+$mainborderwidth: 1px;
+$separatorbordercolor: #e4e4e4;
 .no-domains{
   text-align: center;
   margin-top: 75px;
@@ -8,32 +11,15 @@
 .domain-title{
   font-weight: bolder;
 }
-.domains,.new-domain{
-  border: 2px solid #f1f1f1;
+.domains,.new-domain,.new-record{
+  border: $mainborderwidth solid $mainbordercolor;
   border-radius: 3px;
   padding:25px;
   margin:25px;
   margin-bottom:50px;
-  h3{
+  h3,h2{
     margin-top: 0;
     font-weight: bolder;
-  }
-}
-.domains{
-  h3{
-    padding-bottom:15px;
-  //  border-bottom: 2px solid #f1f1f1;
-    }
-}
-.domain-name{
-  font-weight: bolder;
-  font-size: 1.4em;
-  padding:20px;
-}
-.domain.row{
-  border-top: 2px solid #f1f1f1;
-  &:last-child{
-    border-bottom: 2px solid #f1f1f1;
   }
 }
 .info{
@@ -78,6 +64,7 @@ div.dropdown{
   vertical-align: inherit;
   border:2px solid #3190e7;
   border-radius: 0px !important;
+  transition: all 0.5s ease;
   &:hover{
     border-color: #1569B7;
   }
@@ -123,33 +110,100 @@ div.result{
   &:last-child{
     }
 }
+.domains{
+  h3{
+    padding-bottom:15px;
+  //  border-bottom: 2px solid $mainbordercolor;
+    }
+}
+.domain-list:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+.domain-record div{
+  vertical-align: middle !important;
+  padding:25px;
+  display: inline-block;
+  &.domain-button{
+    float:right;
+    font-size: 1.1em;
+    //vertical-align: middle;
+    margin-top: 0.3em;
+    padding-left: 0px;
+  a{
+    text-decoration: none;
+  }
+  }
+}
+.domain-name{
+  padding-left: 0 !important;
+  font-weight: bolder;
+  font-size: 1.4em;
+  //padding:20px;
+}
 
 .delete-domain,.view-records{
-  margin:11px;
-  //margin-top:13px;
-  padding:10px 30px;
+  padding:12px 20px;
   font-family: 'quicksandbold';
   font-weight: bolder;
-  font-size: 16px;
   border:1px solid #3190e7;
   border-radius: 3px !important;
-  display: inline-block;
   background-color:#3190e7;
+  transition: all 0.5s ease;
   color:white;
-  float:right;
   &:hover,&:active,&:focus{
     background-color: #1569B7;
+    border-color: #1569B7;
     color:white;
   }
-//  vertical-align: middle;
 }
 .delete-domain{
   color:red;
   background: white;
+  padding: 12px 26px;
   border: 1px solid red;
   &:hover,&:active,&:focus{
     background-color:red;
     color:white;
+    border-color:red;
 
+  }
+}
+.domain-record:not(:first-child){
+  border-top: 2px solid $separatorbordercolor;
+}
+.new-domain-wrapper{
+  padding-left: 50px;
+}
+.record-type{
+  text-align: center;
+  //font-family: 'quicksandbold';
+  font-weight: bolder;
+  width:125px;
+  padding: 0.4em;
+  color:white;
+  margin:10px;
+  font-size: 1.4em;
+  display: inline-block;
+  border-radius: 3px;
+  &.a{
+    background-color: #ef5350;
+  }
+  &.aaaa{
+    background-color: #AB47BC;
+  }
+  &.cname{
+    background-color: #26A69A;
+  }
+  &.mx{
+    background-color: #66BB6A;
+  }
+  &.txt{
+    background-color: #FF7043;
+  }
+  &.srv{
+    background-color: #8D6E63;
   }
 }

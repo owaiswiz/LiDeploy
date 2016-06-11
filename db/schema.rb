@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160608080323) do
+ActiveRecord::Schema.define(version: 20160611180310) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -76,7 +76,10 @@ ActiveRecord::Schema.define(version: 20160608080323) do
     t.integer  "weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "domain_id"
   end
+
+  add_index "records", ["domain_id"], name: "index_records_on_domain_id"
 
   create_table "replies", force: :cascade do |t|
     t.text     "reply"

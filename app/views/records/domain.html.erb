@@ -1,1 +1,44 @@
-<h1>Hey there</h1>
+<% content_for :head do %>
+  <style>
+    .add-record{
+      margin-top:25px;
+    }
+    .add-record h3{
+      margin-top:40px;
+      font-family: 'quicksandregular';
+      font-weight: bolder;
+    }
+  </style>
+<% end %>
+<div class="container feature-box" style="text-align: left;">
+  <h1 class="domain-title"><%= @domain.name %></h1>
+  <div class = "new-record">
+		<h2>Add a Record</h2>
+    <div class="add-record">
+      <h3>Select Record Type</h3>
+      <div class="record-types">
+        <div class="record-type a">
+          A
+        </div>
+        <div class="record-type aaaa">
+          AAAA
+        </div>
+        <div class="record-type cname">
+          CNAME
+        </div>
+        <div class="record-type mx">
+          MX
+        </div>
+        <div class="record-type txt">
+          TXT
+        </div>
+        <div class="record-type srv">
+          SRV
+        </div>
+      </div>
+      <div class="new-record-form">
+        <%= simple_form_for(@newrecord,:url => record_path,method: :post,defaults: {label: false,error_html: { class: 'rederror'}}) do |f| %>
+      </div>
+    </div>
+	</div>
+</div>

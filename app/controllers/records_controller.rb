@@ -24,6 +24,9 @@ class RecordsController < ApplicationController
   end
 
   def view_domain
+    @domain = Domain.find_by_name(params[:name])
+    @records = @domain.records
+    @newrecod = @domain.records.new
     render 'records/domain'
   end
 

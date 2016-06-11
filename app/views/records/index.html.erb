@@ -39,7 +39,7 @@
 			The specified IP address will be assigned as an A record (for @) for your domain. You can change this later.<span type="button" class="fa fa-question-circle-o domaintip" data-toggle="tooltip" data-placement="top" title="An @ record is the record for the root domain. For example,if you enter domain as 'example.com' and '1.2.3.4' as IP address, then 'http://example.com' will point to '1.2.3.4'"></span>
 		</div>
 		<div class="add-domain row">
-			<%= simple_form_for(@newdomain,:url => domains_path,:method => :post,defaults: {label: false,class: "col-md-12",error_html: { class: 'rederror'}}) do |f| %>
+			<%= simple_form_for(@newdomain,:url => domains_path,:method => :post,defaults: {label: false,error_html: { class: 'rederror'}},html: { class: "col-md-12"}) do |f| %>
 				<%= f.input_field :name,placeholder: "Domain Name",required:true,:class => "domain" %>
 				<div class="instances-list dropdown" style="display:inline-block;">
 					<%= f.input_field :ip_address,placeholder: "IP Address",required: true,:class => 'ipaddress'%>
@@ -69,15 +69,21 @@
 	<% else %>
 		<div class="domains">
 			<h3>Current Domains</h3>
-			<% Array(@domains).each do |domain| %>
-			<div class="domain row">
-				<div class="domain-name col-md-7"><%= domain.name %></div>
-				<div class="domain-buttons col-md-5">
-					<%= link_to "Delete",delete_domain_path(:name => domain.name),method: :delete,:class => "btn delete-domain"%>
-					<%= link_to "Manage",view_domain_path(:name=> domain.name),:class => "btn view-records"%>
+			<div class="domain-list">
+				<% Array(@domains).each do |domain| %>
+		<!--		<div class="domain row">
+					<div class="domain-name col-md-7"><%= domain.name %></div>
+					<div class="domain-buttons col-md-5">
+						<%= link_to "Delete",delete_domain_path(:name => domain.name),method: :delete,:class => "btndelete-domain"%>
+						<%= link_to "Manage",view_domain_path(:name=> domain.name),:class => "btnview-records"%>
+					</div>
+				</div>-->
+				<div class="domain-record">
+					<div class="domain-name"><%= domain.name %></div>
+					<div class="domain-button" style="padding-right:0 !important;"><%= link_to "Delete",delete_domain_path(:name => domain.name),method: :delete,:class => "delete-domain"%></div>
+					<div class="domain-button"><%= link_to "Manage",view_domain_path(:name=> domain.name),:class => "view-records"%></div>
 				</div>
+				<% end %>
 			</div>
-			<% end %>
-		</div>
 	<% end %>
 </div>
