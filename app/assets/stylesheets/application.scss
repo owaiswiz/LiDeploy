@@ -58,6 +58,9 @@ body{
   border-radius: 0 !important;
   outline: none;
   box-shadow: none !important;
+  &.active{
+    border-color: #3190e7;
+  }
 }
 .btn-primary{
 
@@ -130,6 +133,7 @@ li .navbar-btn{
   transition: opacity 0.4s;
   text-align: left;
   height: auto;
+  transition: all 0.5s ease;
 }
 .help-block{
   font-family: 'quicksandbold';
@@ -153,6 +157,7 @@ li .navbar-btn{
   cursor: pointer;
   display: block;
   font-family: 'quicksandbold';
+  transition: all 0.5s ease;
 }
 .bluebutton{
   @extend .signupbutton;

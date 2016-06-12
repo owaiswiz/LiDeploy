@@ -9,6 +9,21 @@
       font-weight: bolder;
     }
   </style>
+  <script>
+    $(document).ready(function(){
+      content = $(".detached").remove();
+      $(".new-record-types").append(content.find(".a-record"));
+      $("input[name='record[type]']").click(function(){
+        $("label.record-type").removeClass("active");
+        $(this).parent().addClass("active");
+        $(content).append($(".new-record-type").remove());
+        $(".new-record-types").html(content.find("." + $(this).parent().attr('id')));
+        // $("." + $(this).attr('id')).show();
+        // $(".new-record-types").append(mx-record)
+
+      });
+    });
+  </script>
 <% end %>
 <div class="container feature-box" style="text-align: left;">
   <h1 class="domain-title"><%= @domain.name %></h1>
@@ -16,28 +31,138 @@
 		<h2>Add a Record</h2>
     <div class="add-record">
       <h3>Select Record Type</h3>
-      <div class="record-types">
-        <div class="record-type a">
-          A
-        </div>
-        <div class="record-type aaaa">
-          AAAA
-        </div>
-        <div class="record-type cname">
-          CNAME
-        </div>
-        <div class="record-type mx">
-          MX
-        </div>
-        <div class="record-type txt">
-          TXT
-        </div>
-        <div class="record-type srv">
-          SRV
-        </div>
-      </div>
       <div class="new-record-form">
-        <%= simple_form_for(@newrecord,:url => record_path,method: :post,defaults: {label: false,error_html: { class: 'rederror'}}) do |f| %>
+        <%= simple_form_for(@newrecord,:url => add_record_path,method: :post,defaults: {label: false,error_html: { class: 'rederror'}},html:{class: "new-record-form"}) do |f| %>
+        <div class="record-types">
+          <div class="row">
+            <div class="col-md-2" data-toggle="">
+              <label class="record-type a active" id="a-record">
+                <%= f.radio_button :type, 'A',checked: true%>
+                A
+              </label>
+            </div>
+            <div class="col-md-2">
+              <label class="record-type aaaa" id="aaaa-record">
+                <%= f.radio_button :type, 'AAAA'%>
+                AAAA
+              </label>
+            </div>
+            <div class="col-md-2">
+              <label class="record-type cname" id="cname-record">
+                <%= f.radio_button :type, 'CNAME'%>
+                CNAME
+              </label>
+            </div>
+            <div class="col-md-2">
+              <label class="record-type mx" id="mx-record">
+                <%= f.radio_button :type, 'MX'%>
+                MX
+              </label>
+            </div>
+            <div class="col-md-2">
+              <label class="record-type txt" id="txt-record">
+                <%= f.radio_button :type, 'TXT'%>
+                TXT
+              </label>
+            </div>
+            <div class="col-md-2">
+              <label class="record-type srv" id="srv-record">
+                <%= f.radio_button :type, 'SRV'%>
+                SRV
+              </label>
+              </div>
+          </div>
+        </div>
+          <div class="row new-record-types">
+            <div class="detached">
+              <div class="new-record-type a-record">
+                <div class="col-md-4">
+                  <%= f.input_field :name,placeholder: "Enter Name",class: "record name"%>
+                </div>
+                <div class="col-md-4">
+                  <%= f.input_field :data,placeholder: "IP Address",class: "record data"%>
+                </div>
+                <div class="col-md-4">
+                  <%= f.button :submit, "Create A Record",class: "add-record-button"%>
+                </div>
+              </div>
+              <div class="new-record-type aaaa-record">
+                <div class="col-md-4">
+                   <%= f.input_field :name,placeholder: "Enter Name",class: "record name"%>
+                 </div>
+                 <div class="col-md-4">
+                   <%= f.input_field :data,placeholder: "IP Address",class: "record data"%>
+                 </div>
+                 <div class="col-md-4">
+                   <%= f.button :submit, "Create AAAA Record",class: "add-record-button"%>
+                 </div>
+              </div>
+              <div class="new-record-type cname-record">
+                <div class="col-md-4">
+                  <%= f.input_field :name,placeholder: "Enter Name",class: "record name"%>
+                </div>
+                <div class="col-md-4">
+                  <%= f.input_field :data,placeholder: "Points to",class: "record data"%>
+                </div>
+                <div class="col-md-4">
+                  <%= f.button :submit, "Create CNAME Record",class: "add-record-button"%>
+                </div>
+              </div>
+              <div class="new-record-type mx-record">
+                <div class="col-md-4">
+                  <%= f.input_field :name,placeholder: "Enter Hostname",class: "record name"%>
+                </div>
+                <div class="col-md-4">
+                  <%= f.input_field :priority,placeholder: "Enter Priority",class: "record priority"%>
+                </div>
+                <div class="col-md-4">
+                  <%= f.button :submit, "Create MX Record",class: "add-record-button"%>
+                </div>
+              </div>
+              <div class="new-record-type txt-record">
+                <div class="col-md-4">
+                  <%= f.input_field :name,placeholder: "Enter Name",class: "record name"%>
+                </div>
+                <div class="col-md-4">
+                  <%= f.input_field :data,placeholder: "Enter Text",class: "record data"%>
+                </div>
+                <div class="col-md-4">
+                  <%= f.button :submit, "Create TXT Record",class: "add-record-button"%>
+                </div>
+              </div>
+              <div class="new-record-type srv-record">
+                <div class="col-md-12">
+                <div class="row">
+                <div class="col-md-4">
+                  <%= f.input_field :name,placeholder: "Enter Name",class: "record name"%>
+                </div>
+                <div class="col-md-4">
+                  <%= f.input_field :data,placeholder: "Enter Hostname",class: "record data"%>
+                </div>
+                <div class="col-md-4">
+                  <%= f.input_field :priority,placeholder: "Enter Priority",class: "record priority"%>
+                </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <%= f.input_field :port,placeholder: "Enter Port",class: "record port"%>
+                  </div>
+                  <div class="col-md-4">
+                    <%= f.input_field :weight,placeholder: "Enter Weight",class: "record weight"%>
+                  </div>
+                  <div class="col-md-4">
+                    <%= f.button :submit, "Create SRV Record",class: "add-record-button"%>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <%= f.input_field :priority,placeholder: "",class: "record priority" %> -->
+          <!-- <%= f.input_field :port,placeholder: "",class: "record port hidden" %> -->
+          <!-- <%= f.input_field :weight,placeholder: "",class: "record weight hidden" %> -->
+          <!-- </div> -->
+        <% end %>
       </div>
     </div>
 	</div>

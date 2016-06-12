@@ -1,7 +1,7 @@
 class RecordsController < ApplicationController
   def index
     @domains = current_user.domains
-    @newdomain = Domain.new
+    @newdomain = curent_user.domain.new
     @instances = current_user.instances
   end
   def create
@@ -24,26 +24,39 @@ class RecordsController < ApplicationController
   end
 
   def view_domain
-    @domain = Domain.find_by_name(params[:name])
+    @domain = current_user.domains.find_by(:name => params[:name])
     @records = @domain.records
-    @newrecod = @domain.records.new
+    @newrecord = @domain.records.new
     render 'records/domain'
   end
 
   def delete_domain
     domain = current_user.domains.find_by(:name => params[:name])
-  #  begin
+    begin
       client = DropletKit::Client.new(access_token:domain.api_key)
       client.domains.delete(name:domain.name)
       flash[:notice] = "Domain #{domain.name} deleted successfully."
-  #  rescue
-  #    flash[:alert] = "Domain Deleted"
-  #  end
+    rescue
+      flash[:alert] = "Domain Deleted"
+    end
     domain.destroy
     redirect_to domains_path
+  end
+
+  def add_record
+    domain = current_user.domains.find_by_name(params[:name])
+    client = DropletKit::Client.new(access_token:domain.api_key)
+    newrecord = DropletKit::DomainRecord.new(type: params[:record][:type], name: params[:record][:name], data: params[:record][:data],port: params[:record][:port],weight: params[:record][:weight],priority: params[:record][:priority])
+    createdrecord = client.domain_records.create(newrecord, for_domain: params[:name])
+    puts createdrecord.id
+    puts params
+    redirect_to view_domain_path
   end
   private
   def domain_params
     params.require(:domain).permit(:name,:ip_address)
   end
+  #def record_params
+  #  params.require(:record).permit(:name,:data,:priority,:port,:weight)
+  #end
 end
