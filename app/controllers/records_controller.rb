@@ -17,7 +17,10 @@ class RecordsController < ApplicationController
         flash[:notice] = "Domain Record not created."
       end
     rescue => e
-      exception_message = $1.humanize if e.message.match(/"message":"(.*)"/)
+      exception_message = $1 if e.message.match(/"message":"(.*)"/)
+      if $1.match(/Name Only valid hostname/)
+        exception_message = "Only valid hostname characters are allowed. (a-z, a-z, 0-9, ., and -) or a single record of '@'."
+      end
       flash[:alert] = "Failed to create Domain Record. #{exception_message}"
     end
     redirect_to domains_path
@@ -48,27 +51,57 @@ class RecordsController < ApplicationController
 
   def add_record
     domain = current_user.domains.find_by_name(params[:domainname])
-    record = domain.records.create(record_params)
+    record = domain.records.new(record_params)
     begin
       client = DropletKit::Client.new(access_token:domain.api_key)
-      newrecord = DropletKit::DomainRecord.new(type: params[:record][:type], name: params[:record][:name], data: params[:record][:data],port: params[:record][:port],weight: params[:record][:weight],priority: params[:record][:priority])
+      newrecord = DropletKit::DomainRecord.new(type: params[:record][:record_type], name: params[:record][:name], data: params[:record][:data],port: params[:record][:port],weight: params[:record][:weight],priority: params[:record][:priority])
       createdrecord = client.domain_records.create(newrecord, for_domain: params[:domainname])
       record.record_id = createdrecord.id
-      if record.save
+      puts record.record_id
+      if !record.record_id.nil?
+        record.save
         redirect_to view_domain_path and return
       else
         flash[:alert] = "Error Occured while saving record"
       end
-    rescue
-      flash[:alert] = "Failed"
+    rescue => e
+      exception_message = $1 if e.message.match(/"message":"(.*)"/)
+      if $1.match(/Name Only valid hostname/)
+        exception_message = "Only valid hostname characters are allowed. (a-z, a-z, 0-9, ., and -) or a single record of '@'."
+      end
+      flash[:alert] = "Failed to create Domain Record. #{exception_message}"
     end
     redirect_to view_domain_path
   end
   def update_record
-    record = current_user.domains.find_by_name(params[:domainname]).records.find_by(params[:record][:id])
-    updaterecord = DropletKit::DomainRecord.new(type: params[:record][:type], name: params[:record][:name], data: params[:record][:data],port: params[:record][:port],weight: params[:record][:weight],priority: params[:record][:priority])
-    client.domain_records.update(updaterecord, for_domain: params[:domainname], id: record.id)
+    begin
+    domain = current_user.domains.find_by_name(params[:domainname])
+    record = domain.records.find(params[:record][:id])
+    client = DropletKit::Client.new(access_token:domain.api_key)
+    updaterecord = DropletKit::DomainRecord.new(type: params[:record][:record_type], name: params[:record][:name], data: params[:record][:data],port: params[:record][:port],weight: params[:record][:weight],priority: params[:record][:priority])
+    client.domain_records.update(updaterecord, for_domain: params[:domainname], id: record.record_id)
     record.update_attributes(record_params)
+    rescue => e
+      exception_message = $1 if e.message.match(/"message":"(.*)"/)
+      if $1.match(/Name Only valid hostname/)
+        exception_message = "Only valid hostname characters are allowed. (a-z, a-z, 0-9, ., and -) or a single record of '@'."
+      end
+      flash[:alert] = "Error occured while updating record. #{exception_message}"
+    end
+    redirect_to view_domain_path
+  end
+
+  def delete_record
+    begin
+      domain = current_user.domains.find_by_name(params[:domainname])
+      record = domain.records.find(params[:id])
+      client = DropletKit::Client.new(access_token:domain.api_key)
+      client.domain_records.delete(for_domain: domain.name, id: record.record_id)
+      flash[:notice] = "Record Deleted"
+    rescue
+      flash[:alert] = "Record Deleted"
+    end
+    record.destroy
     redirect_to view_domain_path
   end
   private
@@ -76,6 +109,6 @@ class RecordsController < ApplicationController
     params.require(:domain).permit(:name,:ip_address)
   end
   def record_params
-   params.require(:record).permit(:type,:name,:data,:priority,:port,:weight)
+   params.require(:record).permit(:record_type,:name,:data,:priority,:port,:weight)
   end
 end

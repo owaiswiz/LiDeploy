@@ -8,13 +8,25 @@
       font-family: 'quicksandregular';
       font-weight: bolder;
     }
+    input:not([type=submit]){
+      color: #666;
+    }
+    .update-record input,.update-record .delete-record-button,.update-record .record-type{
+      margin:10px !important;
+      padding: 0.5em !important;
+      font-size: 1.2em !important;
+
+    }
+    .record:not(:first-child) > .row{
+      margin-top: 10px;
+    }
   </style>
   <script>
     $(document).ready(function(){
       content = $(".detached").remove();
       $(".new-record-types").append(content.find(".a-record"));
-      $("input[name='record[type]']").click(function(){
-        $("label.record-type").removeClass("active");
+      $("input[name='record[record_type]']").click(function(){
+        $("label.record-type.new").removeClass("active");
         $(this).parent().addClass("active");
         $(content).append($(".new-record-type").remove());
         $(".new-record-types").html(content.find("." + $(this).parent().attr('id')));
@@ -36,38 +48,38 @@
         <div class="record-types">
           <div class="row">
             <div class="col-md-2" data-toggle="">
-              <label class="record-type a active" id="a-record">
-                <%= f.radio_button :type, 'A',checked: true%>
+              <label class="record-type new a active" id="a-record">
+                <%= f.radio_button :record_type, 'A',checked: true%>
                 A
               </label>
             </div>
             <div class="col-md-2">
-              <label class="record-type aaaa" id="aaaa-record">
-                <%= f.radio_button :type, 'AAAA'%>
+              <label class="record-type new aaaa" id="aaaa-record">
+                <%= f.radio_button :record_type, 'AAAA'%>
                 AAAA
               </label>
             </div>
             <div class="col-md-2">
-              <label class="record-type cname" id="cname-record">
-                <%= f.radio_button :type, 'CNAME'%>
+              <label class="record-type new cname" id="cname-record">
+                <%= f.radio_button :record_type, 'CNAME'%>
                 CNAME
               </label>
             </div>
             <div class="col-md-2">
-              <label class="record-type mx" id="mx-record">
-                <%= f.radio_button :type, 'MX'%>
+              <label class="record-type new mx" id="mx-record">
+                <%= f.radio_button :record_type, 'MX'%>
                 MX
               </label>
             </div>
             <div class="col-md-2">
-              <label class="record-type txt" id="txt-record">
-                <%= f.radio_button :type, 'TXT'%>
+              <label class="record-type new txt" id="txt-record">
+                <%= f.radio_button :record_type, 'TXT'%>
                 TXT
               </label>
             </div>
             <div class="col-md-2">
-              <label class="record-type srv" id="srv-record">
-                <%= f.radio_button :type, 'SRV'%>
+              <label class="record-type new srv" id="srv-record">
+                <%= f.radio_button :record_type, 'SRV'%>
                 SRV
               </label>
               </div>
@@ -110,7 +122,7 @@
               </div>
               <div class="new-record-type mx-record">
                 <div class="col-md-4">
-                  <%= f.input_field :name,placeholder: "Enter Hostname",class: "record name"%>
+                  <%= f.input_field :data,placeholder: "Enter Hostname",class: "record data"%>
                 </div>
                 <div class="col-md-4">
                   <%= f.input_field :priority,placeholder: "Enter Priority",class: "record priority"%>
@@ -168,12 +180,14 @@
   <div class="records">
     <h2>Current Records</h2>
     <div class="record-list">
-      <% Array(@records).each do |record| %>
-        <div class="record">
-          <div class="row">
-            <%= render "shared/#{record.type}" %>
+      <% @records.each do |record| %>
+        <% if !record.id.nil? %>
+          <div class="record">
+            <div class="row">
+              <%= render :partial => "records/shared/#{record.record_type.downcase}",:locals => {:record => record} %>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
   </div>

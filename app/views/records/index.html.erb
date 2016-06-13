@@ -93,8 +93,8 @@
 				<% Array(@domains).each do |domain| %>
 					<div class="domain-record">
 						<div class="domain-name"><%= domain.name %></div>
-						<div class="domain-button" style="padding-right:0 !important;"><%= link_to "Delete",delete_domain_path(domain.name),method: :delete,:class => "delete-domain",title: "Delete this Domain?",data: {:confirm => "This Action is irreversible<br/>All Records Associated with this domain will be deleted too.<br/>Be Certain!"}%></div>
-						<div class="domain-button"><%= link_to "Manage",view_domain_path(:name=> domain.name),:class => "view-records"%></div>
+						<div class="domain-button" style="padding-right:0 !important;"><%= link_to "Delete",delete_domain_path(:domainname => domain.name),method: :delete,:class => "delete-domain",title: "Delete this Domain?",data: {:confirm => "This Action is irreversible<br/>All Records Associated with this domain will be deleted too.<br/>Be Certain!"}%></div>
+						<div class="domain-button"><%= link_to "Manage",view_domain_path(:domainname=> domain.name),:class => "view-records"%></div>
 					</div>
 				<% end %>
 			</div>

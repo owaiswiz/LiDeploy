@@ -249,7 +249,7 @@ input.record{
     outline: 0;
   }
 }
-.add-record-button{
+.add-record-button,.update-record-button,.delete-record-button{
   font-size: 1.2em;
   background-color: #3190e7;
   color:white;
@@ -265,6 +265,16 @@ input.record{
     background-color: #1569B7;
     color:white;
     border-color: #1569B7;
+  }
+}
+.delete-record-button{
+  color:red;
+  border-color: red;
+  background-color: white;
+  &:hover,&:active,&:focus{
+    background-color: red;
+    color:white;
+    border-color: red;
   }
 }
 input[type="radio"]{

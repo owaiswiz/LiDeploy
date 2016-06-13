@@ -1,0 +1,22 @@
+<%= simple_form_for(record,:url => update_record_path,method: :put,defaults: {label: false,error_html: { class: 'rederror'}},html: { class: "col-md-12 update-record"}) do |f| %>
+  <%= f.hidden_field :id,value: record.id %>
+  <div class="row">
+    <div class="col-md-2">
+      <label class="record-type active <%=record.record_type.downcase%>">
+        <%= record.record_type %>
+      </label>
+    </div>
+    <div class="col-md-3">
+      <%= f.input_field :name,placeholder: "Enter Name",class: "record name"%>
+    </div>
+    <div class="col-md-3">
+      <%= f.input_field :data,placeholder: "Enter Text",class: "record data"%>
+    </div>
+    <div class="col-md-2">
+      <%= f.button :submit, "Update",class: "update-record-button"%>
+    </div>
+    <div class="col-md-2">
+      <%= link_to "Delete",delete_record_path(:domainname=> record.domain.name,:id => record.id),method: :delete,:class => "btn btn-default delete-record-button"%>
+    </div>
+  </div>
+<% end %>
