@@ -1,20 +1,20 @@
 class RecordsController < ApplicationController
   def index
     @domains = current_user.domains
-    @newdomain = curent_user.domain.new
+    @newdomain = Domain.new
     @instances = current_user.instances
   end
   def create
     newdomain = current_user.domains.new(domain_params)
-    begin
+    # begin
       newdomain.api_key = ENV["DO_SECRET_KEY"]
       client = DropletKit::Client.new(access_token: newdomain.api_key)
       domain = DropletKit::Domain.new(name: newdomain.name, ip_address: newdomain.ip_address)
       client.domains.create(domain)
-    rescue
-      flash[:alert] = "Failed to create Domain Record. Please recheck domain name and try again later."
-      redirect_to domains_path and return
-    end
+    # rescue
+      # redirect_to domains_path and return
+      # flash[:alert] = "Failed to create Domain Record. Please recheck domain name and try again later."
+    # end
     if newdomain.save
       flash[:notice] = "Domain Record Created."
       redirect_to domains_path

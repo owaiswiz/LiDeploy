@@ -71,16 +71,11 @@
 			<h3>Current Domains</h3>
 			<div class="domain-list">
 				<% Array(@domains).each do |domain| %>
-		<!--		<div class="domain row">
-					<div class="domain-name col-md-7"><%= domain.name %></div>
-					<div class="domain-buttons col-md-5">
-						<%= link_to "Delete",delete_domain_path(:name => domain.name),method: :delete,:class => "btndelete-domain"%>
-						<%= link_to "Manage",view_domain_path(:name=> domain.name),:class => "btnview-records"%>
-					</div>
-				</div>-->
+
 				<div class="domain-record">
 					<div class="domain-name"><%= domain.name %></div>
-					<div class="domain-button" style="padding-right:0 !important;"><%= link_to "Delete",delete_domain_path(:name => domain.name),method: :delete,:class => "delete-domain"%></div>
+					<%= puts domain.name %>
+					<div class="domain-button" style="padding-right:0 !important;"><%= link_to "Delete",delete_domain_path(domain.name),method: :delete,:class => "delete-domain"%></div>
 					<div class="domain-button"><%= link_to "Manage",view_domain_path(:name=> domain.name),:class => "view-records"%></div>
 				</div>
 				<% end %>
