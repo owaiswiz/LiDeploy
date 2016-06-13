@@ -88,14 +88,14 @@
               </div>
               <div class="new-record-type aaaa-record">
                 <div class="col-md-4">
-                   <%= f.input_field :name,placeholder: "Enter Name",class: "record name"%>
-                 </div>
-                 <div class="col-md-4">
-                   <%= f.input_field :data,placeholder: "IP Address",class: "record data"%>
-                 </div>
-                 <div class="col-md-4">
-                   <%= f.button :submit, "Create AAAA Record",class: "add-record-button"%>
-                 </div>
+                  <%= f.input_field :name,placeholder: "Enter Name",class: "record name"%>
+                </div>
+                <div class="col-md-4">
+                  <%= f.input_field :data,placeholder: "IP Address",class: "record data"%>
+                </div>
+                <div class="col-md-4">
+                  <%= f.button :submit, "Create AAAA Record",class: "add-record-button"%>
+                </div>
               </div>
               <div class="new-record-type cname-record">
                 <div class="col-md-4">
@@ -132,38 +132,50 @@
               </div>
               <div class="new-record-type srv-record">
                 <div class="col-md-12">
-                <div class="row">
-                <div class="col-md-4">
-                  <%= f.input_field :name,placeholder: "Enter Name",class: "record name"%>
-                </div>
-                <div class="col-md-4">
-                  <%= f.input_field :data,placeholder: "Enter Hostname",class: "record data"%>
-                </div>
-                <div class="col-md-4">
-                  <%= f.input_field :priority,placeholder: "Enter Priority",class: "record priority"%>
-                </div>
-                </div>
-                <div class="row">
+                  <div class="row">
                   <div class="col-md-4">
-                    <%= f.input_field :port,placeholder: "Enter Port",class: "record port"%>
+                    <%= f.input_field :name,placeholder: "Enter Name",class: "record name"%>
                   </div>
                   <div class="col-md-4">
-                    <%= f.input_field :weight,placeholder: "Enter Weight",class: "record weight"%>
+                    <%= f.input_field :data,placeholder: "Enter Hostname",class: "record data"%>
                   </div>
                   <div class="col-md-4">
-                    <%= f.button :submit, "Create SRV Record",class: "add-record-button"%>
+                    <%= f.input_field :priority,placeholder: "Enter Priority",class: "record priority"%>
                   </div>
-                </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <%= f.input_field :port,placeholder: "Enter Port",class: "record port"%>
+                    </div>
+                    <div class="col-md-4">
+                      <%= f.input_field :weight,placeholder: "Enter Weight",class: "record weight"%>
+                    </div>
+                    <div class="col-md-4">
+                      <%= f.button :submit, "Create SRV Record",class: "add-record-button"%>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- <%= f.input_field :priority,placeholder: "",class: "record priority" %> -->
-          <!-- <%= f.input_field :port,placeholder: "",class: "record port hidden" %> -->
-          <!-- <%= f.input_field :weight,placeholder: "",class: "record weight hidden" %> -->
-          <!-- </div> -->
         <% end %>
       </div>
     </div>
 	</div>
+  <% if @records.first.id.nil? %>
+    <h2 class="no-records">This domain has no records !</h2>
+  <% else %>
+  <div class="records">
+    <h2>Current Records</h2>
+    <div class="record-list">
+      <% Array(@records).each do |record| %>
+        <div class="record">
+          <div class="row">
+            <%= render "shared/#{record.type}" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
 </div>

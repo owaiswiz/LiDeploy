@@ -1,0 +1,5 @@
+<%= simple_form_for(record,:url => update_record_path,method: :put,defaults: {label: false,error_html: { class: 'rederror'}},html: { class: "col-md-12"}) do |f| %>
+  <label class="record-type <%=record.type%>">
+    <%= record.type %>
+  </label>
+<%= end %>

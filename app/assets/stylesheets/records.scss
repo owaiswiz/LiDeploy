@@ -4,14 +4,14 @@
 $mainbordercolor:  #e4e4e4;
 $mainborderwidth: 1px;
 $separatorbordercolor: #e4e4e4;
-.no-domains{
+.no-domains,.no-records{
   text-align: center;
   margin-top: 75px;
 }
 .domain-title{
   font-weight: bolder;
 }
-.domains,.new-domain,.new-record{
+.domains,.new-domain,.new-record,.records{
   border: $mainborderwidth solid $mainbordercolor;
   border-radius: 3px;
   padding:25px;

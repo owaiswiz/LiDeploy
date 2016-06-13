@@ -72,12 +72,12 @@ body{
 	border-radius: 3px;
   position: relative;
   font-weight: 600;
-  -o-transition: color 0.2s linear;
-  -moz-transition: color 0.2s linear;
-	-khtml-transition: color 0.2s linear;
-	-webkit-transition: color 0.2s linear;
-	-ms-transition: color 0.2s linear;
-	transition: color 0.2s linear;
+  -o-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+	-khtml-transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+	transition: all 0.5s ease;
 }
 .btn-primary:hover,.btn-primary:active,.btn-primary:focus {
 	background-color: #3190e7 !important;

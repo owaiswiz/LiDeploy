@@ -62,12 +62,14 @@ end
   get '/pricing' => "pages#page", :name => "pricing"
   get '/features' => "pages#page", :name => "features"
   get '/contact' => "pages#page", :name => "contact"
-  #Networking Domain Records controller
+  #Networking Domain/Records controller
   get '/domains' => "records#index",:as => :domains
   post '/domains' => "records#create"
-  get '/domain/:name' => "records#view_domain",:as => :view_domain,:name => /[^\/]+/
-  delete 'delete/domain/:name' => "records#delete_domain",:as => :delete_domain,:name=> /[^\/]+/
-  post '/domain/:name/' => "records#add_record",as: :add_record,:name => /[^\/]+/
+  get '/domain/:domainname' => "records#view_domain",:as => :view_domain,:domainname => /[^\/]+/
+  delete 'delete/domain/:domainname' => "records#delete_domain",:as => :delete_domain,:domainname=> /[^\/]+/
+  post '/domain/:domainname/' => "records#add_record",as: :add_record,:domainname => /[^\/]+/
+  put '/domain/:domainname/' => "records#update_record",as: :update_record,:domainname => /[^\/]+/
+
   root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

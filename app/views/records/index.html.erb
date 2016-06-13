@@ -29,6 +29,28 @@
 			font-size:1.4em;
 			text-align: left;
 		}
+		.modal-title,.modal-body p{
+			text-align: center;
+			font-family: 'quicksandbold'
+		}
+		.cancel.btn-default,.destroy.btn{
+  		width: 100% !important;
+			background-color:white;
+  	}
+		.destroy.btn-primary{
+		  color: red !important;
+		  outline: 1px solid red !important;
+		}
+		.destroy.btn-primary:focus,.destroy.btn-primary:hover{
+		  background-color: red !important;
+		  color: white !important;
+			border-color:red !important;
+		}
+		.commit.destroy.btn-primary{
+		  margin-left: 0 !important;
+		  margin-top: 5px;
+		  border: 1px red solid;
+		}
 	</style>
 <% end %>
 <div class="container feature-box" style="text-align:left;">
@@ -63,21 +85,17 @@
 		</div>
 	</div>
 	<% if @domains.blank? %>
-		<div class="no-domains">
-			<h2> You haven't added any domains yet! </h2>
-		</div>
+		<h2 class="no-domains"> You haven't added any domains yet! </h2>
 	<% else %>
 		<div class="domains">
 			<h3>Current Domains</h3>
 			<div class="domain-list">
 				<% Array(@domains).each do |domain| %>
-
-				<div class="domain-record">
-					<div class="domain-name"><%= domain.name %></div>
-					<%= puts domain.name %>
-					<div class="domain-button" style="padding-right:0 !important;"><%= link_to "Delete",delete_domain_path(domain.name),method: :delete,:class => "delete-domain"%></div>
-					<div class="domain-button"><%= link_to "Manage",view_domain_path(:name=> domain.name),:class => "view-records"%></div>
-				</div>
+					<div class="domain-record">
+						<div class="domain-name"><%= domain.name %></div>
+						<div class="domain-button" style="padding-right:0 !important;"><%= link_to "Delete",delete_domain_path(domain.name),method: :delete,:class => "delete-domain",title: "Delete this Domain?",data: {:confirm => "This Action is irreversible<br/>All Records Associated with this domain will be deleted too.<br/>Be Certain!"}%></div>
+						<div class="domain-button"><%= link_to "Manage",view_domain_path(:name=> domain.name),:class => "view-records"%></div>
+					</div>
 				<% end %>
 			</div>
 	<% end %>

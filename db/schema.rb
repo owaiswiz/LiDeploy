@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160611180310) do
+ActiveRecord::Schema.define(version: 20160613133844) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -68,15 +68,16 @@ ActiveRecord::Schema.define(version: 20160611180310) do
   add_index "instances", ["user_id"], name: "index_instances_on_user_id"
 
   create_table "records", force: :cascade do |t|
-    t.string   "type"
+    t.string   "record_type"
     t.string   "name"
     t.string   "data"
     t.integer  "priority"
     t.integer  "port"
     t.integer  "weight"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "domain_id"
+    t.integer  "record_id"
   end
 
   add_index "records", ["domain_id"], name: "index_records_on_domain_id"
