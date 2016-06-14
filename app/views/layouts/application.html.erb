@@ -7,7 +7,7 @@
     <%= javascript_include_tag 'application' %>
   <% else %>
     <%= stylesheet_link_tag    'application', params[:controller], media: 'all' %>
-    <%= javascript_include_tag 'application'%>
+    <%= javascript_include_tag 'application', params[:controller]%>
   <% end %>
   <%= favicon_link_tag 'Lideployfavicon.png',type: 'image/png' %>
   <%= yield :head %>

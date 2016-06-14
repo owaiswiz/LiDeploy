@@ -22,7 +22,80 @@
     }
   </style>
   <script>
+    function notifyIfBlank(e){
+      if(inputVal.length <= 0){
+        $.notify({
+          message: "Invalid Value For " + errName
+        });
+        e.preventDefault();
+        return true;
+      }
+      return false;
+    }
+    function rangeCheck(e,errName,inputObj,minVal,maxVal){
+      val = $(inputObj).val();
+      if(val < minVal || val > maxVal)  {
+        $.notify({
+          message: errName + ' must be a number between ' + minVal + ' and ' + maxVal
+        });
+        e.preventDefault();
+      }
+    }
     $(document).ready(function(){
+      $(document.body).on("click","input[type='submit']",function(e){
+        if ($(this).hasClass("srv-button")){
+          inputsVal = $(this).parent().parent().parent().find("input:not([type='submit']):not([type='radio']):not([type='hidden'])")
+        }
+        else{
+          inputsVal = $(this).parent().parent().find("input:not([type='submit']):not([type='radio']):not([type='hidden'])")
+        }
+        $.notifyDefaults({
+          type: "danger",
+          allow_dismiss: false,
+          delay: 3000,
+          offset:{
+            x: 20,
+            y: 100
+          },
+          newest_on_top: true,
+          template: '<div data-notify="container" class="notify-alert col-xs-10 col-sm-2 alert alert-{0}" role="alert">' +
+                        '<div data-notify="icon" class="notify-icon" ><i class="fa fa-2x fa-exclamation-triangle"></i></div>' +
+                  		  '<span data-notify="message" class="notify-message">{2}</span>' +
+                    '</div>'
+        });
+        $.each(inputsVal,function(){
+          inputVal = $(this).val();
+          if ($(this).hasClass("name")){
+            errName = "Name";
+            if(notifyIfBlank(e)){
+              return true;
+            }
+          }
+          else{
+            //check if val has data
+            var entRegex = /^Enter/;
+            var extRegex = /^\w+\s(.+)$/
+            var placeholderVal = $(this).attr('placeholder');
+            if(entRegex.test(placeholderVal)){
+              var match = placeholderVal.match(extRegex);
+              errName = match[1];
+            }
+            else{
+              errName = placeholderVal;
+            }
+            if(notifyIfBlank(e)){
+              return true;
+            }
+          }
+          console.log(errName)
+          if(errName == "Port")
+            rangeCheck(e,errName,this,1,65535)
+          else if(errName == "Priority" || errName == "Weight")
+            rangeCheck(e,errName,this,0,65535)
+        });
+
+
+      });
       content = $(".detached").remove();
       $(".new-record-types").append(content.find(".a-record"));
       $("input[name='record[record_type]']").click(function(){
@@ -36,6 +109,7 @@
       });
     });
   </script>
+  <link rel="stylesheet" href="http://s.mlcdn.co/animate.css">
 <% end %>
 <div class="container feature-box" style="text-align: left;">
   <h1 class="domain-title"><%= @domain.name %></h1>
@@ -128,7 +202,7 @@
                   <%= f.input_field :priority,placeholder: "Enter Priority",class: "record priority"%>
                 </div>
                 <div class="col-md-4">
-                  <%= f.button :submit, "Create MX Record",class: "add-record-button"%>
+                  <%= f.button :submit, "Create MX Record",class: "add-record-button mx-button"%>
                 </div>
               </div>
               <div class="new-record-type txt-record">
@@ -163,7 +237,7 @@
                       <%= f.input_field :weight,placeholder: "Enter Weight",class: "record weight"%>
                     </div>
                     <div class="col-md-4">
-                      <%= f.button :submit, "Create SRV Record",class: "add-record-button"%>
+                      <%= f.button :submit, "Create SRV Record",class: "add-record-button srv-button"%>
                     </div>
                   </div>
                 </div>

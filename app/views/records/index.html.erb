@@ -10,13 +10,13 @@
 				$(".ipaddress").val($(this).children().attr('value'));
 			});
 			$(".add-domain-submit").click(function(e){
-				console.log($(".domain").val());
 				if(($(".domain").val()).length == 0){
 					$(".invaliddomain").text("Invalid Domain");
 					e.preventDefault();
 				}
 				var ipRegex = /^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/;
-				if(!ipRegex.test($(".ipaddress").val()) || $(".")){
+				var ipVal = $(".ipaddress").val();
+				if(!ipRegex.test(ipVal) || ipVal.length <= 0){
 					$(".invalidip").text("Invalid IP Address");
 					return false;
 				}

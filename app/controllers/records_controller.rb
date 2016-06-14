@@ -17,9 +17,12 @@ class RecordsController < ApplicationController
         flash[:notice] = "Domain Record not created."
       end
     rescue => e
-      exception_message = $1 if e.message.match(/"message":"(.*)"/)
-      if $1.match(/Name Only valid hostname/)
-        exception_message = "Only valid hostname characters are allowed. (a-z, a-z, 0-9, ., and -) or a single record of '@'."
+      if e.message.match(/"message":"(.*)"/)
+        if $1.match(/Name Only valid hostname/)
+          exception_message = "Only valid hostname characters are allowed. (a-z, a-z, 0-9, ., and -) or a single record of '@'."
+        else
+          exception_message = $1
+        end
       end
       flash[:alert] = "Failed to create Domain Record. #{exception_message}"
     end
@@ -65,9 +68,13 @@ class RecordsController < ApplicationController
         flash[:alert] = "Error Occured while saving record"
       end
     rescue => e
-      exception_message = $1 if e.message.match(/"message":"(.*)"/)
-      if $1.match(/Name Only valid hostname/)
-        exception_message = "Only valid hostname characters are allowed. (a-z, a-z, 0-9, ., and -) or a single record of '@'."
+      if e.message.match(/"message":"(.*)"/)
+        err = $1
+        if err.match(/Name Only valid hostname/)
+          exception_message = "Only valid hostname characters are allowed. (a-z, a-z, 0-9, ., and -) or a single record of '@'."
+        else
+          exception_message = err
+        end
       end
       flash[:alert] = "Failed to create Domain Record. #{exception_message}"
     end
@@ -82,9 +89,12 @@ class RecordsController < ApplicationController
     client.domain_records.update(updaterecord, for_domain: params[:domainname], id: record.record_id)
     record.update_attributes(record_params)
     rescue => e
-      exception_message = $1 if e.message.match(/"message":"(.*)"/)
-      if $1.match(/Name Only valid hostname/)
-        exception_message = "Only valid hostname characters are allowed. (a-z, a-z, 0-9, ., and -) or a single record of '@'."
+      if e.message.match(/"message":"(.*)"/)
+        if $1.match(/Name Only valid hostname/)
+          exception_message = "Only valid hostname characters are allowed. (a-z, a-z, 0-9, ., and -) or a single record of '@'."
+        else
+          exception_message = $1
+        end
       end
       flash[:alert] = "Error occured while updating record. #{exception_message}"
     end

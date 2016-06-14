@@ -4,6 +4,24 @@
 $mainbordercolor:  #e4e4e4;
 $mainborderwidth: 1px;
 $separatorbordercolor: #e4e4e4;
+$materialred: #e57373;
+.notify-alert{
+  border: 2px solid $materialred;
+  border-radius: 2px;
+  background-color: white;
+  color: $materialred;
+  // font-size: 1.2em;
+  font-weight: bolder;
+  text-align: center;
+  span{
+    font: normal normal bolder 1.2em/1 'quicksandregular';
+    text-align: center;
+  }
+  .notify-icon{
+    padding:10px;
+  }
+}
+
 .no-domains,.no-records{
   text-align: center;
   margin-top: 75px;
@@ -217,17 +235,13 @@ div.result{
     cursor:pointer;
   }
 }
-.new-record-form{
-  input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    margin: 0;
-  }
-  input.required{
-  //  width: 45% !important;
-  }
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
 }
+
 .new-record-type{
 //  display:none;
 }

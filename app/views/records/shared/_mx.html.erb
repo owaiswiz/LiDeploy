@@ -10,7 +10,7 @@
       <%= f.input_field :data,placeholder: "Enter Hostname",class: "record data"%>
     </div>
     <div class="col-md-3">
-      <%= f.input_field :priority,placeholder: "Enter priority",class: "record priority"%>
+      <%= f.input_field :priority,placeholder: "Enter Priority",class: "record priority",min: '0',max: '65535'%>
     </div>
     <div class="col-md-2">
       <%= f.button :submit, "Update",class: "update-record-button"%>
