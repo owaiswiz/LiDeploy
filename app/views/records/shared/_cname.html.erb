@@ -7,13 +7,13 @@
       </label>
     </div>
     <div class="col-md-3">
-      <%= f.input_field :name,placeholder: "Enter Name",class: "record name"%>
+      <%= f.input_field :name,placeholder: "Name",class: "record name"%>
     </div>
     <div class="col-md-3">
-      <%= f.input_field :data,placeholder: "Points To",class: "record data"%>
+      <%= f.input_field :data,placeholder: "Points to",class: "record data"%>
     </div>
     <div class="col-md-2">
-      <%= f.button :submit, "Update",class: "update-record-button"%>
+      <%= f.button :submit, "Update",class: "update-record-button inactive"%>
     </div>
     <div class="col-md-2">
       <%= link_to "Delete",delete_record_path(:domainname=> record.domain.name,:id => record.id),method: :delete,:class => "btn btn-default delete-record-button"%>

@@ -58,6 +58,7 @@ input.required{
   transition: opacity 0.4s;
   text-align: left;
   height: auto;
+  transition: all 0.5s ease;
   &:active,&:focus{
     border:1px solid #3190e7; //#66afe9;
     &.ipaddress{
@@ -81,14 +82,12 @@ div.dropdown{
   font-size:18px;
   vertical-align: inherit;
   border:2px solid #3190e7;
-  border-radius: 0px !important;
+  border-radius: 3px !important;
   transition: all 0.5s ease;
-  &:hover{
-    border-color: #1569B7;
-  }
-  &:active,&:focus,&:visited{
+  &:active,&:focus,&:visited,&:hover{
     color:white !important;
     border-color: #1569B7 !important;
+    background-color: #1569B7 !important;
   }
 }
 .domaintip{
@@ -118,15 +117,14 @@ div.result{
   border-radius: 0px;
   padding:15px;
   text-align: center;
-  font-size: 1.4em;
+  font-size: 1.3em;
   font-weight: bolder;
   outline: 1px solid #3190e7;
+  transition: all 0.5s ease;
   &:hover{
     background:#3190e7;
     color:white;
   }
-  &:last-child{
-    }
 }
 .domains{
   h3{
@@ -275,6 +273,12 @@ input.record{
   width: 100%;
   margin:20px 10px;
   transition: all 0.5s ease;
+  &.inactive,&.inactive:hover,&.inactive:focus,&.inactive:active{
+    color:#bbb;
+    background-color: #ececec;
+    border-color: #ececec;
+    cursor: not-allowed;
+  }
   &:active,&:focus,&:hover{
     background-color: #1569B7;
     color:white;

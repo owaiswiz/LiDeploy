@@ -21,6 +21,7 @@ class InstancesController < ApplicationController
 		begin
 			Array(@instances).each do |inst|
 			 	client = DropletKit::Client.new(access_token: inst.api_key)
+				tries = 0
 				begin
 					instance = client.droplets.find(id: inst.instanceid)
 					if instance.status == 'off'
@@ -53,12 +54,14 @@ class InstancesController < ApplicationController
 					if inst.status == "Payment Failed"
 						flash[:notice] = "Payment Not Completed for #{inst.name}.Please Contact us at support@lideploy.com for further help"
 					elsif inst.status != 'Waiting for Payment Confirmation'
+						tries += 1
+						retry if tries < 2
 						inst.update_attributes(:status => "Not Found",:ip_address => nil,:disk => nil)
 					end
 				end
 			end
 		rescue
-
+			flash[:alert] = "An Unknown Error occurred.Please try again later."
 		end
 		if request.original_fullpath.match(/\/api\/get\/instances/)
 			render 'instances/shared/_index',:layout => false

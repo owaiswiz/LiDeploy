@@ -3,7 +3,8 @@ Rails.application.routes.draw do
  # get '/signup' => 'devise/registrations#new', :as => 'new_user_registration'
  # end
  #devise_for :users
-resources :instances
+
+#resources :instances
 devise_for :users, :skip => [:sessions,:registrations,:confirmations]
 as :user do
   #User Signin/Signout
@@ -27,16 +28,17 @@ as :user do
   get '/account/confirm' => "devise/confirmations#show"
 
 end
+  get '/' => 'home#index'
+  post '/instances' => 'instances#index'
   get '/instances/' => 'instances#index'
   get '/api/get/instances' => 'instances#index'
   get '/instance/new' => "instances#new"
   post '/instance/new' => "instances#create"
-  get '/' => 'home#index'
+  delete '/instances/' => "instances#destroy"
 
   #Paypal Related routes
   post "/hooks" => "instances#hook"
 
-  delete '/instances/' => "instances#destroy"
   post '/instances/restart' => "instances#restart", :as => :restart_instance
   post '/instances/start' => "instances#start", :as => :start_instance
   post '/instances/shutdown' => "instances#shutdown",:as => :shutdown_instance
@@ -44,6 +46,8 @@ end
   put '/instance/renew' => "instances#renew_put",:as => :renew_put_instance
   post '/instances/resize' => "instances#resize",:as => :resize_instance
   post '/instances/resize_process' => "instances#resize_process",:as => :resize_process_instance
+  get '/instances/resize_process/' => redirect('/instances/')
+
   get '/instance/renew' => redirect('/instances/')
   get '/instance/' => redirect('/instances/')
 

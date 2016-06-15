@@ -15,10 +15,14 @@
       margin:10px !important;
       padding: 0.5em !important;
       font-size: 1.2em !important;
-
+    }
+    .update-record .record + .tooltip .tooltip-inner{
+      padding:10px 15px;
+      font-size:1.2em;
+      background-color: rgba(52,52,52, 0.95);
     }
     .record:not(:first-child) > .row{
-      margin-top: 10px;
+      margin-top: 20px;
     }
   </style>
   <script>
@@ -41,28 +45,38 @@
         e.preventDefault();
       }
     }
+    function ipValidator(e,errName,inputObj,ipRegex){
+      var ipVal = $(inputObj).val();
+      if(!ipRegex.test(ipVal)){
+        $.notify({message: "Invalid " + errName});
+        e.preventDefault();
+      }
+    }
     $(document).ready(function(){
+      $.notifyDefaults({
+        type: "danger",
+        allow_dismiss: false,
+        delay: 3000,
+        offset:{
+          x: 20,
+          y: 100
+        },
+        spacing:25,
+        animate: {
+		        enter: 'animated bounceInRight',
+		        exit: 'animated bounceOutRight'
+	      },
+        template: '<div data-notify="container" class="notify-alert col-xs-10 col-sm-2 alert alert-{0}" role="alert">' +
+                      '<div data-notify="icon" class="notify-icon" ><i class="fa fa-2x fa-exclamation-triangle"></i></div>' +
+                      '<span data-notify="message" class="notify-message">{2}</span>' +
+                  '</div>'
+      });
+      $(".update-record input[type=text],.update-record input[type=number]").each(function(){
+        toolTipTitle = $(this).attr('placeholder');
+        $(this).tooltip({'trigger':'focus','title': toolTipTitle });
+      });
       $(document.body).on("click","input[type='submit']",function(e){
-        if ($(this).hasClass("srv-button")){
-          inputsVal = $(this).parent().parent().parent().find("input:not([type='submit']):not([type='radio']):not([type='hidden'])")
-        }
-        else{
-          inputsVal = $(this).parent().parent().find("input:not([type='submit']):not([type='radio']):not([type='hidden'])")
-        }
-        $.notifyDefaults({
-          type: "danger",
-          allow_dismiss: false,
-          delay: 3000,
-          offset:{
-            x: 20,
-            y: 100
-          },
-          newest_on_top: true,
-          template: '<div data-notify="container" class="notify-alert col-xs-10 col-sm-2 alert alert-{0}" role="alert">' +
-                        '<div data-notify="icon" class="notify-icon" ><i class="fa fa-2x fa-exclamation-triangle"></i></div>' +
-                  		  '<span data-notify="message" class="notify-message">{2}</span>' +
-                    '</div>'
-        });
+        inputsVal = $(this).closest("form").find("input[type=text],input[type=number]");
         $.each(inputsVal,function(){
           inputVal = $(this).val();
           if ($(this).hasClass("name")){
@@ -74,7 +88,7 @@
           else{
             //check if val has data
             var entRegex = /^Enter/;
-            var extRegex = /^\w+\s(.+)$/
+            var extRegex = /^\w+\s(.+)$/;
             var placeholderVal = $(this).attr('placeholder');
             if(entRegex.test(placeholderVal)){
               var match = placeholderVal.match(extRegex);
@@ -87,14 +101,44 @@
               return true;
             }
           }
-          console.log(errName)
           if(errName == "Port")
-            rangeCheck(e,errName,this,1,65535)
+            rangeCheck(e,errName,this,1,65535);
           else if(errName == "Priority" || errName == "Weight")
-            rangeCheck(e,errName,this,0,65535)
+            rangeCheck(e,errName,this,0,65535);
+          else if(errName == "Hostname" || errName == "Points to"){
+            var dotRegex = /\.$/;
+            if((!dotRegex.test($(this).val())) && $(this).val() != '@'){
+              $.notify({message: errName + " needs to end with a '.'(dot)."});
+              e.preventDefault();
+            }
+          }
+          else if(errName == "IP Address"){
+            var ipv4Regex = /((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])/;
+            ipValidator(e,errName,this,ipv4Regex)
+          }
+          else if(errName == "IPv6 Address"){
+            var ipv6Regex = /(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))/;
+            ipValidator(e,errName,this,ipv6Regex);
+          }
+          else if($(this).hasClass("srv-name")){
+            var srvNameRegex = /^\_.+\.\_.+/;
+            if(!srvNameRegex.test($(this).val())){
+              $.notify({message: "Record name must be in the format of _service._protocol.domain.com"});
+              e.preventDefault();
+            }
+          }
         });
 
 
+      });
+      $('.update-record input').on('keydown',function(){
+        $(this).closest("form").find(".update-record-button").removeClass("inactive");
+      });
+      $('.delete-record-button').click(function(){
+        $('.delete-record-button').one('click',function(e) {
+          $.notify({message: 'Hang on a second '});
+          return false;
+        });
       });
       content = $(".detached").remove();
       $(".new-record-types").append(content.find(".a-record"));
@@ -103,9 +147,6 @@
         $(this).parent().addClass("active");
         $(content).append($(".new-record-type").remove());
         $(".new-record-types").html(content.find("." + $(this).parent().attr('id')));
-        // $("." + $(this).attr('id')).show();
-        // $(".new-record-types").append(mx-record)
-
       });
     });
   </script>
@@ -146,17 +187,17 @@
               </label>
             </div>
             <div class="col-md-2">
+              <label class="record-type new srv" id="srv-record">
+                <%= f.radio_button :record_type, 'SRV'%>
+                SRV
+              </label>
+            </div>
+            <div class="col-md-2">
               <label class="record-type new txt" id="txt-record">
                 <%= f.radio_button :record_type, 'TXT'%>
                 TXT
               </label>
             </div>
-            <div class="col-md-2">
-              <label class="record-type new srv" id="srv-record">
-                <%= f.radio_button :record_type, 'SRV'%>
-                SRV
-              </label>
-              </div>
           </div>
         </div>
           <div class="row new-record-types">
@@ -177,7 +218,7 @@
                   <%= f.input_field :name,placeholder: "Enter Name",class: "record name"%>
                 </div>
                 <div class="col-md-4">
-                  <%= f.input_field :data,placeholder: "IP Address",class: "record data"%>
+                  <%= f.input_field :data,placeholder: "IPv6 Address",class: "record data"%>
                 </div>
                 <div class="col-md-4">
                   <%= f.button :submit, "Create AAAA Record",class: "add-record-button"%>
@@ -220,7 +261,7 @@
                 <div class="col-md-12">
                   <div class="row">
                   <div class="col-md-4">
-                    <%= f.input_field :name,placeholder: "Enter Name",class: "record name"%>
+                    <%= f.input_field :name,placeholder: "Enter Name",class: "record name srv-name"%>
                   </div>
                   <div class="col-md-4">
                     <%= f.input_field :data,placeholder: "Enter Hostname",class: "record data"%>

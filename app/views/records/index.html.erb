@@ -2,8 +2,11 @@
 	<script>
 		$(document).ready(function(){
 			$(".domaintip").tooltip();
-			$(".ipaddress").focus(function(){$(".instances-dropdown").show();}).focusout(function(){
-						window.setTimeout(function(){$(".instances-dropdown").hide();$(".invalidip").text("");},100);
+			$(".ipaddress").focus(function(){
+				$(".instances-dropdown").show();
+				$(".invalidip").text("");
+			}).focusout(function(){
+						window.setTimeout(function(){$(".instances-dropdown").hide();},200);
 					});
 			$(".domain").focus(function(){$(".invaliddomain").text("");});
 			$(".wrapres").click(function(){
@@ -14,7 +17,8 @@
 					$(".invaliddomain").text("Invalid Domain");
 					e.preventDefault();
 				}
-				var ipRegex = /^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/;
+				//var ipRegex = /^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/;
+				var ipRegex = /((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])/
 				var ipVal = $(".ipaddress").val();
 				if(!ipRegex.test(ipVal) || ipVal.length <= 0){
 					$(".invalidip").text("Invalid IP Address");

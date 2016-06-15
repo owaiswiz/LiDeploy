@@ -31,21 +31,21 @@ class RecordsController < ApplicationController
 
   def view_domain
     @domain = current_user.domains.find_by(:name => params[:domainname])
-    @records = @domain.records
+    @records = @domain.records.alphabetically
     @newrecord = @domain.records.new
     render 'records/domain'
   end
 
   def delete_domain
     domain = current_user.domains.find_by(:name => params[:domainname])
+    tries = 0
     begin
-      tries = 0
       client = DropletKit::Client.new(access_token:domain.api_key)
       client.domains.delete(name:domain.name)
       flash[:notice] = "Domain #{domain.name} deleted successfully."
     rescue
       tries += 1
-      retry if tries < 1
+      retry if tries < 2
       flash[:alert] = "Domain Deleted"
     end
     domain.destroy
@@ -54,15 +54,13 @@ class RecordsController < ApplicationController
 
   def add_record
     domain = current_user.domains.find_by_name(params[:domainname])
-    record = domain.records.new(record_params)
     begin
       client = DropletKit::Client.new(access_token:domain.api_key)
       newrecord = DropletKit::DomainRecord.new(type: params[:record][:record_type], name: params[:record][:name], data: params[:record][:data],port: params[:record][:port],weight: params[:record][:weight],priority: params[:record][:priority])
-      createdrecord = client.domain_records.create(newrecord, for_domain: params[:domainname])
-      record.record_id = createdrecord.id
-      puts record.record_id
-      if !record.record_id.nil?
-        record.save
+      crecord = client.domain_records.create(newrecord, for_domain: params[:domainname])
+      puts crecord.type,crecord.name,crecord.data
+      if !crecord.id.nil?
+        record = domain.records.create(record_type: crecord.type,name: crecord.name,data: crecord.data,port:crecord.port,weight:crecord.weight,priority: crecord.priority,record_id: crecord.id)
         redirect_to view_domain_path and return
       else
         flash[:alert] = "Error Occured while saving record"
@@ -76,19 +74,20 @@ class RecordsController < ApplicationController
           exception_message = err
         end
       end
-      flash[:alert] = "Failed to create Domain Record. #{exception_message}"
+      flash[:alert] = "Error Occurred while creating Domain Record. #{exception_message}"
     end
     redirect_to view_domain_path
   end
   def update_record
     begin
-    domain = current_user.domains.find_by_name(params[:domainname])
-    record = domain.records.find(params[:record][:id])
-    client = DropletKit::Client.new(access_token:domain.api_key)
-    updaterecord = DropletKit::DomainRecord.new(type: params[:record][:record_type], name: params[:record][:name], data: params[:record][:data],port: params[:record][:port],weight: params[:record][:weight],priority: params[:record][:priority])
-    client.domain_records.update(updaterecord, for_domain: params[:domainname], id: record.record_id)
-    record.update_attributes(record_params)
+      domain = current_user.domains.find_by_name(params[:domainname])
+      record = domain.records.find(params[:record][:id])
+      client = DropletKit::Client.new(access_token:domain.api_key)
+      updaterecord = DropletKit::DomainRecord.new(type: params[:record][:record_type], name: params[:record][:name], data: params[:record][:data],port: params[:record][:port],weight: params[:record][:weight],priority: params[:record][:priority])
+      crecord = client.domain_records.update(updaterecord, for_domain: params[:domainname], id: record.record_id)
+      record.update_attributes(name: crecord.name,data: crecord.data,port:crecord.port,weight:crecord.weight,priority: crecord.priority)
     rescue => e
+      puts e
       if e.message.match(/"message":"(.*)"/)
         if $1.match(/Name Only valid hostname/)
           exception_message = "Only valid hostname characters are allowed. (a-z, a-z, 0-9, ., and -) or a single record of '@'."
