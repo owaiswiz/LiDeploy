@@ -159,13 +159,6 @@ li .navbar-btn{
   font-family: 'quicksandbold';
   transition: all 0.5s ease;
 }
-.bluebutton{
-  @extend .signupbutton;
-   background: #3190e7 !important;
-}
-.bluebutton:hover{
-  background: #1569B7 !important;
-}
 .signupbutton{
   font-size: 20px;
   height: auto;
@@ -176,9 +169,19 @@ li .navbar-btn{
   border: 0;
   -webkit-appearance: none;
 }
-.greenbutton:hover,.signupbutton:hover {
-  color: white;
-  background: #24A849;
+.greenbutton,.signupbutton{
+  &:hover,&:focus,&:active{
+    color: white !important;
+    background: #24A849 !important;
+  }
+}
+.bluebutton{
+  @extend .signupbutton;
+  background: #3190e7 !important;
+  &:hover,&:focus,&:active{
+  background: #1569B7 !important;
+  }
+
 }
 
 .form-inputs{
@@ -199,6 +202,8 @@ li .navbar-btn{
 
 footer {
     background: #2e3234;
+    position:absolute;
+    bottom:0;
     padding: 100px 0 60px 0;
     margin-top: 25px;
     color: #747474;

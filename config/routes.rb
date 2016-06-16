@@ -3,31 +3,29 @@ Rails.application.routes.draw do
  # get '/signup' => 'devise/registrations#new', :as => 'new_user_registration'
  # end
  #devise_for :users
-
-#resources :instances
-devise_for :users, :skip => [:sessions,:registrations,:confirmations]
-as :user do
-  #User Signin/Signout
-# get '/account/:username/' => "account#index", as: :user_root
-  get "/login" => "sessions#new", :as => :new_user_session
-  post "/login" => "sessions#create", :as => :user_session
-  get "/logout" => "sessions#destroy"
-  delete "/logout" => "devise/sessions#destroy", :as => :destroy_user_session
-  #User Signup/Delete
-  get '/register' => "devise/registrations#new", :as =>:new_user_registration
-  get '/deleteaccount' => "devise/registrations#cancel", :as => :cancel_user_registration
-  post '/register' => "devise/registrations#create", :as => :user_registration
-  #User Account Edit
-  get '/account/edit' => "devise/registrations#edit", :as => :edit_user_registration
-  patch '/account' => "devise/registrations#update"
-  put '/account' => "devise/registrations#update"
-  delete '/account' => "devise/registrations#destroy"
-  #User Account Confirmation
-  post '/account/confirm' => "devise/confirmations#create", :as => :user_confirmation
-  get '/account/confirm/new' => "devise/confirmations#new", :as => :new_user_confirmation
-  get '/account/confirm' => "devise/confirmations#show"
-
-end
+ resources :instances, except: :show
+ devise_for :users, :skip => [:sessions,:registrations,:confirmations]
+ as :user do
+    #User Signin/Signout
+    # get '/account/:username/' => "account#index", as: :user_root
+    get "/login" => "sessions#new", :as => :new_user_session
+    post "/login" => "sessions#create", :as => :user_session
+    get "/logout" => "sessions#destroy"
+    delete "/logout" => "devise/sessions#destroy", :as => :destroy_user_session
+    #User Signup/Delete
+    get '/register' => "devise/registrations#new", :as =>:new_user_registration
+    get '/deleteaccount' => "devise/registrations#cancel", :as => :cancel_user_registration
+    post '/register' => "devise/registrations#create", :as => :user_registration
+    #User Account Edit
+    get '/account/edit' => "devise/registrations#edit", :as => :edit_user_registration
+    patch '/account' => "devise/registrations#update"
+    put '/account' => "devise/registrations#update"
+    delete '/account' => "devise/registrations#destroy"
+    #User Account Confirmation
+    post '/account/confirm' => "devise/confirmations#create", :as => :user_confirmation
+    get '/account/confirm/new' => "devise/confirmations#new", :as => :new_user_confirmation
+    get '/account/confirm' => "devise/confirmations#show"
+  end
   get '/' => 'home#index'
   post '/instances' => 'instances#index'
   get '/instances/' => 'instances#index'

@@ -5,7 +5,9 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   protected
     def authenticate_user!(opts={})
-      session[:return_to] = request.url
+      if request.original_fullpath.match(/support\/ticket/)
+        session[:return_to] = request.url
+      end
       opts[:scope] = :user
       warden.authenticate!(opts) if !devise_controller? || opts.delete(:force)
     end

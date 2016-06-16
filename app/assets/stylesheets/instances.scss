@@ -1,6 +1,10 @@
 .region,.sizes,.btn-group label{
   transition: all 0.5s ease;
 }
+.nooutline.active{
+  outline: 0 !important;
+  border: 0 !important;
+}
 .alert{
   margin-top: 20px;
 }
@@ -52,25 +56,28 @@
   background-color: #298eea !important;
 }
 .sizes{
-  height: 200px;
+  height: 280px;
   width: 250px;
   padding: 0;
   border-color: #298eea;
   border: solid 1px #298eea;
-  margin: 20px;
+  margin: 20px !important;
 }
 
 .text{
-  padding-top: 10px;
+  padding-top: 15px;
   padding-bottom: 10px;
   font-family: 'quicksandbold';
-  font-size: 20px;
-  border-bottom: solid 0.1px #CDCDCD;
+  font-size: 1.2em;
+  border-bottom: solid 1px #CDCDCD;
+  height: 102px;
   h5{
     font-size: 15px;
+    margin: 15px auto;
   }
 }
 .sizes.active .text{
+  transition: all 0.5s ease;
   background-color: #298eea;
   color: white;
 }
@@ -90,7 +97,8 @@
     li{
       list-style: none;
       color: #bdc3c7;
-      font-size: 16px;
+      font-size: 1.2em;
+      margin: 12px auto;
       span{
         color: #34495e;
         font-family: 'quicksandbold';
@@ -105,7 +113,8 @@
   background-repeat: no-repeat !important;
   background-position: center !important;
   border: solid 0.2px #298eea;
-  margin: 20px;
+  margin: 15px !important;
+  float:none !important;
   text-align: center;
   p{
     padding-top: 75px;
