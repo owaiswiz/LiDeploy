@@ -72,6 +72,9 @@ Rails.application.routes.draw do
   post '/domain/:domainname/' => "records#add_record",as: :add_record,:domainname => /[^\/]+/
   put '/domain/:domainname/' => "records#update_record",as: :update_record,:domainname => /[^\/]+/
   delete '/delete/:domainname/record/:id' => "records#delete_record",as: :delete_record,:domainname => /[^\/]+/
+
+  #Admin Related controller
+  get '/admin' => "admin#index"
   root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,5 +1,28 @@
 <% content_for :head do %>
   <style>
+    html,body{
+      height: 100%;
+    }
+    .main-container{
+      min-height: 100%;
+      position: relative;
+    }
+    .content-container{
+      padding-bottom: 250px
+    }
+    footer{
+      position:absolute;
+      bottom:0;
+      height: 250px;
+      background: #2e3234;
+      padding: 100px 0 60px 0;
+      margin-top: 25px;
+      color: #747474;
+      float: left;
+      width: 100%;
+      text-align: center;
+    }
+
     .footb {
       font-family: 'quicksandbold';
       line-height: 200%;
@@ -19,7 +42,9 @@
     }
   </style>
 <% end %>
+</div>
 <footer>
+  <div class="container">
   <div class = "col-md-4 col-sm-4 col-xs-4 footb">
     <div class="row">
       <h4>Copyright © 2016</h4>
@@ -59,4 +84,5 @@
       <div class="col-md-4 col-xs-4 col-sm-4"></div>
     </div>
   </div>
+</div>
 </footer>
