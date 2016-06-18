@@ -2,22 +2,21 @@ class InstancesController < ApplicationController
 	before_action :authenticate_user!,:except => [:hook]
 	#Allocate a new Instance model
 	def new
-		@instance = Instance.new
+		@newinstance = Instance.new
 	end
 
 	#Create a new Instance from Form Input
 	def create
-		@instance= Instance.new(instance_params)
-		@instance.user_id = current_user.id
-		@instance.status = 'Waiting for Payment Confirmation'
-		if @instance.save
-			redirect_to @instance.paypal_url(@instance)
+		createinstance= current_user.instances.new(instance_params)
+		createinstance.status = 'Waiting for Payment Confirmation'
+		if createinstance.save
+			redirect_to createinstance.paypal_url(createinstance)
 		end
 	end
 
 	#List all Instances of A Particular User
 	def index
-		@instances = Instance.where(user_id: current_user.id)
+		@instances = current_user.instances
 		begin
 			Array(@instances).each do |inst|
 			 	client = DropletKit::Client.new(access_token: inst.api_key)
@@ -69,7 +68,7 @@ class InstancesController < ApplicationController
 	end
 	#Start an Instance
 	def start
-		instance = Instance.find_by(user_id: current_user.id,id:params[:id])
+		instance = current_user.instances.find(params[:id])
 		begin
 			client = DropletKit::Client.new(access_token: instance.api_key)
 			droplet = client.droplet_actions.power_on(droplet_id: instance.instanceid)
@@ -78,12 +77,13 @@ class InstancesController < ApplicationController
 		rescue
 			flash[:alert] = "Error Occurred while Starting Instance.Try again after few minutes."
 		end
+		instance = nil
 		redirect_to instances_path
 	end
 
 	#Delete an Instance
 	def destroy
-	  instance = Instance.find_by(user_id: current_user.id,id:params[:id])
+	  instance = current_user.instances.find(params[:id])
 		begin
 			client = DropletKit::Client.new(access_token: instance.api_key)
 			client.droplets.delete(id: instance.instanceid)
@@ -92,12 +92,13 @@ class InstancesController < ApplicationController
 			flash[:alert] = "Instance Deleted Successfully"
 		end
 		instance.destroy
+		instance = nil
 		redirect_to instances_path
 	end
 
 	#Restart an Instance
 	def restart
-		instance = Instance.find_by(user_id: current_user.id,id: params[:id])
+		instance = current_user.instances.find(params[:id])
 		begin
 			client = DropletKit::Client.new(access_token: instance.api_key)
 			client.droplet_actions.reboot(droplet_id: instance.instanceid)
@@ -106,38 +107,37 @@ class InstancesController < ApplicationController
 		rescue
 			flash[:alert] = "Error Occurred While Restarting. Try again after few minutes."
 		end
+		instance = nil
 		redirect_to instances_path
 	end
 
 	#Power off an Instance
 	def shutdown
-		instance = Instance.find_by(user_id: current_user.id,id:params[:id])
+		instance = current_user.instances.find(params[:id])
 		begin
 			client = DropletKit::Client.new(access_token: instance.api_key)
 			shuttingdown = client.droplet_actions.shutdown(droplet_id: instance.instanceid)
 			instance.update_attributes(:status => "Shutting Down",:action => shuttingdown.id)
-		#	client.droplet_actions.power_off(droplet_id: @instance.instanceid)
 			flash[:notice] = "Shutdown Initiated.It will be completed within few seconds."
 		rescue
 			flash[:alert] = "Trying to shutdown.Try again in few minutes if Instance is still active."
 		end
+		instance = nil
 		redirect_to instances_path
 	end
 
 	#Renew Instance(Render Page part)
 	def renew_put
-			@instance = Instance.find_by(user_id:current_user,id: params[:id])
+			@instance = current_user.instances.find(params[:id])
 			render 'renew'
 	end
 
 	#Renew Instance(Process Payment and redirect to payment processor)
 	def renew_post
 		begin
-			@instance = Instance.find_by(user_id: current_user.id,id: params[:id])
-			raise "Not Found" if @instance.nil?
-			if @instance.update_attributes(:duration => params[:instance][:duration],:temp_status => "Renewing")
-				redirect_to @instance.paypal_url(@instance)
-			end
+			instance = current_user.instances.find(params[:id])
+			raise "Not Found" if instance.nil?
+			redirect_to instance.paypal_url(instance)	if instance.update_attributes(:duration => params[:instance][:duration],:temp_status => "Renewing")
 		rescue
 			flash[:alert] = "Instance Not Found"
 			redirect_to instances_path
@@ -147,7 +147,7 @@ class InstancesController < ApplicationController
 	#Resize an Instance
 	def resize
 		begin
-			@instance = Instance.find_by(user_id: current_user.id,id:params[:id])
+			@instance = current_user.instances.find(params[:id])
 			raise "Not Found" if @instance.nil?
 			if @instance.status != "Powered Off" && @instance.size != "2gb"
 				shutdown
@@ -160,18 +160,17 @@ class InstancesController < ApplicationController
 	end
 
 	def resize_process
-		@instance = Instance.find_by(user_id: current_user.id,id: params[:id])
-		@instance.update_attributes(:temp_status => "Resizing",:duration => params[:instance][:duration])
-		@instance.size=params[:instance][:size]
-		redirect_to @instance.paypal_url(@instance)
+		instance = current_user.instances.find(params[:id])
+		instance.update_attributes(:temp_status => "Resizing",:duration => params[:instance][:duration])
+		instance.size=params[:instance][:size]
+		redirect_to instance.paypal_url(instance)
 	end
 
 	protect_from_forgery except: [:hook]
 	  def hook
 	    params.permit! # Permit all Paypal input params
-	    status = params[:payment_status]
-			instance = Instance.find params[:item_number]
-	    if status == "Completed"
+			instance = Instance.find(params[:item_number])
+	    if params[:payment_status] == "Completed"
 				if instance.temp_status == "Renewing"
 					instance.update_attributes(:temp_status => "Renewed",:expires => instance.expires+instance.duration.months)
 				elsif instance.temp_status == "Resizing"
@@ -191,6 +190,7 @@ class InstancesController < ApplicationController
 			else
 				instance.update_attributes(:status=> "Payment Failed")
 			end
+			instance = nil
 	    render nothing: true
 	  end
 

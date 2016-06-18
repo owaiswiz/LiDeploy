@@ -48,6 +48,7 @@
                     <% if ticket.replies.first.nil? %>
                       <%= current_user.username %>
                     <% else %>
+                    <!-- Optimize THIS -->
                       <%= ticket.replies.last.from %>
                     <% end %>
                   </span>

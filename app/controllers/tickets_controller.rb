@@ -1,9 +1,8 @@
 class TicketsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @user = User.find_by(id: current_user.id)
     if params[:ticketid].nil?
-      @tickets = Ticket.where(user_id:current_user.id,:status => params[:status])
+      @tickets = current_user.tickets.where(status: params[:status])
       if @tickets.first.nil?
         @tickets = nil
         params[:ticketid] = "newticket"
@@ -12,7 +11,7 @@ class TicketsController < ApplicationController
       end
     end
     if params[:ticketid] != "newticket"
-      @ticket = Ticket.find_by(user_id: current_user.id,id:params[:ticketid])
+      @ticket = current_user.tickets.find(params[:ticketid])
       if @ticket.nil?
         flash[:alert] = "Invalid Ticket ID"
         redirect_to view_tickets_path and return
@@ -21,12 +20,12 @@ class TicketsController < ApplicationController
         @replies = @ticket.replies
         @newreply = Reply.new
       end
-      @tickets = Ticket.where(user_id:current_user.id,:status => @ticket.status)
+      @tickets = current_user.tickets.where(status: @ticket.status)
     else
       if params[:status].nil?
         params[:status] = "open"
       end
-      @tickets = Ticket.where(user_id: current_user.id,:status => params[:status])
+      @tickets = current_user.tickets.where(status: params[:status])
       if @tickets.first.nil?
         @tickets=nil
       end
@@ -35,41 +34,40 @@ class TicketsController < ApplicationController
   end
 
   def create
-    @ticket = Ticket.new(ticket_params)
-    @ticket.user_id = current_user.id
-    @ticket.status = "open"
-    if @ticket.save
+    ticket = current_user.tickets.new(ticket_params)
+    ticket.status = "open"
+    if ticket.save
       redirect_to view_tickets_path
     end
   end
   def addreply
     unless current_user.admin
-      @ticket = Ticket.find_by(user_id: current_user.id,id:params[:ticketid])
+      ticket = current_user.tickets.find_by(id:params[:ticketid])
     else
-      @ticket = Ticket.find(params[:ticketid])
+      ticket = Ticket.find(params[:ticketid])
     end
     if params[:reply][:reply].gsub(/\s+/,'').length > 0
-      @reply = @ticket.replies.new(reply_params)
-      @reply.from = current_user.username
-      if @reply.save
-        @ticket.update_attributes(updated_at: Time.now)
+      reply = ticket.replies.new(reply_params)
+      reply.from = current_user.username
+      if reply.save
+        ticket.update_attributes(updated_at: Time.now)
         flash[:notice] = "Reply Submitted"
-        if @reply.from != User.find(@ticket.user_id).username
-          SendTicketEmailJob.set(wait: 20.seconds).perform_later(@reply)
+        if reply.from != ticket.user.username
+          SendTicketEmailJob.set(wait: 20.seconds).perform_later(reply)
         end
       else
         flash[:alert] = "Error occurred while submitting reply."
       end
     end
     if params[:status] == "Close Ticket"
-      @ticket.update_attributes(:status => "closed")
+      ticket.update_attributes(:status => "closed")
       flash[:notice1] = "Ticket Closed"
-    elsif @ticket.status == "closed"
-      @ticket.update_attributes(:status => "open")
+    elsif ticket.status == "closed"
+      ticket.update_attributes(:status => "open")
       flash[:notice1] = "Ticket Opened"
     end
     if current_user.admin
-      redirect_to "/admin/ticket/#{@ticket.id}"
+      redirect_to "/admin/ticket/#{ticket.id}"
     else
       redirect_to ticket_path
     end

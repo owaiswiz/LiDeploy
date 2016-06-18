@@ -6,13 +6,6 @@ GIT
       capistrano (~> 3.1)
       sshkit (~> 1.3)
 
-GIT
-  remote: git://github.com/owaiswiz/data-confirm-modal.git
-  revision: fdb78054d20132a6e8738d57221c0ed1d9f00d7c
-  specs:
-    data-confirm-modal (1.1.0)
-      railties (>= 3.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -195,8 +188,6 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
-    rdoc (4.2.2)
-      json (~> 1.4)
     resource_kit (0.1.5)
       addressable (~> 2.3.6)
     responders (2.2.0)
@@ -208,9 +199,6 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    sdoc (0.4.1)
-      json (~> 1.7, >= 1.7.7)
-      rdoc (~> 4.0)
     simple_form (3.2.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
@@ -262,7 +250,6 @@ DEPENDENCIES
   capistrano-rbenv!
   coffee-rails (~> 4.1.0)
   daemons
-  data-confirm-modal!
   delayed_job_active_record
   devise (~> 3.5, >= 3.5.6)
   droplet_kit
@@ -272,9 +259,9 @@ DEPENDENCIES
   mailman
   mailman-rails
   mini_portile2
+  nokogiri
   rails (= 4.2.6)
   sass-rails (~> 5.0)
-  sdoc (~> 0.4.0)
   simple_form
   spring
   sqlite3

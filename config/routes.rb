@@ -7,7 +7,6 @@ Rails.application.routes.draw do
  devise_for :users, :skip => [:sessions,:registrations,:confirmations]
  as :user do
     #User Signin/Signout
-    # get '/account/:username/' => "account#index", as: :user_root
     get "/login" => "sessions#new", :as => :new_user_session
     post "/login" => "sessions#create", :as => :user_session
     get "/logout" => "sessions#destroy"

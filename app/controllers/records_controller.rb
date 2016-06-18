@@ -26,18 +26,19 @@ class RecordsController < ApplicationController
       end
       flash[:alert] = "Failed to create Domain Record. #{exception_message}"
     end
+    newdomain,domain,exception_message = nil
     redirect_to domains_path
   end
 
   def view_domain
-    @domain = current_user.domains.find_by(:name => params[:domainname])
+    @domain = current_user.domains.find_by_name(params[:domainname])
     @records = @domain.records.alphabetically
     @newrecord = @domain.records.new
     render 'records/domain'
   end
 
   def delete_domain
-    domain = current_user.domains.find_by(:name => params[:domainname])
+    domain = current_user.domains.find_by_name(params[:domainname])
     tries = 0
     begin
       client = DropletKit::Client.new(access_token:domain.api_key)
@@ -49,6 +50,7 @@ class RecordsController < ApplicationController
       flash[:alert] = "Domain Deleted"
     end
     domain.destroy
+    domain = nil
     redirect_to domains_path
   end
 
@@ -58,10 +60,8 @@ class RecordsController < ApplicationController
       client = DropletKit::Client.new(access_token:domain.api_key)
       newrecord = DropletKit::DomainRecord.new(type: params[:record][:record_type], name: params[:record][:name], data: params[:record][:data],port: params[:record][:port],weight: params[:record][:weight],priority: params[:record][:priority])
       crecord = client.domain_records.create(newrecord, for_domain: params[:domainname])
-      puts crecord.type,crecord.name,crecord.data
       if !crecord.id.nil?
         record = domain.records.create(record_type: crecord.type,name: crecord.name,data: crecord.data,port:crecord.port,weight:crecord.weight,priority: crecord.priority,record_id: crecord.id)
-        redirect_to view_domain_path and return
       else
         flash[:alert] = "Error Occured while saving record"
       end
@@ -76,6 +76,7 @@ class RecordsController < ApplicationController
       end
       flash[:alert] = "Error Occurred while creating Domain Record. #{exception_message}"
     end
+    record,crecord,err,exception_message,client = nil
     redirect_to view_domain_path
   end
   def update_record
@@ -87,7 +88,6 @@ class RecordsController < ApplicationController
       crecord = client.domain_records.update(updaterecord, for_domain: params[:domainname], id: record.record_id)
       record.update_attributes(name: crecord.name,data: crecord.data,port:crecord.port,weight:crecord.weight,priority: crecord.priority)
     rescue => e
-      puts e
       if e.message.match(/"message":"(.*)"/)
         if $1.match(/Name Only valid hostname/)
           exception_message = "Only valid hostname characters are allowed. (a-z, a-z, 0-9, ., and -) or a single record of '@'."
@@ -97,6 +97,7 @@ class RecordsController < ApplicationController
       end
       flash[:alert] = "Error occured while updating record. #{exception_message}"
     end
+    record,client,updaterecord,crecord,exception_message = nil
     redirect_to view_domain_path
   end
 
@@ -111,6 +112,7 @@ class RecordsController < ApplicationController
       flash[:alert] = "Record Deleted"
     end
     record.destroy
+    record,client = nil
     redirect_to view_domain_path
   end
   private
