@@ -1,52 +1,43 @@
 <div class="container-fluid">
-    <nav class="navbar navbar-default navbar-fixed-top navbar-nav Nav">
-            <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header page-scroll">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-nav-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <div class="navbar-btn">
-                    <!--<a href="/" style="font-size: 25px;font-family: 'quicksandbold' ">LiDeploy</a>-->
-                    <% if controller_name == "home" %>
-                      <a href="/"><img src="/assets/Lideployicon.png" width="42px;" style="margin-left:84px;" /></a>
-                    <% else %>
-                      <a href="/"><img src="/assets/Lideployicon.png" width="42px;" style="margin-left:84px;" /></a>
-                      <a href="/" class="btn header-logo header-text">LiDeploy</a>
-                      <!--<a href="/" class="header-logo"><img src="/assets/Lideployicon.png" width="42px;" style="margin-left:84px;" /><div style="display:inline-block;"class="header-text">LiDeploy</div></a>-->
-                    <% end %>
-                    </div>
-                </div>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-nav-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <% if !user_signed_in? %>
-                          <li>
-                            <div class="navbar-btn">
-                              <a href="/pricing" class="btn grey">Pricing</a>
-                              <a href="/features" class="btn grey">Features</a>
-                              <a href="/contact" class="btn grey">Contact</a>
-                              <a href="/login" class="btn login" role="button">Login</a>
-                              <a href="/register" class="btn btn-primary" role="button">Register</a>
-                            </div>
-                          </li>
-                        <% else %>
-                            <li>
-                              <div class="navbar-btn">
-                                  <a href="/instances/new" class="btn greenbutton" style="display:inline-block;" role="button">Create New Instance</a>
-                                  <a href="/instances/" class="btn grey">Instances</a>
-                                  <a href="/domains/" class="btn grey">DNS</a>
-                                  <a href="/support/" class="btn grey">Support</a>
-                                  <a href="/logout" class="btn btn-primary" role="button">Logout</a>
-                              </div>
-                            </li>
-                        <% end %>
-                    </ul>
-                </div>
+  <nav class="navbar navbar-default navbar-fixed-top navbar-nav Nav">
+    <div class="container">
+      <div class="navbar-header page-scroll">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-nav-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="navbar-btn">
+          <% if controller_name == "home" %>
+            <a href="/"><img src="/assets/Lideployicon.png" width="42px;" style="margin-left:84px;" /></a>
+          <% else %>
+            <a href="/"><img src="/assets/Lideployicon.png" width="42px;" /></a>
+            <a href="/" class="btn header-logo header-text">LiDeploy</a>
+          <% end %>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-nav-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <div class="navbar-btn" style="margin-right: 15px;">
+              <% if !user_signed_in? %>
+                <a href="/pricing" class="btn grey">Pricing</a>
+                <a href="/features" class="btn grey">Features</a>
+                <a href="/contact" class="btn grey">Contact</a>
+                <a href="/login" class="btn login" role="button">Login</a>
+                <a href="/register" class="btn btn-primary" role="button">Register</a>
+              <% else %>
+                <a href="/instances/new" class="btn greenbutton" style="display:inline-block;" role="button">Create New Instance</a>
+                <a href="/instances/" class="btn grey">Instances</a>
+                <a href="/domains/" class="btn grey">DNS</a>
+                <a href="/support/" class="btn grey">Support</a>
+                <a href="/logout" class="btn btn-primary" role="button">Logout</a>
+              <% end %>
             </div>
-    </nav>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>
 </div>

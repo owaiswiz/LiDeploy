@@ -1,0 +1,82 @@
+<% content_for :head do %>
+  <style>
+    .Active{
+      color: #26A65B !important;
+    }
+    .New,.Starting,.Restarting,.Shuttingdown,.Resizing{
+      color: #F57C00 !important;
+    }
+    .Def{
+      font-family: 'quicksandbold' !important;ol;;;;
+      color: #D91E18;
+    }
+    /*tablecss*/
+    .theader>th{
+      text-align: center;
+      font-family: 'quicksandbold';
+      font-size: 135%;
+      color: #535151;
+      border-bottom-color: #222 !important;
+    }
+    .trow>td{
+      text-align: center;
+      font-family: 'quicksandregular';
+      font-size: 120%;
+      font-weight: 600;
+      vertical-align: middle !important;
+    }
+    .instname{
+      font-family: 'quicksandbold';
+      color: #337ab7;
+    }
+    .instdetails{
+      font-family: 'quicksandlight';
+      font-size: 80%;
+    }
+  </style>
+<% end %>
+<table class="table table-sm">
+  <thead>
+    <tr class="theader">
+      <th>ID</th>
+      <th>Owned By</th>
+      <th>Distribution</th>
+      <th>Name</th>
+      <th>IP Address</th>
+      <th>Status</th>
+      <th>Expires</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% Array(@instances).each do |inst| %>
+      <tr class="trow">
+        <td><%= inst.id %></td>
+        <td><%= User.find(inst.user_id).email %></td>
+        <td><img src="/assets/<%= inst.distro.downcase %>-32.png" alt="<%=inst.distro%>"></td>
+        <td>
+          <%if inst.disk? %>
+            <span class="instname"><%= inst.name%></span><br/>
+            <span class ="instdetails"><%=inst.size.upcase%> Memory / <%= inst.disk%>GB Disk</span>
+          <%else%>
+            <span class="instname"><%= inst.name%>
+          <%end%>
+        </td>
+        <td><%= inst.ip_address %></td>
+        <td class="Def <%= inst.status.capitalize.delete(' ') %>">
+          <%if inst.status.capitalize == "New" %>
+            Creating Instance
+          <%else%>
+            <%= inst.status.capitalize %>
+          <%end%>
+        </td>
+        <td>
+          <% if inst.disk? %>
+            <%= inst.expires.strftime('%-d %B %Y') %>
+          <%else%>
+            <span class="Def">-</span>
+          <%end%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,64 @@
+<% content_for :head do %>
+  <style>
+    #wrapper{
+    }
+    .Nav.navbar{
+      background-color: #222;
+      border-color: #222;
+    }
+    .navbar-btn .btn.btn-primary,#page-wrapper{
+      background-color: #222;
+      color:white;
+    }
+    .side-nav{
+      top: 131px !important;
+      font-size: 1.4em;
+      color:#3190e7;
+      font-weight: bolder;
+      font-family: 'quicksandbold';
+      letter-spacing: 2px;
+    }
+    ul.side-nav a{
+      color: #3190e7;
+      padding-top:25px;
+      padding-bottom:25px;
+    }
+    .grey{
+      color:white !important;
+    }
+    .panel-footer span,.huge + div{
+      font-size: 1.2em;
+      font-weight: bolder;
+      font-family: 'quicksandbold';
+    }
+  </style>
+<% end %>
+<div id="wrapper">
+  <!-- Navigation -->
+  <nav class="navbar" role="navigation">
+    <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav side-nav">
+        <li>
+          <a href="/admin/users"><i class="fa fa-fw fa-users"></i> Users</a>
+        </li>
+        <li class="active">
+          <a href="/admin/index"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li>
+          <a href="/admin/instances"><i class="fa fa-fw fa-server"></i> Instances</a>
+        </li>
+        <li>
+          <a href="/admin/tickets"><i class="fa fa-fw fa-life-saver"></i> Tickets</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div id="page-wrapper">
+    <div class="container-fluid">
+      <%= render  "admin/#{@page}" %>
+    </div>
+    <!-- /.container-fluid -->
+  </div>
+  <!-- /#page-wrapper -->
+</div>

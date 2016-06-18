@@ -119,7 +119,7 @@ class InstancesController < ApplicationController
 		#	client.droplet_actions.power_off(droplet_id: @instance.instanceid)
 			flash[:notice] = "Shutdown Initiated.It will be completed within few seconds."
 		rescue
-			flash[:alert] = "Error Occurred While Shutting Down. Try again after few minutes."
+			flash[:alert] = "Trying to shutdown.Try again in few minutes if Instance is still active."
 		end
 		redirect_to instances_path
 	end

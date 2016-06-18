@@ -1,0 +1,48 @@
+<% content_for :head do %>
+  <style>
+    /*tablecss*/
+    .theader>th{
+      text-align: center;
+      font-family: 'quicksandbold';
+      font-size: 135%;
+      color: #535151;
+      border-bottom-color: #222 !important;
+    }
+    .trow>td{
+      text-align: center;
+      font-family: 'quicksandregular';
+      font-size: 1.3em;
+      font-weight: 600;
+      vertical-align: middle !important;
+      border-top-color: #222 !important;
+    }
+  </style>
+<% end %>
+<table class="table table-sm">
+  <thead>
+    <tr class="theader">
+      <th>ID</th>
+      <th>Username</th>
+      <th>E-Mail</th>
+      <th>Confirmed</th>
+      <th>Has</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% Array(@users).each do |user| %>
+      <tr class="trow">
+        <td><%= user.id %></td>
+        <td><%= user.username %></td>
+        <td><%= user.email %></td>
+        <td>
+          <%if user.confirmed_at.nil? %>
+            No
+          <% else %>
+            Yes
+          <% end %>
+        </td>
+        <td><%= Instance.where(user_id: user.id).count %> Instances</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -43,13 +43,20 @@ class TicketsController < ApplicationController
     end
   end
   def addreply
-    @ticket = Ticket.find_by(user_id: current_user.id,id:params[:ticketid])
+    unless current_user.admin
+      @ticket = Ticket.find_by(user_id: current_user.id,id:params[:ticketid])
+    else
+      @ticket = Ticket.find(params[:ticketid])
+    end
     if params[:reply][:reply].gsub(/\s+/,'').length > 0
-      @reply = @ticket.replies.create(reply_params)
+      @reply = @ticket.replies.new(reply_params)
       @reply.from = current_user.username
       if @reply.save
+        @ticket.update_attributes(updated_at: Time.now)
         flash[:notice] = "Reply Submitted"
-        SendTicketEmailJob.set(wait: 20.seconds).perform_later(@reply)
+        if @reply.from != User.find(@ticket.user_id).username
+          SendTicketEmailJob.set(wait: 20.seconds).perform_later(@reply)
+        end
       else
         flash[:alert] = "Error occurred while submitting reply."
       end
@@ -61,8 +68,11 @@ class TicketsController < ApplicationController
       @ticket.update_attributes(:status => "open")
       flash[:notice1] = "Ticket Opened"
     end
-    redirect_to ticket_path
-
+    if current_user.admin
+      redirect_to "/admin/ticket/#{@ticket.id}"
+    else
+      redirect_to ticket_path
+    end
   end
   private
   def ticket_params

@@ -75,6 +75,11 @@ Rails.application.routes.draw do
 
   #Admin Related controller
   get '/admin' => "admin#index"
+  get '/admin/index' => "admin#index"
+  get '/admin/instances' => "admin#instances"
+  get '/admin/tickets' => "admin#tickets"
+  get '/admin/ticket/:ticketid' => "admin#tickets"
+  get '/admin/users' => "admin#users"
   root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
