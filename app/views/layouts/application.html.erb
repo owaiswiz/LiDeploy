@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Demo</title>
+  <title><%= content_for?(:title) ? content_for(:title) : "LiDeploy" %></title>
   <% if devise_controller? %>
     <%= stylesheet_link_tag 'application', 'sessions',media: 'all' %>
     <%= javascript_include_tag 'application' %>

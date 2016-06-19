@@ -1,3 +1,4 @@
+<% title "Records" %>
 <% content_for :head do %>
   <style>
     .add-record{
@@ -159,7 +160,7 @@
     <div class="add-record">
       <h3>Select Record Type</h3>
       <div class="new-record-form">
-        <%= simple_form_for(@newrecord,:url => add_record_path,method: :post,defaults: {label: false,error_html: { class: 'rederror'}},html:{class: "new-record-form"}) do |f| %>
+        <%= simple_form_for(@newrecord,url: add_record_path,method: :post,defaults: {label: false,error_html: { class: 'rederror'}},html:{class: "new-record-form"}) do |f| %>
         <div class="record-types">
           <div class="row">
             <div class="col-md-2" data-toggle="">
@@ -289,17 +290,17 @@
       </div>
     </div>
 	</div>
-  <% if @records.first.id.nil? %>
+  <% if @records.first.nil? %>
     <h2 class="no-records">This domain has no records !</h2>
   <% else %>
   <div class="records">
     <h2>Current Records</h2>
     <div class="record-list">
       <% @records.each do |record| %>
-        <% if !record.id.nil? %>
+        <% if !record.nil? %>
           <div class="record">
             <div class="row">
-              <%= render :partial => "records/shared/#{record.record_type.downcase}",:locals => {:record => record} %>
+              <%= render partial: "records/shared/#{record.record_type.downcase}",locals: {record: record} %>
             </div>
           </div>
         <% end %>

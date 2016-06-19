@@ -1,3 +1,4 @@
+<% title "Instances" %>
 <% content_for :head do %>
  	<style>
 	  .dropdown-menu {
@@ -35,6 +36,10 @@
       color: #D91E18;
     }
     /*tablecss*/
+    td{
+      padding-top: 15px !important;
+      padding-bottom: 15px !important;
+      }
     .theader>th{
       text-align: center;
       font-family: 'quicksandbold';
@@ -46,6 +51,7 @@
       font-family: 'quicksandregular';
       font-size: 120%;
       font-weight: 600;
+      border: 0 !important;
       vertical-align: middle !important;
     }
     .instname{
@@ -58,9 +64,34 @@
     }
  	</style>
   <script>
+    var refreshInstances;
     var autoRefresh;
     $(document).ready(function(){
-      var autoRefresh = setInterval(function(){$('.instancelist').load('/api/get/instances');},20000);
+      var instances = $(".trow");
+      var intervalDuration = 15000 * (instances.length);
+      console.log("ID=" + intervalDuration);
+      console.log("IL=" + instances.length);
+      refreshInstances = function(offset){
+        var timeoutDuration = 0;
+        console.log("RefreshInstances was called with offset="+offset);
+        $(instances).each(function(){
+          var id=$(this).attr('id');
+          if(!$(this).hasClass("loading"))
+          {
+            $(this).addClass("loading");
+            var t = setTimeout(function() {
+              $("#" + id).load('/api/get/instances?id=' + id,function(){
+                $('#' + id).removeClass("loading");
+              });
+            }, timeoutDuration);
+            timeoutDuration += offset;
+          }
+        });
+      }
+      if(instances.length > 0){
+        refreshInstances(1000);
+        var autoRefresh = setInterval(function(){refreshInstances(8000)},intervalDuration);
+      }
     });
     $(window).unload(function(){
       clearInterval(autoRefresh);
@@ -68,5 +99,80 @@
   </script>
 <% end %>
 <div class="container instancelist feature-box">
-  <%= render 'instances/shared/index' %>
+  <% if @instances.blank? %>
+  	<h1> Create An Instance </h1>
+  	<i class="fa fa-server fa-5x"></i>
+  	<h2> You don't seem to have any instances </h2>
+  	<h3> Create One Now with just a Few Clicks ! </h3>
+  	<a class="btn btn-default signupbutton" href="/instances/new/" style="width: 50% !important;" role="button">Create Instance</a>
+  <% else %>
+  	<table class="table table-sm">
+  		<thead>
+  			<tr class="theader">
+  				<th>Distribution</th>
+  				<th>Name</th>
+  				<th>IP Address</th>
+  				<th>Status</th>
+          <th>Expires</th>
+  				<th></th>
+  			</tr>
+  		</thead>
+  		<tbody>
+  			<% Array(@instances).each do |inst| %>
+  				<tr class="trow" id="<%= inst.id %>">
+  					<td><img src="/assets/<%= inst.distro.downcase %>-32.png" alt="<%=inst.distro%>"></td>
+  					<td>
+              <%if inst.disk? %>
+                <span class="instname"><%= inst.name%></span><br/>
+                <span class ="instdetails"><%=inst.size.upcase%> Memory / <%= inst.disk%>GB Disk</span>
+              <%else%>
+                <span class="instname"><%= inst.name%>
+              <%end%>
+            </td>
+  					<td><%= inst.ip_address %></td>
+  					<td class="Def <%= inst.status.capitalize.delete(' ') %>">
+  						<%if inst.status.capitalize == "New" %>
+  							Creating Instance
+  						<%else%>
+  							<%= inst.status.capitalize %>
+  						<%end%>
+  					</td>
+            <td>
+              <% if inst.disk? %>
+                <%= inst.expires.strftime('%-d %B %Y') %>
+              <%else%>
+                <span class="Def">-</span>
+              <%end%>
+            </td>
+            <td>
+  					<% if inst.disk? %>
+  						<div class="btn-group">
+                <% if inst.status == "new" || inst.status == "Resizing" || inst.status == "Shutting Down" || inst.status == "Starting" %>
+                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>Action</button>
+                <% else %>
+  								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+  								<div class="dropdown-menu">
+                    <% if inst.status == "Powered Off" %>
+                      <%= button_to "Start",start_instance_path(:id=> inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Start Instance" %>
+                    <% else %>
+                      <%= button_to "Shutdown",shutdown_instance_path(:id=>inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Shutdown Instance" %>
+                      <%= button_to "Restart",restart_instance_path(:id => inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Restart Instance" %>
+                    <% end %>
+                    <%= button_to "Renew",renew_put_instance_path(:id => inst.id),method: :put,:class => "btn btn-primary dropdown-item",:title => "Renew Instance" %>
+                    <%= button_to "Resize",resize_instance_path(:id => inst.id),method: :post,:class => "btn btn-primary dropdown-item",:titke => "Resize Instance" %>
+                    <%= button_to "Destroy",instances_path(:id => inst.id),method: :delete,:class => "btn btn-primary destroy dropdown-item",:title => "Destroy this Instance?",data: {:confirm => "This Action is irreversible<br/>Be Certain!"}%>
+                  </div>
+                <% end %>
+  						</div>
+              <% else%>
+                <% if inst.status != "new" %>
+                  <%= button_to "Delete",instances_path(:id => inst.id),method: :delete,:class => "btn btn-primary destroy dropdown-item" %>
+                <%end%>
+            <% end %>
+  					</td>
+  				</tr>
+  			<% end %>
+  		</tbody>
+  	</table>
+  <% end %>
 </div>

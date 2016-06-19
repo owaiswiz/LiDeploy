@@ -1,6 +1,6 @@
 class RecordsController < ApplicationController
   def index
-    @domains = current_user.domains
+    @domains = current_user.domains.recent
     @newdomain = Domain.new
     @instances = current_user.instances
   end

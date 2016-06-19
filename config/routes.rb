@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   get '/' => 'home#index'
   post '/instances' => 'instances#index'
   get '/instances/' => 'instances#index'
-  get '/api/get/instances' => 'instances#index'
+  get '/api/get/instances' => 'instances#update_instance'
   get '/instance/new' => "instances#new"
   post '/instance/new' => "instances#create"
   delete '/instances/' => "instances#destroy"

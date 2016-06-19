@@ -1,0 +1,50 @@
+<td><img src="/assets/<%= @vinst.distro.downcase %>-32.png" alt="<%=@vinst.distro%>"></td>
+<td>
+	<%if @vinst.disk? %>
+		<span class="instname"><%= @vinst.name%></span><br/>
+		<span class ="instdetails"><%=@vinst.size.upcase%> Memory / <%= @vinst.disk%>GB Disk</span>
+	<%else%>
+		<span class="instname"><%= @vinst.name%>
+	<%end%>
+</td>
+<td><%= @vinst.ip_address %></td>
+<td class="Def <%= @vinst.status.capitalize.delete(' ') %>">
+	<%if @vinst.status.capitalize == "New" %>
+		Creating Instance
+	<%else%>
+		<%= @vinst.status.capitalize %>
+	<%end%>
+</td>
+<td>
+	<% if @vinst.disk? %>
+		<%= @vinst.expires.strftime('%-d %B %Y') %>
+	<%else%>
+		<span class="Def">-</span>
+	<%end%>
+</td>
+<td>
+<% if @vinst.disk? %>
+	<div class="btn-group">
+		<% if @vinst.status == "new" || @vinst.status == "Resizing" || @vinst.status == "Shutting Down" || @vinst.status == "Starting" %>
+			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>Action</button>
+		<% else %>
+			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+			<div class="dropdown-menu">
+				<% if @vinst.status == "Powered Off" %>
+					<%= button_to "Start",start_instance_path(:id=> @vinst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Start Instance" %>
+				<% else %>
+					<%= button_to "Shutdown",shutdown_instance_path(:id=>@vinst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Shutdown Instance" %>
+					<%= button_to "Restart",restart_instance_path(:id => @vinst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Restart Instance" %>
+				<% end %>
+				<%= button_to "Renew",renew_put_instance_path(:id => @vinst.id),method: :put,:class => "btn btn-primary dropdown-item",:title => "Renew Instance" %>
+				<%= button_to "Resize",resize_instance_path(:id => @vinst.id),method: :post,:class => "btn btn-primary dropdown-item",:titke => "Resize Instance" %>
+				<%= button_to "Destroy",instances_path(:id => @vinst.id),method: :delete,:class => "btn btn-primary destroy dropdown-item",:title => "Destroy this Instance?",data: {:confirm => "This Action is irreversible<br/>Be Certain!"}%>
+			</div>
+		<% end %>
+	</div>
+	<% else%>
+		<% if @vinst.status != "new" %>
+			<%= button_to "Delete",instances_path(:id => @vinst.id),method: :delete,:class => "btn btn-primary destroy dropdown-item" %>
+		<%end%>
+<% end %>
+</td>

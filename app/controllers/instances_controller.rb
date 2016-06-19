@@ -17,54 +17,6 @@ class InstancesController < ApplicationController
 	#List all Instances of A Particular User
 	def index
 		@instances = current_user.instances
-		begin
-			Array(@instances).each do |inst|
-			 	client = DropletKit::Client.new(access_token: inst.api_key)
-				tries = 0
-				begin
-					instance = client.droplets.find(id: inst.instanceid)
-					if instance.status == 'off'
-						if inst.status == 'active' || inst.status == 'Not Found'
-							status = 'Powered Off'
-						elsif inst.status == 'Shutting Down'
-							status = 'Powered Off'
-							inst.update_attributes(:action => nil)
-						else
-							status = inst.status
-						end
-					elsif inst.status == 'Shutting Down' && (client.actions.find(id: inst.action).status == 'in-progress' || client.actions.find(id:inst.action).status == 'completed')
-						status = inst.status
-					else
-						status = instance.status
-					end
-					inst.update_attributes(:ip_address => instance.networks.v4[0].ip_address,:vcpus => instance.vcpus,:disk => instance.disk,:status => status)
-					if inst.temp_status == "Renewed"
-						flash[:notice] = "Renewed Successfully"
-						inst.update_attributes(:temp_status => nil)
-					elsif inst.temp_status == "Resized"
-						if inst.status == 'Resizing' && (client.actions.find(id: inst.action).status == "completed")
-							client.droplet_actions.power_on(droplet_id: inst.instanceid)
-							inst.update_attributes(:status => "Starting",:temp_status => nil,:action => nil)
-							flash[:notice] = "Resized Successfully"
-							flash[:notice1] = "Instance Started"
-						end
-					end
-				rescue
-					if inst.status == "Payment Failed"
-						flash[:notice] = "Payment Not Completed for #{inst.name}.Please Contact us at support@lideploy.com for further help"
-					elsif inst.status != 'Waiting for Payment Confirmation'
-						tries += 1
-						retry if tries < 2
-						inst.update_attributes(:status => "Not Found",:ip_address => nil,:disk => nil)
-					end
-				end
-			end
-		rescue
-			flash[:alert] = "An Unknown Error occurred.Please try again later."
-		end
-		if request.original_fullpath.match(/\/api\/get\/instances/)
-			render 'instances/shared/_index',:layout => false
-		end
 	end
 	#Start an Instance
 	def start
@@ -164,6 +116,58 @@ class InstancesController < ApplicationController
 		instance.update_attributes(:temp_status => "Resizing",:duration => params[:instance][:duration])
 		instance.size=params[:instance][:size]
 		redirect_to instance.paypal_url(instance)
+	end
+
+	def update_instance
+		inst = current_user.instances.find(params[:id])
+		@vinst = inst
+		begin
+			tries = 0
+			client = DropletKit::Client.new(access_token: inst.api_key)
+			if !inst.action.nil?
+				actionstatus = client.actions.find(id:inst.action).status
+			end
+			begin
+				instance = client.droplets.find(id: inst.instanceid)
+				if instance.status == 'off'
+					if inst.status == 'active' || inst.status == 'Not Found'
+						status = 'Powered Off'
+					elsif inst.status == 'Shutting Down'
+						status = 'Powered Off'
+						inst.update_attributes(action: nil)
+					else
+						status = inst.status
+					end
+				elsif inst.status == 'Shutting Down' && (actionstatus == 'in-progress' || actionstatus == 'completed')
+					status = inst.status
+				else
+					status = instance.status
+				end
+				inst.update_attributes(ip_address: instance.networks.v4[0].ip_address,vcpus: instance.vcpus,disk: instance.disk,status: status)
+				if inst.temp_status == "Renewed"
+					flash[:notice] = "Renewed Successfully"
+					inst.update_attributes(temp_status: nil)
+				elsif inst.temp_status == "Resized"
+					if inst.status == 'Resizing' && (actionstatus == "completed")
+						client.droplet_actions.power_on(droplet_id: inst.instanceid)
+						inst.update_attributes(status: "Starting",temp_status: nil,action: nil)
+						flash[:notice] = "Resized Successfully"
+						flash[:notice1] = "Instance Started"
+					end
+				end
+			rescue => e
+				if inst.status == "Payment Failed"
+					flash[:notice] = "Payment Not Completed for #{inst.name}.Please Contact us at support@lideploy.com for further help"
+				elsif inst.status != 'Waiting for Payment Confirmation'
+					tries += 1
+					retry if tries < 2
+					inst.update_attributes(status: "Not Found",ip_address: nil,disk: nil)
+				end
+			end
+		rescue => e
+			flash[:alert] = "An Unknown Error occurred.Please try again later."
+		end
+		render "instances/shared/update_instance",layout: false
 	end
 
 	protect_from_forgery except: [:hook]

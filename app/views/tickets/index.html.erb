@@ -1,3 +1,4 @@
+<% title "Support" %>
 <%= content_for :head do %>]
   <script>
     $(document).ready(function(){
@@ -99,15 +100,15 @@
         </div>
         <div class="new-reply">
           <h4 class="reply-heading">Reply</h4>
-          <%= simple_form_for(@newreply,:url => "/support/ticket/#{params[:ticketid]}",:method => :put,defaults: {label: false,error_html: { class: 'rederror'}}) do |f| %>
+          <%= simple_form_for(@newreply,url: "/support/ticket/#{params[:ticketid]}",method: :put,defaults: {label: false,error_html: { class: 'rederror'}}) do |f| %>
             <%= f.input :reply,placeholder: "Describe the problem you need assistance with in detail.",required: true %>
             <div class="row reply-submit">
               <div class="col-md-12">
                 <% if @ticket.status == "open" %>
-                  <%= f.button :submit,:class=> "btn reply-submit-button createreply",name: "status",value:"Submit Reply"%>
-                  <%= f.button :submit,:class=>"btn reply-submit-button closeticket",name: "status",value: "Close Ticket"%>
+                  <%= f.button :submit,class: "btn reply-submit-button createreply",name: "status",value:"Submit Reply"%>
+                  <%= f.button :submit,class: "btn reply-submit-button closeticket",name: "status",value: "Close Ticket"%>
                 <% else %>
-                  <%= f.button :submit,:class=> "btn reply-submit-button createreply",name: "status",value:"Submit Reply and Open Ticket"%>
+                  <%= f.button :submit,class: "btn reply-submit-button createreply",name: "status",value:"Submit Reply and Open Ticket"%>
                 <% end %>
               </div>
           </div>
@@ -116,10 +117,10 @@
       <% else %>
         <div class="newticket">
           <h3>Create New Support Ticket</h3>
-          <%= simple_form_for(@newticket,:url => "/support/tickets/create",:method => :post, defaults: {label: false,error_html: { class: 'rederror'}}) do |f| %>
+          <%= simple_form_for(@newticket,:url => "/support/tickets/create",method: :post, defaults: {label: false,error_html: { class: 'rederror'}}) do |f| %>
               <%= f.input :title,placeholder: "Subject",required:true %>
               <%= f.input :message,placeholder: "Describe the problem you need assistance with in detail.",required: true %>
-              <%= f.button :submit, "Create Ticket",:class=> "bluebutton" %>
+              <%= f.button :submit, "Create Ticket",class: "bluebutton",style: "border-radius: 3px !important"%>
           <% end %>
         </div>
       <% end %>
