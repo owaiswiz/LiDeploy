@@ -1,9 +1,9 @@
-Hello <%= @user.username %>,
-Your ticket on "<%= @reply.ticket.title %>" just received a reply:
+Hello <%= @mticket.created_by %>,
+Your ticket on "<%= @mticket.title %>" just received a reply:
 <%=@reply.reply%>
 ---
 
-To view or reply to the ticket,please visit this link: https://lideploy.com/support/ticket/<%=@reply.ticket.id%>
+To view or reply to the ticket,please visit this link: https://lideploy.com/support/ticket/<%=@mticket.id%>
 
 Regards,
 LiDeploy Support Team.

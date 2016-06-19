@@ -32,7 +32,7 @@
             <a id="<%=ticket.id%>" class="ticket <%=ticket.status%>" href="/admin/ticket/<%=ticket.id%>">
               <div class="row">
                 <div class="col-md-12">
-                  <span class="username"><%= User.find(ticket.user_id).username %></span>
+                  <span class="username"><%= ticket.created_by %></span>
                   <span class="date"><%=time_ago_in_words(ticket.updated_at).gsub('about','') %> ago </span>
                 </div>
               </div>
@@ -52,7 +52,7 @@
           <div class="message-info row">
             <div class="col-md-12">
               <span class="message-user username">
-                <%= User.find(@ticket.user_id).username %>
+                <%= @ticket.created_by %>
               </span>
               <span class="message-date date">
                 Created <%= time_ago_in_words(@ticket.created_at) %> ago

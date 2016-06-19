@@ -36,6 +36,7 @@ class TicketsController < ApplicationController
   def create
     ticket = current_user.tickets.new(ticket_params)
     ticket.status = "open"
+    ticket.last_reply_from,ticket.created_by = [current_user.username] * 2
     if ticket.save
       redirect_to view_tickets_path
     end
@@ -50,9 +51,9 @@ class TicketsController < ApplicationController
       reply = ticket.replies.new(reply_params)
       reply.from = current_user.username
       if reply.save
-        ticket.update_attributes(updated_at: Time.now)
+        ticket.update_attributes(last_reply_from: current_user.username)
         flash[:notice] = "Reply Submitted"
-        if reply.from != ticket.user.username
+        if reply.from != ticket.created_by
           SendTicketEmailJob.set(wait: 20.seconds).perform_later(reply)
         end
       else

@@ -1,8 +1,8 @@
-Hello <%= @user.username %>,<br>
-Your ticket on "<%= @reply.ticket.title %>" just received a reply:<br>
+Hello <%= @mticket.created_by %>,<br>
+Your ticket on "<%= @mticket.title %>" just received a reply:<br>
 <%=simple_format(@reply.reply)%>
 ---<br><br>
-To view or reply to the ticket,please visit this link: https://lideploy.com/support/ticket/<%=@reply.ticket.id%><br>
+To view or reply to the ticket,please visit this link: https://lideploy.com/support/ticket/<%=@mticket.id%><br>
 <br>
 Regards,<br>
 LiDeploy Support Team.<br>

@@ -1,7 +1,4 @@
-<%= content_for :head do %>
-  <style>
-
-  </style>
+<%= content_for :head do %>]
   <script>
     $(document).ready(function(){
       $(".ticket#<%=params[:ticketid]%>").addClass("current");
@@ -45,12 +42,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <span class="username">
-                    <% if ticket.replies.first.nil? %>
-                      <%= current_user.username %>
-                    <% else %>
-                    <!-- Optimize THIS -->
-                      <%= ticket.replies.last.from %>
-                    <% end %>
+                    <%= ticket.last_reply_from %>
                   </span>
                   <span class="date"><%=time_ago_in_words(ticket.updated_at).gsub('about','') %> ago </span>
                 </div>

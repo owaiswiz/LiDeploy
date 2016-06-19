@@ -1,9 +1,7 @@
 class SendTicketEmailJob < ActiveJob::Base
   queue_as :default
 
-  def perform(reply)
-    # Do something later
-    @reply = reply
-    TicketMailer.newreply(@reply).deliver_later
+  def perform(replyobj)
+    TicketMailer.newreply(replyobj).deliver_later
   end
 end
