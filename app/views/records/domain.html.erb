@@ -49,28 +49,13 @@
     function ipValidator(e,errName,inputObj,ipRegex){
       var ipVal = $(inputObj).val();
       if(!ipRegex.test(ipVal)){
-        $.notify({message: "Invalid " + errName});
+        $.notify({icon:"fa fa-2x fa-exclamation-cirlce",message: "Invalid " + errName});
         e.preventDefault();
       }
     }
     $(document).ready(function(){
       $.notifyDefaults({
-        type: "danger",
-        allow_dismiss: false,
-        delay: 3000,
-        offset:{
-          x: 20,
-          y: 100
-        },
-        spacing:25,
-        animate: {
-		        enter: 'animated bounceInRight',
-		        exit: 'animated bounceOutRight'
-	      },
-        template: '<div data-notify="container" class="notify-alert col-xs-10 col-sm-2 alert alert-{0}" role="alert">' +
-                      '<div data-notify="icon" class="notify-icon" ><i class="fa fa-2x fa-exclamation-triangle"></i></div>' +
-                      '<span data-notify="message" class="notify-message">{2}</span>' +
-                  '</div>'
+        type: "danger"
       });
       $(".update-record input[type=text],.update-record input[type=number]").each(function(){
         toolTipTitle = $(this).attr('placeholder');
@@ -151,7 +136,6 @@
       });
     });
   </script>
-  <link rel="stylesheet" href="http://s.mlcdn.co/animate.css">
 <% end %>
 <div class="container feature-box" style="text-align: left;">
   <h1 class="domain-title"><%= @domain.name %></h1>

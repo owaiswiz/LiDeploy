@@ -5,22 +5,6 @@ $mainbordercolor:  #e4e4e4;
 $mainborderwidth: 1px;
 $separatorbordercolor: #e4e4e4;
 $materialred: #e57373;
-.notify-alert{
-  border: 2px solid $materialred;
-  border-radius: 2px;
-  background-color: white;
-  color: $materialred;
-  // font-size: 1.2em;
-  font-weight: bolder;
-  text-align: center;
-  span{
-    font: normal normal bolder 1.2em/1 'quicksandregular';
-    text-align: center;
-  }
-  .notify-icon{
-    padding:10px;
-  }
-}
 
 .no-domains,.no-records{
   text-align: center;

@@ -19,6 +19,12 @@
         });
         return true;
       });
+      <% flash.each do |key, value| %>
+        <% if value.length > 0 %>
+          <% if key == "notice" || key == "notice1" then alert_class = "success" elsif key == "alert" then alert_class = "danger" else alert_class = key end %>
+            $.notify({message:"<%= value%>"},{type:"<%= alert_class %>",delay:5000})
+        <% end %>
+      <% end %>
     });
   </script>
   <%= csrf_meta_tags %>
@@ -31,15 +37,6 @@
 <% elsif %>
 	<body class="page-top">
 		<%= render 'shared/navbar' %>
-<% end %>
-<% flash.each do |key, value| %>
-  <% if value.length > 0 %>
-    <% if key == "notice" || key == "notice1" then alert_class = "success" elsif key == "alert" then alert_class = "danger" else alert_class = key end %>
-    <%= content_tag :div, class: "alert alert-#{alert_class}" do %>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <%= value%>
-    <% end %>
-  <% end %>
 <% end %>
 <div class="main-container">
 <div class="content-container">

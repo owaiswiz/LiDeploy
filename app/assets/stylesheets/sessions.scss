@@ -10,9 +10,6 @@
     border-radius: 3px;
     background: #3190e7;
 }
-.alert{
-  margin-top:0px !important;
-}
 .etos{
   font-size:12px;
   font-family: 'quicksandbold';
@@ -25,5 +22,11 @@
     border: none;
     color:#34495E;
     border-bottom: 1px dotted #34495e;
+  }
+}
+.notify-alert,.notify-icon{
+  background-color: #3190e7 !important;
+  span{
+    font-family: 'quicksandbold' !important;
   }
 }
