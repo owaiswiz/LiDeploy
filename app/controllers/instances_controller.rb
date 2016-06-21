@@ -102,8 +102,8 @@ class InstancesController < ApplicationController
 			@instance = current_user.instances.find(params[:id])
 			raise "Not Found" if @instance.nil?
 			if @instance.status != "Powered Off" && @instance.size != "2gb"
-				shutdown
 				flash[:notice1] = "Try resizing when instance is Powered Off"
+				shutdown
 			end
 		rescue
 			flash[:notice] = "Instance Not Found or Unknown State"
@@ -145,19 +145,19 @@ class InstancesController < ApplicationController
 				end
 				inst.update_attributes(ip_address: instance.networks.v4[0].ip_address,vcpus: instance.vcpus,disk: instance.disk,status: status)
 				if inst.temp_status == "Renewed"
-					flash[:notice] = "Renewed Successfully"
+					flash.now[:notice] = "Renewed Successfully"
 					inst.update_attributes(temp_status: nil)
 				elsif inst.temp_status == "Resized"
 					if inst.status == 'Resizing' && (actionstatus == "completed")
 						client.droplet_actions.power_on(droplet_id: inst.instanceid)
 						inst.update_attributes(status: "Starting",temp_status: nil,action: nil)
-						flash[:notice] = "Resized Successfully"
-						flash[:notice1] = "Instance Started"
+						flash.now[:notice] = "Resized Successfully"
+						flash.now[:notice1] = "Instance Started"
 					end
 				end
 			rescue => e
 				if inst.status == "Payment Failed"
-					flash[:notice] = "Payment Not Completed for #{inst.name}.Please Contact us at support@lideploy.com for further help"
+					flash.now[:notice] = "Payment Not Completed for #{inst.name}.Please Contact us at support@lideploy.com for further help"
 				elsif inst.status != 'Waiting for Payment Confirmation'
 					tries += 1
 					retry if tries < 2
@@ -165,7 +165,7 @@ class InstancesController < ApplicationController
 				end
 			end
 		rescue => e
-			flash[:alert] = "An Unknown Error occurred.Please try again later."
+			flash.now[:alert] = "An Unknown Error occurred.Please try again later."
 		end
 		render "instances/shared/update_instance",layout: false
 	end
@@ -188,8 +188,6 @@ class InstancesController < ApplicationController
 					droplet = DropletKit::Droplet.new(name: instance.name,region: instance.region,size: instance.size,image: instance.image)
 					created = client.droplets.create(droplet)
 					instance.update_attributes(:instanceid => created.id,:status => created.status,:api_key => current_do_key,:expires => Time.now+instance.duration.months)
-				else
-					flash[:notice] = "Instance Already Created"
 				end
 			else
 				instance.update_attributes(:status=> "Payment Failed")

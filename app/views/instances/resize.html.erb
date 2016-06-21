@@ -44,7 +44,7 @@
       <br/>
     </div>
     <h2 class ="resize header">Current Plan</h2>
-    <div class="btn" data-toggle="buttons">
+    <div class="btn-group">
       <div class="btn low sizes">
         <div class="dis prices text">
           <h3><sup>$</sup>6/Month</h3>
@@ -94,8 +94,7 @@
         <%= simple_form_for(@instance,:url => resize_process_instance_path(id: @instance.id),method: :post, defaults: {label: false,error_html: { class: 'rederror'}},html: { autocomplete: 'off',id: 'resizeinstance'}) do |f| %>
           <h2 class="resize header">Resize To</h2>
           <div class = "size">
-            <div class="btn inform" data-toggle="buttons">
-              <br>
+            <div class="btn-group inform" data-toggle="buttons">
               <% if @instance.size == "512mb"%>
                 <%= render 'instances/shared/mid',f: f%>
                 <%= render 'instances/shared/high',f: f%>
@@ -106,7 +105,7 @@
           </div>
           <h2 class="renew header">Select New Instance Duration</h2>
           <div class ="duration">
-            <div class="btn-group" data-toggle="buttons">
+            <div class="btn-group" style="margin:20px;" data-toggle="buttons">
       				<label class="btn btn-primary onemonth">
       					<%= f.radio_button :duration,1,:checked => false %>
       					1 Month
