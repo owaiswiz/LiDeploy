@@ -64,6 +64,7 @@ class RecordsController < ApplicationController
       crecord = client.domain_records.create(newrecord, for_domain: params[:domainname])
       if !crecord.id.nil?
         record = domain.records.create(record_type: crecord.type,name: crecord.name,data: crecord.data,port:crecord.port,weight:crecord.weight,priority: crecord.priority,record_id: crecord.id)
+        flash[:notice] = "Record Created Successfully"
       else
         flash[:alert] = "Error Occured while saving record"
       end

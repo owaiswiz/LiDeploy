@@ -38,6 +38,7 @@ class TicketsController < ApplicationController
     ticket.status = "open"
     ticket.last_reply_from,ticket.created_by = [current_user.username] * 2
     if ticket.save
+      flash[:notice] = "Ticket Created"
       redirect_to view_tickets_path
     end
   end

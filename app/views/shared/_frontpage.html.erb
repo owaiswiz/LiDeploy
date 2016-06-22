@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">
 	<div class="muhmaincontent">
 		<div class="muhleft">
 			<h1 class="light">
@@ -16,4 +16,63 @@
 			<img src="/assets/front/frontcloud.png" style="margin-top:25px;width:95%;padding-bottom:30px;" />
 		</div>
 	</div>
+</div>
+-->
+<% content_for :head do %>
+	<script>
+		var who = ["Bloggers","Designers","Simple Deployments","You"];
+		var rClass = ["developers","bloggers","designers","designers","deploy"];
+		var aClass = ["bloggers","designers","deploy","you"]
+		var timeout = 2000;
+		$(who).each(function(index){
+			setTimeout(function(){
+				$(".for").text(who[index]);
+				$(".for").closest(".text-header").removeClass(rClass[index]).addClass(aClass[index]);
+			},4000+timeout);
+			timeout = timeout+4000;
+		});
+	</script>
+	<style>
+		.text-header{
+			width: 100%;
+			margin:0;
+			padding:0;
+			border:0;
+			line-height: 2;
+			padding:20px 80px 50px;
+			background-color: #d5e8fa;
+			min-height: 550px;
+			min-width: 720px;
+			background-repeat: no-repeat;
+			background-position: center -20px;
+		}
+		.developers{
+			background-image: url("/assets/front/developers.png");
+		}
+		.bloggers{
+			background-image: url("/assets/front/bloggers.png");
+		}
+		.designers{
+			background-image: url("/assets/front/designers.png")
+		}
+		.deploy{
+			background-image: url("/assets/front/deploy.png")
+		}
+		.you{
+			background-image: url("/assets/front/you.png")
+		}
+		.dynamic-text{
+			font-family: 'quicksandregular';
+			font-weight: bolder;
+			font-size: 3em;
+			text-align:center;
+			margin:5px;
+		}
+	</style>
+
+<% end %>
+<div class="text-header developers">
+		<div class="dynamic-text">
+			<span>Powerful Cloud Hosting for <br><span class="for">Developers</span>.</span>
+		</div>
 </div>
