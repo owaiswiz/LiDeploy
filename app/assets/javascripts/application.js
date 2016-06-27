@@ -13,7 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
-
+//= require turbolinks
+//= require turbolinks-compatibility
 //data-confirm-modal
 /*
  * Implements a user-facing modal confirmation when link has a

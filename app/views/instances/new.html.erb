@@ -1,7 +1,7 @@
 <% title "Create Instance" %>
 <% content_for :head do %>
 	<script>
-		$(document).ready(function() {
+		$(document).on('turbolinks:load',function() {
 			//checks to see if host name is valid
 			$("#instance_name").on('keyup change',function(){
 			var inst_regex = /^[a-zA-Z0-9]+[a-z0-9A-Z.-]+[a-z0-9A-Z]$/g;
@@ -70,7 +70,7 @@
 	<%= simple_form_for(@newinstance, defaults: {label: false,error_html: { class: 'rederror'}}) do |f| %>
 		<%= f.error_notification %>
 		<div class="form-inputs">
-	  	<h1 style="font-weight:bolder;margin-top:50px;">Create An Instance</h2>
+	  	<h1 class="container" style="font-weight:bolder;margin-top:50px;">Create An Instance</h2>
 	  	<div class="container feature-box">
 		  	<h3>Select Your Distribution</h3>
 		  </div>
@@ -275,11 +275,15 @@
 		    </div>
 	  	</div>
 		  <div class="container feature-box">
-				<h3>Select Server's Location</h3>
+				<h3>Select Instance's Location</h3>
 	  		<div class="btn-group" data-toggle="buttons">
 		  		<div class="btn netherland region">
 		  			<%= f.radio_button :region,'ams2' %>
 		  			<p>Amsterdam</p>
+		  		</div>
+					<div class="btn india region">
+		  			<%= f.radio_button :region,'blr1' %>
+		  			<p>Bangalore</p>
 		  		</div>
 		  		<div class="btn germany region">
 			  		<%= f.radio_button :region,'fra1' %>

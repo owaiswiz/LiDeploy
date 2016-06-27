@@ -41,7 +41,7 @@
 				$(".theme-img").attr('src',"/assets/front/" + group[index] + ".png");
 				$(".for,.theme-img").removeClass("fadeOut").addClass("fadeIn");
 				if(group[index] == "you"){
-					$(".for").delay(1000).queue(function(next){$(".for").removeClass("animated fadeIn").addClass("animated flash");next();});
+					$(".for").delay(1000).queue(function(next){$(".for").removeClass("animated fadeIn").addClass("animated flash").css("animation-iteration-count",'2');next();});
 				}
 				// $(".for").closest(".text-header").css("background-image","url('/assets/front/" + aClass[index] + ".png')");
 				next();

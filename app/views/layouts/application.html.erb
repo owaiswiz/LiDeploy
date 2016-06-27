@@ -2,15 +2,9 @@
 <html>
 <head>
   <title><%= content_for?(:title) ? content_for(:title) : "LiDeploy" %></title>
-  <% if devise_controller? %>
-    <%= stylesheet_link_tag 'application', 'sessions',media: 'all' %>
-    <%= javascript_include_tag 'application' %>
-  <% else %>
-    <%= stylesheet_link_tag    'application', params[:controller], media: 'all' %>
-    <%= javascript_include_tag 'application', params[:controller]%>
-  <% end %>
+  <%= stylesheet_link_tag    'application',media: 'all' %>
+  <%= javascript_include_tag 'application'%>
   <%= favicon_link_tag 'Lideployfavicon.png',type: 'image/png' %>
-  <%= yield :head %>
   <script>
     $(document).ready(function(){
       $("form").submit(function() {
@@ -19,25 +13,31 @@
         });
         return true;
       });
-      <% flash.each do |key, value| %>
-        <% if value.length > 0 %>
-          <% if key == "notice" || key == "notice1" then alert_class = "success" elsif key == "alert" then alert_class = "danger" else alert_class = key end %>
-            $.notify({message:"<%= value%>"},{type:"<%= alert_class %>",delay:5000})
-        <% end %>
-      <% end %>
     });
   </script>
   <%= csrf_meta_tags %>
 </head>
 <% if ["sessions","registrations","passwords","confirmations"].include?(controller_name) %>
 	<body class="bluer">
+    <%= stylesheet_link_tag 'sessions', media: 'all' %>
     <div class="form container new_user" style="text-align:center;">
       <a href="/"><img src="/assets/lideploy.png" width="42px";></a><a href="/" class="btn header-logo header-text" style="color:#333;margin-top:6px !important;font-size:35px;">LiDeploy</a>
     </div>
 <% elsif %>
 	<body class="page-top">
+    <%= stylesheet_link_tag    controller_name, media: 'all' %>
+    <%= javascript_include_tag controller_name%>
 		<%= render 'shared/navbar' %>
 <% end %>
+<script>
+  <% flash.each do |key, value| %>
+    <% if value.length > 0 %>
+      <% if key == "notice" || key == "notice1" then alert_class = "success" elsif key == "alert" then alert_class = "danger" else alert_class = key end %>
+        $.notify({message:"<%= value%>"},{type:"<%= alert_class %>",delay:5000})
+    <% end %>
+  <% end %>
+</script>
+<%= yield :head %>
 <div class="main-container">
 <div class="content-container">
   <%= yield %>
