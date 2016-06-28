@@ -1,0 +1,96 @@
+<% content_for :head do %>
+<link href="https://fonts.googleapis.com/css?family=Raleway:800" rel="stylesheet">
+	<style>
+		.text-header{
+			width: 100%;
+			margin:0;
+			padding:0;
+			border:0;
+			line-height: 2;
+			padding:20px 80px 50px;
+			background-color:#e4f0fb;
+			min-height: 550px;
+			min-width: 720px;
+			position: relative
+		}
+		.text-header img{
+			opacity: 1;
+			position:absolute;
+			left: 50%;
+			margin-left:-400px;
+			right:0;
+			bottom:15px;
+		}
+		.dynamic-text{
+			font-family: 'Raleway', sans-serif;
+			text-transform: uppercase;
+			font-weight: bolder;
+			font-size: 3em;
+			text-align:center;
+			margin:5px;
+		}
+	/*	.preload-01 { background: url(/assets/front/bloggers.png) no-repeat -9999px -9999px; }
+		.preload-02 { background: url(/assets/front/designers.png) no-repeat -9999px -9999px; }
+		.preload-03 { background: url(/assets/front/deploy.png) no-repeat -9999px -9999px; }
+		.preload-04 { background: url(/assets/front/you.png) no-repeat -9999px -9999px; }
+*/
+	</style>
+	<script>
+	var who = ["Bloggers.","Designers.","Simple Deployments.","You."];
+	var group = ["bloggers","designers","deploy","you"];
+	var timeout = 0;
+	$(document).ready(function(){
+		$(who).each(function(index){
+			setTimeout(function(){
+				/*$(".for,.theme-img").removeClass("fadeIn").addClass("fadeOut").delay(1000).queue(function(next){
+					$(".for").text(who[index]);
+					$(".theme-img").attr('src',"/assets/front/" + group[index] + ".png").delay(500).queue(function(next){
+					$(".for,.theme-img").removeClass("fadeOut").addClass("fadeIn");
+					if(group[index] == "you"){
+						$(".for").delay(1000).queue(function(next){$(".for").removeClass("animated fadeIn").addClass("animated flash").css("animation-iteration-count",'2');next();});
+					}
+					next();
+					});
+					next();
+				});*/
+				$(".for,.theme-img").removeClass("fadeIn").addClass("fadeOut");
+				setTimeout(function(){
+					$(".for").text(who[index]);
+					var newImg = new Image();
+					newImg.onload = function(){
+				  	document.getElementById("theme-img").setAttribute('src', this.src);
+						console.log("Executed onload");
+						// setTimeout(function(){
+							$(".for,.theme-img").removeClass("fadeOut").addClass("fadeIn");
+							if(group[index] == "you"){
+								setTimeout(function(){
+									$(".for").removeClass("animated fadeIn").addClass("animated flash").css("animation-iteration-count",'2');
+								},1000)
+							}
+						// },500);
+
+					};
+					newImg.src = "/assets/front/" + group[index] + ".png";
+				},1000);
+			},3000+timeout);
+			timeout = timeout+4000;
+		});
+	});
+	</script>
+
+<% end %>
+<!--<div class="preload-01 hidden"></div>
+<div class="preload-02 hidden"></div>
+<div class="preload-03 hidden"></div>
+<div class="preload-04 hidden"></div>-->
+<img class="preload hidden" src="/assets/front/bloggers.png">
+<img class="preload hidden" src="/assets/front/designers.png">
+<img class="preload hidden" src="/assets/front/deploy.png">
+<img class="preload hidden" src="/assets/front/you.png">
+
+<div class="text-header developers">
+		<img id="theme-img" class="theme-img animated" src="/assets/front/developers.png">
+		<div class="dynamic-text">
+			<span>Powerful Cloud Hosting for <br><span class="for animated">Developers.</span></span>
+		</div>
+</div>

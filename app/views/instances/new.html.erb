@@ -27,22 +27,21 @@
 			$("label.distro").on("click", function() {
 	 			$("label.distro").removeClass("active");
 	 			$("div.ver").hide("fadeOut");
-
 	    	$(this).addClass("active");
 	  	});
-  		$(".ubuntu").click(function() { $(".ubuntuver").show("fadeIn").find('input.def').prop('checked',true); });
-		 	$(".fedora").click(function() { $(".fedoraver").show("fadeIn").find('input.def').prop('checked',true); });
-			$(".centos").click(function() { $(".centosver").show("fadeIn").find('input.def').prop('checked',true); });
-			$(".debian").click(function() { $(".debianver").show("fadeIn").find('input.def').prop('checked',true); });
-			$("label.onemonth").click(function(){
+  		$(".ubuntu").on("click", function() { $(".ubuntuver").show("fadeIn").find('input.def').prop('checked',true); });
+		 	$(".fedora").on("click", function() { $(".fedoraver").show("fadeIn").find('input.def').prop('checked',true); });
+			$(".centos").on("click", function() { $(".centosver").show("fadeIn").find('input.def').prop('checked',true); });
+			$(".debian").on("click", function() { $(".debianver").show("fadeIn").find('input.def').prop('checked',true); });
+			$("label.onemonth").on("click", function(){
 				$("div.prices").hide();
 				$("div.nodis").show();
 			});
-			$("label.threemonth").click(function(){
+			$("label.threemonth").on("click", function(){
 				$("div.prices").hide();
 				$("div.dis").show();
 			});
-			$("label.sixmonth").click(function(){
+			$("label.sixmonth").on("click", function(){
 				$("div.prices").hide();
 				$("div.maxdis").show();
 			});
