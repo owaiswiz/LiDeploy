@@ -17,71 +17,82 @@
       background: #2e3234;
       padding: 100px 0 60px 0;
       margin-top: 25px;
-      color: #747474;
+      color: #b2b2b2;
       float: left;
       width: 100%;
-      text-align: center;
+      text-align: left;
+      letter-spacing: 1px;
     }
+    footer a{
+      color: #939393;
+      text-decoration: none;
+      letter-spacing: 1px;
 
+    }
+    footer a:hover,footer a:active,footer a:visited,footer a:focus{
+      text-decoration: none;
+      color: #a3a3a3;
+    }
     .footb {
       font-family: 'quicksandbold';
       line-height: 200%;
     }
-    .fa{
-        background-position: 0 6px;
-        font-size: 16px;
+    .social-icons .fa{
+      padding-right: 10px;
+      background-position: 0 6px;
+      font-size: 16px;
     }
-    .social-icons a{
-      text-align: left;
-      width: 60%;
-      float: right;
-    }
-    .social-icons i{
-      text-align: right;
-      width: 30%;
+    .social-icons{
+
     }
   </style>
 <% end %>
 </div>
 <footer>
   <div class="container">
-  <div class = "col-md-4 col-sm-4 col-xs-4 footb">
+  <div class = "col-md-3 col-sm-3 col-xs-3 footb">
     <div class="row">
       <h4>Copyright © 2016</h4>
     </div>
     <div class = "row">
+      <a href="/legal/copyright">Copyright</a><br/>
       <a href="/legal/privacy">Privacy Policy</a><br/>
       <a href="/legal/terms">Terms of Service</a><br/>
-      <a href="/legal/copyright">Copyright Infringements</a><br/>
     </div>
   </div>
-  <div class = "col-md-4 col-sm-4 col-xs-4 footb">
+  <div class = "col-md-1 col-sm-1 col-xs-1 footb"></div>
+  <div class="col-md-2 col-xs-2 col-sm-2 footb">
+    <div class="row">
+      <h4>PRODUCT</h4>
+    </div>
+    <div class="row">
+      <a href="/pricing">Pricing</a><br/>
+      <a href="/features">Features</a><br/>
+      <a href="/contact">Contact Us</a><br/>
+    </div>
+  </div>
+  <div class = "col-md-1 col-sm-1 col-xs-1 footb"></div>
+  <div class = "col-md-2 col-sm-2 col-xs-2 footb">
     <div class="row">
       <h4>HELP</h4>
     </div>
     <div class="row">
+      <a href="/help/introduction">FAQs</a><br/>
       <a href="/tutorials">Tutorials</a><br/>
       <a href="/help/gettingstarted">Getting Started</a><br/>
-      <a href="/help/introduction">Frequently Asked Questions</a><br/>
     </div>
   </div>
-  <div class = "col-md-4 col-sm-4 col-xs-4 footb">
+  <div class = "col-md-1 col-sm-1 col-xs-1 footb"></div>
+  <div class = "col-md-2 col-sm-2 col-xs-2 footb">
     <div class="row">
       <h4>SOCIAL</h4>
     </div>
     <div class="row">
-      <div class="col-md-4 col-xs-4 col-sm-4"></div>
-      <div class="col-md-4 col-xs-4 col-sm-4 social-icons">
+      <div class="social-icons">
         <i class="fa fa-twitter-square"></i><a href="https://twitter.com/LiDeploy">Twitter</a><br/>
-        <i class="fa fa-facebook-square"></i><a href="#">Google+</a><br/>
-        <i class="fa fa-google-plus-square"></i><a href="https://facebook.com/LiDeploy">Facebook</a><br/>
+        <i class="fa fa-google-plus-square"></i><a href="#">Google+</a><br/>
+        <i class="fa fa-facebook-square"></i><a href="https://facebook.com/LiDeploy">Facebook</a><br/>
       </div>
-      <!--<div class="col-md-2" style="text-align: center;">
-        <a href="https://twitter.com/LiDeploy">Twitter</a><br/>
-        <a href="#">Google+</a><br/>
-        <a href="https://facebook.com/LiDeploy">Facebook</a><br/>
-      </div>-->
-      <div class="col-md-4 col-xs-4 col-sm-4"></div>
     </div>
   </div>
 </div>
