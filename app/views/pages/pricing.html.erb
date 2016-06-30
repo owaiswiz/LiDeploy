@@ -4,7 +4,38 @@
     footer{
       margin-top: 0px;
     }
+    .nodis,.dis{
+      display: none;
+    }
+    .btn.sizes .prices.text{
+      padding-top:20px;
+      padding-bottom: 20px;
+      min-height: 110px;
+    }
+    .months.active,.months:hover,.months:focus{
+      background-color:#3190e7;
+    }
   </style>
+  <script>
+    $(document).ready(function(){
+      $("label.onemonth").on("click", function(){
+        $("div.prices").hide();
+        $("div.nodis").show();
+      });
+      $("label.threemonth").on("click", function(){
+        $("div.prices").hide();
+        $("div.dis").show();
+      });
+      $("label.sixmonth").on("click", function(){
+        $("div.prices").hide();
+        $("div.maxdis").show();
+      });
+      $("label.months").on("click",function(){
+        $("label.months").removeClass("active");
+        $(this).addClass("active");
+      });
+    });
+  </script>
 <% end %>
 <div class="muhcontainer" style="color: #666">
   <div class="row feature-box">
@@ -13,51 +44,85 @@
           <h4>Each Plan comes with Solid State Drives and availablity around the globe.</h4>
       </div>
   </div>
+  <div class="container feature-box" style="margin-top:20px;">
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-primary months onemonth">
+        1 Month
+      </label>
+      <label class="btn btn-primary months sixmonth active">
+        6 Months
+      </label>
+      <label class="btn btn-primary months threemonth">
+        3 Months
+      </label>
+    </div>
+  </div>
   <div class="container feature-box" style="margin-top:0px;">
     <div class="btn instsize">
       <br>
       <div class="btn sizes">
         <div class="nodis prices text">
-          <h3>Starts from<br> <sup>$</sup>1.99</h3>
+          <h3><sup>$</sup>6/Month</h3>
+        </div>
+        <div class="dis prices text">
+          <h4><sup>$</sup>3.99/First Month</h4>
+          <h5><sup>$</sup>6/Thereafter</h5>
+        </div>
+        <div class="maxdis prices text">
+          <h4><sup>$</sup>1.99/First Month</h4>
+          <h5><sup>$</sup>6/Thereafter</h5>
         </div>
         <div class="specs">
           <ul>
             <li><span>512 MB</span> RAM</li>
-            <li><span>2.4 GHz</span> Single Core CPU</li>
+            <li><span>Single</span> Core CPU</li>
             <li><span>20 GB SSD</span> Disk</li>
-            <li><span>1000 GB</span>Transfer</li>
+            <li><span>1000 GB</span> Bandwidth</li>
           </ul>
         </div>
       </div><!--
    --><div class="btn active sizes">
-        <div class="prices text">
-          <div class="nodis">
-            <h3>Starts from<br> <sup>$</sup>3.99</h3>
-          </div>
+        <div class="nodis prices text">
+         <h3><sup>$</sup>11/Month</h3>
         </div>
-
+        <div class="dis prices text">
+         <h4><sup>$</sup>6.99/First Month</h4>
+         <h5><sup>$</sup>11/Thereafter</h5>
+        </div>
+        <div class="maxdis prices text">
+         <h4><sup>$</sup>4.99/First Month</h4>
+         <h5><sup>$</sup>11/Thereafter</h5>
+        </div>
         <div class="popular">
           MOST POPULAR PLAN
         </div>
         <div class="specs">
           <ul>
             <li><span>1 GB</span> RAM</li>
-            <li><span>2.4 GHz</span> Single Core CPU</li>
+            <li><span>Single</span> Core CPU</li>
             <li><span>30 GB SSD</span> Disk</li>
-            <li><span>2000 GB</span>Transfer</li>
+            <li><span>2000 GB</span> Bandwidth</li>
           </ul>
         </div>
       </div><!--
-  --><div class="btn sizes">
+   --><div class="btn sizes">
         <div class="nodis prices text">
-          <h3>Starts from<br> <sup>$</sup>11.99</h3>
+          <h3><sup>$</sup>22/Month</h3>
+        </div>
+        <div class="dis prices text">
+          <h4><sup>$</sup>13.99/First Month</h4>
+          <h5><sup>$</sup>22/Thereafter</h5>
+        </div>
+        <div class="maxdis prices text">
+          <h4><sup>$</sup>11.99/First Month</h4>
+          <h5><sup>$</sup>22/Thereafter</h5>
         </div>
         <div class="specs">
           <ul>
             <li><span>2 GB</span> RAM</li>
-            <li><span>2.4 GHz</span> Dual Core CPU</li>
+            <li><span>Dual</span> Core CPU</li>
             <li><span>40 GB SSD</span> Disk</li>
-            <li><span>3000 GB</span>Transfer</li>
+            <li><span>3000 GB</span> Bandwidth</li>
           </ul>
         </div>
       </div>
@@ -92,6 +157,5 @@
       </div>
     </div>
   </div>
-  <div class="etos">*Prices applicable for First Mo. for semi-annual plan duration.</div>
 </div>
 <%= render 'shared/footer' %>

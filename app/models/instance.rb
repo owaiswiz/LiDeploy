@@ -41,6 +41,7 @@ class Instance < ActiveRecord::Base
     else
       month = "Months"
     end
+    inst.update_attributes(price: price);
     values = {
         business: "support@lideploy.com",
         cmd: "_xclick",

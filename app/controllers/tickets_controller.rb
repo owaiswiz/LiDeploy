@@ -42,6 +42,7 @@ class TicketsController < ApplicationController
       redirect_to view_tickets_path
     end
   end
+
   def addreply
     unless current_user.admin
       ticket = current_user.tickets.find_by(id:params[:ticketid])
@@ -74,11 +75,14 @@ class TicketsController < ApplicationController
       redirect_to ticket_path
     end
   end
+
   private
   def ticket_params
     params.require(:ticket).permit(:title,:message,:status)
   end
+
   def reply_params
     params.require(:reply).permit(:reply)
   end
+  
 end

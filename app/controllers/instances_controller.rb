@@ -4,7 +4,6 @@ class InstancesController < ApplicationController
 	def new
 		@newinstance = Instance.new
 	end
-
 	#Create a new Instance from Form Input
 	def create
 		createinstance= current_user.instances.new(instance_params)
@@ -13,7 +12,6 @@ class InstancesController < ApplicationController
 			redirect_to createinstance.paypal_url(createinstance)
 		end
 	end
-
 	#List all Instances of A Particular User
 	def index
 		@instances = current_user.instances
@@ -32,7 +30,6 @@ class InstancesController < ApplicationController
 		instance = nil
 		redirect_to instances_path
 	end
-
 	#Delete an Instance
 	def destroy
 	  instance = current_user.instances.find(params[:id])
@@ -47,7 +44,6 @@ class InstancesController < ApplicationController
 		instance = nil
 		redirect_to instances_path
 	end
-
 	#Restart an Instance
 	def restart
 		instance = current_user.instances.find(params[:id])
@@ -62,7 +58,6 @@ class InstancesController < ApplicationController
 		instance = nil
 		redirect_to instances_path
 	end
-
 	#Power off an Instance
 	def shutdown
 		instance = current_user.instances.find(params[:id])
@@ -77,13 +72,11 @@ class InstancesController < ApplicationController
 		instance = nil
 		redirect_to instances_path
 	end
-
 	#Renew Instance(Render Page part)
 	def renew_put
 			@instance = current_user.instances.find(params[:id])
 			render 'renew'
 	end
-
 	#Renew Instance(Process Payment and redirect to payment processor)
 	def renew_post
 		begin
@@ -95,7 +88,6 @@ class InstancesController < ApplicationController
 			redirect_to instances_path
 		end
 	end
-
 	#Resize an Instance
 	def resize
 		begin
@@ -110,14 +102,14 @@ class InstancesController < ApplicationController
 			redirect_to instances_path and return
 		end
 	end
-
+	#Resize - Process Resizing - Redirect to Paypal
 	def resize_process
 		instance = current_user.instances.find(params[:id])
 		instance.update_attributes(:temp_status => "Resizing",:duration => params[:instance][:duration])
 		instance.size=params[:instance][:size]
 		redirect_to instance.paypal_url(instance)
 	end
-
+	#Update Instance status
 	def update_instance
 		inst = current_user.instances.find(params[:id])
 		@vinst = inst
@@ -174,7 +166,7 @@ class InstancesController < ApplicationController
 	  def hook
 	    params.permit! # Permit all Paypal input params
 			instance = Instance.find(params[:item_number])
-	    if params[:payment_status] == "Completed"
+	    if params[:payment_status] == "Completed" && (params[:payment_gross] == instance.price)
 				if instance.temp_status == "Renewing"
 					instance.update_attributes(:temp_status => "Renewed",:expires => instance.expires+instance.duration.months)
 				elsif instance.temp_status == "Resizing"
