@@ -51,7 +51,7 @@ input.required{
     outline: 0;
   }
 }
-div.dropdown{
+div.dropdown.instances-list{
   width: 40%;
   margin-right: 15px;
   input{
@@ -113,7 +113,6 @@ div.result{
 .domains{
   h3{
     padding-bottom:15px;
-  //  border-bottom: 2px solid $mainbordercolor;
     }
 }
 .domain-list:before {
@@ -129,7 +128,6 @@ div.result{
   &.domain-button{
     float:right;
     font-size: 1.1em;
-    //vertical-align: middle;
     margin-top: 0.3em;
     padding-left: 0px;
   a{
@@ -160,14 +158,14 @@ div.result{
   }
 }
 .delete-domain{
-  color:red;
+  color:#ef5350;
   background: white;
   padding: 12px 26px;
-  border: 1px solid red;
+  border: 1px solid #ef5350;
   &:hover,&:active,&:focus{
-    background-color:red;
+    background-color:#ef5350;
     color:white;
-    border-color:red;
+    border-color:#ef5350
 
   }
 }
@@ -270,13 +268,13 @@ input.record{
   }
 }
 .delete-record-button{
-  color:red;
-  border-color: red;
+  color:#ef5350;
+  border-color: #ef5350;
   background-color: white;
   &:hover,&:active,&:focus{
-    background-color: red;
+    background-color: #ef5350;
     color:white;
-    border-color: red;
+    border-color: #ef5350;
   }
 }
 input[type="radio"]{

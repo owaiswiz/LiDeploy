@@ -280,3 +280,27 @@ a,.btn{
 .turbolinks-progress-bar {
   background-color: #3190e7;
 }
+.btn.grey.dropdown-toggle{
+	&:hover{
+		color:#5f5f5f !important;
+	}
+}
+.dropdown.open>a.btn.grey.noborder.dropdown-toggle{
+	color: #5f5f5f;
+	background-color:white;
+}
+.nav-drop.noborder{
+	min-width: 100px !important;
+	left: -10%;
+	right: -10%;
+}
+.nav-res.dropdown-item{
+	display:block;
+	&:hover{
+		color: #5f5f5f !important;
+	}
+
+}
+.noborder,.noborder a{
+	border:0 !important;
+}

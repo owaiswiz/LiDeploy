@@ -1,66 +1,108 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>We're sorry, but something went wrong (500)</title>
+  <title>404 - LiDeploy</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="shortcut icon" type="image/png" href="/assets/Lideployfavicon.png">
+  <link href="https://fonts.googleapis.com/css?family=Oswald:300" rel="stylesheet">
   <style>
   body {
-    background-color: #EFEFEF;
-    color: #2E2F30;
+    background-color: #f06061;
     text-align: center;
     font-family: arial, sans-serif;
     margin: 0;
   }
-
-  div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
+  div.img{
+    width: 600px;
+    height: 235px;
+    background-image: url("/assets/50x.png");
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin-top: -117px; /* Half the height */
+    margin-left: -300px; 
   }
-
-  div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+  div.text{
+    position: absolute;
+    top: 40%;
+    left:0.3%;
+    width: 99%;
+    margin-top:-50px;
+    color:white;
+    font-family:'Oswald',sans-serif;
+    font-size:27px;
   }
-
-  h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
+  div.buttons{
+    margin-top: 117px;
   }
-
-  div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+  div.buttons a{
+    display: inline-block;
+    width: 5em;
+    color: #ffebee;
+    font-size: 1.2em;
+    letter-spacing: 2px;
+    text-decoration: none;
+    padding:0.5em;
+    margin:0 1em;
+    border:1px solid #ffebee;
+    transition: all 0.7s ease;
   }
+  div.buttons a:hover{
+    color: black;
+    color: black;
+    border-color: black;
+  }
+  div.header{
+    top:2.5%;
+    left:0.8%;
+    letter-spacing: 5px;
+    margin-top:0;
+    font-size:3em;
+    z-index: 1050;
+  }
+  .header h3{
+    margin-top: 0;
+  }
+  .header a{
+    color: black;
+    text-decoration: none;
+    transition: all 0.7s ease;
+  }
+  .header a:hover{
+    color: #ffebee;
+  }
+  .error{
+    margin-bottom: 0;
+  }
+  .main-error{
+    margin-top:-150px !important;
   </style>
 </head>
 
 <body>
-  <!-- This file lives in public/500.html -->
+  <!-- This file lives in public/404.html 
   <div class="dialog">
     <div>
-      <h1>We're sorry, but something went wrong.</h1>
+      <h1>404</h1>
+      <h4>Page Not Found</h4>
+      <h3>It seems you're lost</h3>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
+  </div>
+  -->
+  <div class="text header"><h3><a href="/" class="btn">LiDeploy</a></h3></div>
+  <div class="img"></div>
+  <div class="main-error text">
+    <h1 class="error">
+      Something's Wrong
+    </h1> 
+    <h3>
+      Experienced monkeys should be fixing the issue soon.
+    </h3>
+  </div>
+  <div class="text buttons">
+    <a href="/" class="btn">Homepage</a>
+    <a href="/contact" class="btn">Support</a>
   </div>
 </body>
 </html>

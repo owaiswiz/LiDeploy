@@ -10,7 +10,7 @@
         </button>
         <div class="navbar-btn">
           <% if controller_name == "home" %>
-            <a href="/"><img src="/assets/Lideployicon.png" width="42px;" style="" /></a>
+            <a href="/"><img src="/assets/Lideployicon.png" width="42px;"/></a>
             <a href="/" class="btn header-logo header-text">LiDeploy</a>
           <% else %>
             <a href="/"><img src="/assets/Lideployicon.png" width="42px;" /></a>
@@ -22,14 +22,36 @@
         <ul class="nav navbar-nav navbar-right">
           <li>
             <div class="navbar-btn" style="margin-right: 15px;">
+              
               <% if !user_signed_in? %>
+                <div class="dropdown" style="display: inline-block;">
+                  <a class="btn grey dropdown-toggle noborder" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Resources<i class="fa fa-caret-down" style="margin-left: 5px;"></i>
+                  </a>
+                  <div class="nav-drop dropdown-menu dropdown-menu-center noborder" aria-labelledby="dropdownMenu2">
+                    <a href="/help/gettingstarted" class="nav-res btn grey dropdown-item" type="button">Getting Started</a>
+                    <a href="/tutorials" class="nav-res btn grey dropdown-item" type="button">Tutorials</a>
+                    <a href="/help/introduction" class="nav-res btn grey dropdown-item" type="button">FAQs</a>
+                  </div>
+                </div>
                 <a href="/pricing" class="btn grey">Pricing</a>
                 <a href="/features" class="btn grey">Features</a>
                 <a href="/contact" class="btn grey">Contact</a>
                 <a href="/login" class="btn login" role="button">Login</a>
                 <a href="/register" class="btn btn-primary" role="button">Register</a>
               <% else %>
+                
                 <a href="/instances/new" class="btn greenbutton" style="display:inline-block;" role="button">Create New Instance</a>
+                <div class="dropdown" style="display: inline-block;">
+                  <a class="btn grey dropdown-toggle noborder" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Resources<i class="fa fa-caret-down" style="margin-left: 5px;"></i>
+                  </a>
+                  <div class="nav-drop dropdown-menu dropdown-menu-center noborder" aria-labelledby="dropdownMenu2">
+                    <a href="/help/gettingstarted" class="nav-res btn grey dropdown-item" type="button">Getting Started</a>
+                    <a href="/tutorials" class="nav-res btn grey dropdown-item" type="button">Tutorials</a>
+                    <a href="/help/introduction" class="nav-res btn grey dropdown-item" type="button">FAQs</a>
+                  </div>
+                </div>
                 <a href="/instances/" class="btn grey">Instances</a>
                 <a href="/domains/" class="btn grey">DNS</a>
                 <a href="/support/" class="btn grey">Support</a>

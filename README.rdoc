@@ -2,3 +2,4 @@
 Following tasks should be executed
 * rake mailman:start - To start mailman in background in order to listen to incoming mails such as password's email from DO.
 * bin/delayed_job - To start delayed_job in background in order to send new mail in background incase of reply to a ticket.
+* Set Environment variable `SECRET_KEY_BASE` to a secret key(generate via rake)

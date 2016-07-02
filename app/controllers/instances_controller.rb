@@ -150,7 +150,8 @@ class InstancesController < ApplicationController
 			rescue => e
 				if inst.status == "Payment Failed"
 					flash.now[:notice] = "Payment Not Completed for #{inst.name}.Please Contact us at support@lideploy.com for further help"
-				elsif inst.status != 'Waiting for Payment Confirmation'
+					inst.update_attributes(status: "Payment failed");
+				elsif inst.status != 'Waiting for Payment Confirmation' && inst.status != "Payment failed"
 					tries += 1
 					retry if tries < 2
 					inst.update_attributes(status: "Not Found",ip_address: nil,disk: nil)
@@ -166,7 +167,7 @@ class InstancesController < ApplicationController
 	  def hook
 	    params.permit! # Permit all Paypal input params
 			instance = Instance.find(params[:item_number])
-	    if params[:payment_status] == "Completed" && (params[:payment_gross] == instance.price)
+	    if params[:payment_status] == "Completed" && (params[:payment_gross].to_f == instance.price)
 				if instance.temp_status == "Renewing"
 					instance.update_attributes(:temp_status => "Renewed",:expires => instance.expires+instance.duration.months)
 				elsif instance.temp_status == "Resizing"

@@ -176,16 +176,16 @@
 //confirm modal related
 
 .destroy.btn-primary{
-  color: red !important;
-  border: 1px solid red !important;
+  color: #ef5350 !important;
+  border: 1px solid #ef5350 !important;
 }
 .destroy.btn-primary:focus,.destroy.btn-primary:hover{
-  background-color: red !important;
+  background-color: #ef5350 !important;
   color: white !important;
-  border-color:red !important;
+  border-color:#ef5350 !important;
 }
 .commit.destroy.btn-primary{
   margin-left: 0 !important;
   margin-top: 5px;
-  border: 1px red solid;
+  border: 1px #ef5350 solid;
 }
