@@ -151,6 +151,7 @@ GEM
     minitest (5.9.0)
     multi_json (1.12.1)
     multipart-post (2.0.0)
+    mysql2 (0.4.4)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (3.1.1)
@@ -262,6 +263,7 @@ DEPENDENCIES
   mailman
   mailman-rails
   mini_portile2
+  mysql2
   nokogiri
   rails (= 4.2.6)
   sass-rails (~> 5.0)
