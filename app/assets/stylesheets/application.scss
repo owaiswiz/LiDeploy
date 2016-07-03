@@ -72,24 +72,23 @@ body{
   }
 }
 .btn-primary{
-
-	background-color: #ffffff;
-	border-style: solid;
-	color: #3190e7;
+  background-color: #ffffff;
+  border-style: solid;
+  color: #3190e7;
   font-family: 'quicksandbold';
   border-color: #3190e7;
-	border-radius: 3px;
+  border-radius: 3px;
   position: relative;
   font-weight: 600;
   -o-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
-	-khtml-transition: all 0.5s ease;
-	-webkit-transition: all 0.5s ease;
-	-ms-transition: all 0.5s ease;
-	transition: all 0.5s ease;
+  -khtml-transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 .btn-primary:hover,.btn-primary:active,.btn-primary:focus {
-	background-color: #3190e7 !important;
+  background-color: #3190e7 !important;
   border-color:#3190e7 !important;
 }
 li div a.btn-primary{

@@ -1,4 +1,4 @@
-<td><img src="/assets/<%= @vinst.distro.downcase %>-32.png" alt="<%=@vinst.distro%>"></td>
+<td><img src='<%= image_path("#{@vinst.distro.downcase}-32.png") %>' alt="<%=@vinst.distro%>"></td>
 <td>
 	<%if @vinst.disk? %>
 		<span class="instname"><%= @vinst.name%></span><br/>

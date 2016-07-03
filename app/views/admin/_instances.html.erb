@@ -53,7 +53,7 @@
       <tr class="trow">
         <td><%= inst.id %></td>
         <td><%= User.find(inst.user_id).email %></td>
-        <td><img src="/assets/<%= inst.distro.downcase %>-32.png" alt="<%=inst.distro%>"></td>
+        <td><img src='<%= image_path("#{inst.distro.downcase}-32.png"%>' alt="<%=inst.distro%>"></td>
         <td>
           <%if inst.disk? %>
             <span class="instname"><%= inst.name%></span><br/>

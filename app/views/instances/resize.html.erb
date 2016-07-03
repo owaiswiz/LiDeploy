@@ -40,7 +40,7 @@
 <div class="container feature-box" style="margin-top:10px;">
   <h1 class="resize header">Resize <%= @instance.name %></h1><br/>
     <div class = "resize details">
-      Memory: <%= @instance.size.upcase %><span class="resize header">&nbsp;|&nbsp;</span><img src="/assets/<%= @instance.distro.downcase %>-32.png" alt="<%=@instance.distro%>"><span class="resize header">&nbsp;|&nbsp;</span>Disk: <%= @instance.disk %>GB<br/>
+      Memory: <%= @instance.size.upcase %><span class="resize header">&nbsp;|&nbsp;</span><img src='<%= image_path("#{@instance.distro.downcase}-32.png")%>' alt="<%=@instance.distro%>"><span class="resize header">&nbsp;|&nbsp;</span>Disk: <%= @instance.disk %>GB<br/>
       <br/>
     </div>
     <h2 class ="resize header">Current Plan</h2>

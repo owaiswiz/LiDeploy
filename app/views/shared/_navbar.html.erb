@@ -10,10 +10,10 @@
         </button>
         <div class="navbar-btn">
           <% if controller_name == "home" %>
-            <a href="/"><img src="/assets/Lideployicon.png" width="42px;"/></a>
+            <a href="/"><img src="<%= image_path('Lideployicon.png') %>" width="42px;"/></a>
             <a href="/" class="btn header-logo header-text">LiDeploy</a>
           <% else %>
-            <a href="/"><img src="/assets/Lideployicon.png" width="42px;" /></a>
+            <a href="/"><img src="<%= image_path('Lideployicon.png') %>" width="42px;" /></a>
             <a href="/" class="btn header-logo header-text">LiDeploy</a>
           <% end %>
         </div>

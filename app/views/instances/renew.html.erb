@@ -27,7 +27,7 @@
 <div class="container feature-box" style="margin-top:10px;">
   <h1 class="renew header">Renew <%= @instance.name %></h1><br/>
     <div class = "renew details">
-      Memory: <%= @instance.size.upcase %><span class="renew header">&nbsp;|&nbsp;</span><img src="/assets/<%= @instance.distro.downcase %>-32.png" alt="<%=@instance.distro%>"><span class="renew header">&nbsp;|&nbsp;</span>Disk: <%= @instance.disk %>GB<br/>
+      Memory: <%= @instance.size.upcase %><span class="renew header">&nbsp;|&nbsp;</span><img src='<%= image_path("#{@instance.distro.downcase}-32.png")%>' alt="<%=@instance.distro%>"><span class="renew header">&nbsp;|&nbsp;</span>Disk: <%= @instance.disk %>GB<br/>
       Current Expiry Date: <%= @instance.expires.strftime('%-d %B %Y') %><br/>
       Current Plan Expires in : <span class="header"><%= ((@instance.expires - Time.now).to_i/86400)%> Days</span><br/>
       <br/>

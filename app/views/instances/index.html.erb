@@ -120,7 +120,7 @@
   		<tbody>
   			<% Array(@instances).each do |inst| %>
   				<tr class="trow" id="<%= inst.id %>">
-  					<td><img src="/assets/<%= inst.distro.downcase %>-32.png" alt="<%=inst.distro%>"></td>
+  					<td><img src='<%= image_path("#{inst.distro.downcase}-32.png") %>' alt="<%=inst.distro%>"></td>
   					<td>
               <%if inst.disk? %>
                 <span class="instname"><%= inst.name%></span><br/>

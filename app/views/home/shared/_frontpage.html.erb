@@ -29,11 +29,6 @@
 			text-align:center;
 			margin:5px;
 		}
-	/*	.preload-01 { background: url(/assets/front/bloggers.png) no-repeat -9999px -9999px; }
-		.preload-02 { background: url(/assets/front/designers.png) no-repeat -9999px -9999px; }
-		.preload-03 { background: url(/assets/front/deploy.png) no-repeat -9999px -9999px; }
-		.preload-04 { background: url(/assets/front/you.png) no-repeat -9999px -9999px; }
-*/
 	</style>
 	<script>
 	var who = ["Bloggers.","Designers.","Simple Deployments.","You."];
@@ -42,17 +37,6 @@
 	$(document).ready(function(){
 		$(who).each(function(index){
 			setTimeout(function(){
-				/*$(".for,.theme-img").removeClass("fadeIn").addClass("fadeOut").delay(1000).queue(function(next){
-					$(".for").text(who[index]);
-					$(".theme-img").attr('src',"/assets/front/" + group[index] + ".png").delay(500).queue(function(next){
-					$(".for,.theme-img").removeClass("fadeOut").addClass("fadeIn");
-					if(group[index] == "you"){
-						$(".for").delay(1000).queue(function(next){$(".for").removeClass("animated fadeIn").addClass("animated flash").css("animation-iteration-count",'2');next();});
-					}
-					next();
-					});
-					next();
-				});*/
 				$(".for,.theme-img").removeClass("fadeIn").addClass("fadeOut");
 				setTimeout(function(){
 					$(".for").text(who[index]);
@@ -60,36 +44,28 @@
 					newImg.onload = function(){
 				  	document.getElementById("theme-img").setAttribute('src', this.src);
 						console.log("Executed onload");
-						// setTimeout(function(){
 							$(".for,.theme-img").removeClass("fadeOut").addClass("fadeIn");
 							if(group[index] == "you"){
 								setTimeout(function(){
 									$(".for").removeClass("animated fadeIn").addClass("animated flash").css("animation-iteration-count",'2');
 								},1000)
 							}
-						// },500);
-
 					};
-					newImg.src = "/assets/front/" + group[index] + ".png";
+					newImg.src = $(".preload."+group[index]).attr('src');
 				},1000);
 			},3000+timeout);
 			timeout = timeout+4000;
 		});
 	});
 	</script>
-
 <% end %>
-<!--<div class="preload-01 hidden"></div>
-<div class="preload-02 hidden"></div>
-<div class="preload-03 hidden"></div>
-<div class="preload-04 hidden"></div>-->
-<img class="preload hidden" src="/assets/front/bloggers.png">
-<img class="preload hidden" src="/assets/front/designers.png">
-<img class="preload hidden" src="/assets/front/deploy.png">
-<img class="preload hidden" src="/assets/front/you.png">
+<img class="preload bloggers hidden" src="<%=image_path('front/bloggers.png')%>">
+<img class="preload designers hidden" src="<%=image_path('front/designers.png')%>">
+<img class="preload deploy hidden" src="<%=image_path('front/deploy.png')%>">
+<img class="preload you hidden" src="<%=image_path('front/you.png')%>">
 
 <div class="text-header developers">
-		<img id="theme-img" class="theme-img animated" src="/assets/front/developers.png">
+		<img id="theme-img" class="theme-img animated" src="<%=image_path('front/developers.png')%>">
 		<div class="dynamic-text">
 			<span>Powerful Cloud Hosting for <br><span class="for animated">Developers.</span></span>
 		</div>

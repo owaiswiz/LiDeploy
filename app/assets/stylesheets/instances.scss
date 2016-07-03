@@ -26,31 +26,31 @@
   }
 }
 .ubuntu{
-  background: url('/assets/ubuntu.png') #f2f2f2;
+  background: image-url('ubuntu.png') #f2f2f2;
 }
 .ubuntu.active{
-  background-image: url('/assets/ubuntu-active.png') !important;
+  background-image: image-url('ubuntu-active.png') !important;
 }
 
 .fedora{
-  background: url('/assets/fedora.png') #f2f2f2;
+  background: image-url('fedora.png') #f2f2f2;
 }
 .fedora.active{
-  background-image: url('/assets/fedora-active.png') !important;
+  background-image: image-url('fedora-active.png') !important;
 }
 
 .centos{
-  background: url('/assets/centos.png') #f2f2f2;
+  background: image-url('centos.png') #f2f2f2;
 }
 .centos.active{
-  background-image: url('/assets/centos-active.png') !important;
+  background-image: image-url('centos-active.png') !important;
 }
 
 .debian{
-  background: url('/assets/debian.png') #f2f2f2;
+  background: image-url('debian.png') #f2f2f2;
 }
 .debian.active{
-  background-image: url('/assets/debian-active.png') !important;
+  background-image: image-url('debian-active.png') !important;
 }
 .btn-primary.active{
   background-color: #298eea !important;
@@ -130,25 +130,25 @@
 }
 
 .america{
-  background-image: url('/assets/usa.png') !important;
+  background-image: image-url('usa.png') !important;
 }
 .uk{
-  background-image: url('/assets/uk.png') !important;
+  background-image: image-url('uk.png') !important;
 }
 .germany{
-  background-image: url('/assets/germany.png') !important;
+  background-image: image-url('germany.png') !important;
 }
 .canada{
-  background-image: url('/assets/canada.png') !important;
+  background-image: image-url('canada.png') !important;
 }
 .netherland{
-  background-image: url('/assets/netherlands.png') !important;
+  background-image: image-url('netherlands.png') !important;
 }
 .singapore{
-  background-image: url('/assets/singapore.png') !important;
+  background-image: image-url('singapore.png') !important;
 }
 .india{
-  background-image: url('/assets/india.png') !important;
+  background-image: image-url('india.png') !important;
 }
 
 .required input[type="text"]{

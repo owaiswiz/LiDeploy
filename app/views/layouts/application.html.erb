@@ -21,12 +21,11 @@
 	<body class="bluer">
     <%= stylesheet_link_tag 'sessions', media: 'all' %>
     <div class="form container new_user" style="text-align:center;">
-      <a href="/"><img src="/assets/lideploy.png" width="42px";></a><a href="/" class="btn header-logo header-text" style="color:#333;margin-top:6px !important;font-size:35px;">LiDeploy</a>
+      <a href="/"><img src="<%= image_path('lideploy.png') %>" width="42px";></a><a href="/" class="btn header-logo header-text" style="color:#333;margin-top:6px !important;font-size:35px;">LiDeploy</a>
     </div>
 <% elsif %>
 	<body class="page-top">
-    <%= stylesheet_link_tag    controller_name, media: 'all' %>
-    <%= javascript_include_tag controller_name%>
+    <%= stylesheet_link_tag controller_name, media: 'all' %>
 		<%= render 'shared/navbar' %>
 <% end %>
 <script>
