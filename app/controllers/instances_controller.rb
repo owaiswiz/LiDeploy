@@ -167,7 +167,7 @@ class InstancesController < ApplicationController
 	  def hook
 	    params.permit! # Permit all Paypal input params
 			instance = Instance.find(params[:item_number])
-	    if params[:payment_status] == "Completed" && (params[:payment_gross].to_f == instance.price)
+	    if params[:payment_status] == "Completed" && (params[:payment_gross] == instance.price)
 				if instance.temp_status == "Renewing"
 					instance.update_attributes(:temp_status => "Renewed",:expires => instance.expires+instance.duration.months)
 				elsif instance.temp_status == "Resizing"
