@@ -34,19 +34,19 @@
 	var who = ["Bloggers.","Designers.","Simple Deployments.","You."];
 	var group = ["bloggers","designers","deploy","you"];
 	var timeout = 0;
+	var parentTimeout,loadImageTimeout,lastAnimateTimeout,
 	$(document).ready(function(){
 		$(who).each(function(index){
-			setTimeout(function(){
+			parentTimeout = setTimeout(function(){
 				$(".for,.theme-img").removeClass("fadeIn").addClass("fadeOut");
-				setTimeout(function(){
+				loadImageTimeout = setTimeout(function(){
 					$(".for").text(who[index]);
 					var newImg = new Image();
 					newImg.onload = function(){
 				  	document.getElementById("theme-img").setAttribute('src', this.src);
-						console.log("Executed onload");
 							$(".for,.theme-img").removeClass("fadeOut").addClass("fadeIn");
 							if(group[index] == "you"){
-								setTimeout(function(){
+								lastAnimateTimeout = setTimeout(function(){
 									$(".for").removeClass("animated fadeIn").addClass("animated flash").css("animation-iteration-count",'2');
 								},1000)
 							}
@@ -56,6 +56,11 @@
 			},3000+timeout);
 			timeout = timeout+4000;
 		});
+	});
+	$(document).on("page:before-change",function(){
+		clearTimeout(parentTimeout);
+		clearTimeout(loadImageTimeout);
+		clearTimeout(lastAnimateTimeout);
 	});
 	</script>
 <% end %>
