@@ -303,3 +303,8 @@ a,.btn{
 .noborder,.noborder a{
 	border:0 !important;
 }
+@media only screen and (max-width: 995px){
+	.navbar.navbar-fixed-top.navbar-nav .container{
+	width: 100%;
+	}
+}
