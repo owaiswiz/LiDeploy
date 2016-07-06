@@ -1,3 +1,5 @@
+@import 'https://fonts.googleapis.com/css?family=Oswald:300';
+@import 'https://fonts.googleapis.com/css?family=Raleway:800';
 body{
   color: #666;
 }
@@ -16,7 +18,8 @@ h1{
   color: #298eea;
 }
 .key-points.col-md-4 h2{
-  font-family: 'quicksandregular' !important;
+  font-family: 'Oswald' !important;
+  letter-spacing: 1px;
 }
 .wrapper{
   width: 100%;
@@ -124,8 +127,6 @@ hr{
 }
 .contact-block{
   text-align: center;
-  //font-family: 'quicksandregular';
-  font-weight: bolder;
 }
 .contact-img{
   margin-bottom: 20px;
@@ -148,4 +149,38 @@ footer{
 .blue-wrapper{
   width: 100%;
   background-color: #e4f0fb;
+}
+.text-header{
+      width: 100%;
+      margin:0;
+      padding:0;
+      border:0;
+      line-height: 2;
+      padding:20px 80px 50px;
+      background-color:#e4f0fb;
+      min-height: 550px;
+      min-width: 720px;
+      position: relative
+}
+.text-header img{
+  opacity: 1;
+  position:absolute;
+  left: 50%;
+  margin-left:-400px;
+  right:0;
+  bottom:15px;
+}
+.dynamic-text{
+  font-family: 'Raleway', sans-serif;
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-size: 3em;
+  text-align:center;
+  margin:5px;
+}
+p {
+  font-family: 'Oswald';
+  letter-spacing: 1px;
+  line-height: 150%;
+  font-size: 1.25em;
 }
