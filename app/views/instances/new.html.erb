@@ -24,29 +24,48 @@
 			}
 		});
 		//show hide and highlight selected distros
-			$("label.distro").on("click", function() {
-	 			$("label.distro").removeClass("active");
-	 			$("div.ver").hide("fadeOut");
-	    	$(this).addClass("active");
+		$("label.distro").on("click", function() {
+ 			$("label.distro").removeClass("active");
+ 			$("div.ver").hide("fadeOut");
+    		$(this).addClass("active");
 	  	});
-  		$(".ubuntu").on("click", function() { $(".ubuntuver").show("fadeIn").find('input.def').prop('checked',true); });
-		 	$(".fedora").on("click", function() { $(".fedoraver").show("fadeIn").find('input.def').prop('checked',true); });
-			$(".centos").on("click", function() { $(".centosver").show("fadeIn").find('input.def').prop('checked',true); });
-			$(".debian").on("click", function() { $(".debianver").show("fadeIn").find('input.def').prop('checked',true); });
-			$("label.onemonth").on("click", function(){
-				$("div.prices").hide();
-				$("div.nodis").show();
-			});
-			$("label.threemonth").on("click", function(){
-				$("div.prices").hide();
-				$("div.dis").show();
-			});
-			$("label.sixmonth").on("click", function(){
-				$("div.prices").hide();
-				$("div.maxdis").show();
-			});
-			$(".ubuntuver").show();
+  		$(".ubuntu").on("click", function() { $(".ubuntuver").show("fadeIn").find('label.btn.btn-primary').removeClass('active').find('input.def').prop('checked',true).closest("label.btn.btn-primary").addClass('active'); });
+	 	$(".fedora").on("click", function() { $(".fedoraver").show("fadeIn").find('label.btn.btn-primary').removeClass('active').find('input.def').prop('checked',true).closest("label.btn.btn-primary").addClass('active'); });
+		$(".centos").on("click", function() { $(".centosver").show("fadeIn").find('label.btn.btn-primary').removeClass('active').find('input.def').prop('checked',true).closest("label.btn.btn-primary").addClass('active'); });
+		$(".debian").on("click", function() { $(".debianver").show("fadeIn").find('label.btn.btn-primary').removeClass('active').find('input.def').prop('checked',true).closest("label.btn.btn-primary").addClass('active'); });
+		$("label.onemonth").on("click", function(){
+			$("div.prices").hide();
+			$("div.nodis").show();
+			$(".btn.sizes").removeClass("active");
+			$(".defsize").addClass("active").find('input.defsizeinput').prop('checked',true);
 		});
+		$("label.threemonth").on("click", function(){
+			$("div.prices").hide();
+			$("div.dis").show();
+			$(".btn.sizes").removeClass("active");
+			$(".defsize").addClass("active").find('input.defsizeinput').prop('checked',true);
+		});
+		$("label.sixmonth").on("click", function(){
+			$("div.prices").hide();
+			$("div.maxdis").show();
+			$(".btn.sizes").removeClass("active");
+			$(".defsize").addClass("active").find('input.defsizeinput').prop('checked',true);
+		});
+		$(".ubuntuver").show();
+	});
+	$(window).bind("pageshow", function() {
+		$('.ver').hide();
+		$('.sizes').removeClass('active');
+		$('label.distro').removeClass('active');
+		$('.inst-duration').removeClass('active');
+		$('.region').removeClass('active');
+		$('.ver label.btn.btn-primary').removeClass('active');
+  		$('input[name="instance[distro]"]:checked').closest('label.distro').addClass("active");
+  		$('input[name="instance[image]"]:checked').closest('label.btn-primary').addClass("active").closest("div.ver").show();
+  		$('input[name="instance[size]"]:checked').closest('.btn.sizes').addClass("active");
+  		$('input[name="instance[duration]"]:checked').closest('label.inst-duration').addClass("active")
+  		$('input[name="instance[region]"]:checked').closest('div.region').addClass("active")
+	});
 	</script>
 	<style>
 		.ver{
@@ -189,15 +208,15 @@
 	  	<div class="container feature-box">
 	  		<h3>Select Your Plan</h3>
 	  		<div class="btn-group" data-toggle="buttons">
-					<label class="btn btn-primary onemonth">
+					<label class="btn btn-primary inst-duration onemonth">
 						<%= f.radio_button :duration,1 %>
 						1 Month
 					</label>
-					<label class="btn btn-primary threemonth active">
+					<label class="btn btn-primary inst-duration threemonth active">
 						<%= f.radio_button :duration,3,:checked => true %>
 						3 Months
 					</label>
-					<label class="btn btn-primary sixmonth">
+					<label class="btn btn-primary inst-duration sixmonth">
 						<%= f.radio_button :duration,6 %>
 						6 Months
 					</label>
@@ -227,7 +246,7 @@
 	  			</div>
 	  			<%= f.radio_button :size, '512mb' %>
 		    </div><!--
-		 --><div class="btn active sizes">
+		 --><div class="btn defsize active sizes">
 					<div class="nodis prices text">
 						<h3><sup>$</sup>11/Month</h3>
 					</div>
@@ -247,7 +266,7 @@
 			  			<li><span>2000 GB</span> Bandwidth</li>
 		  			</ul>
 	  			</div>
-	  			<%= f.radio_button :size, '1gb',:checked => true %>
+	  			<%= f.radio_button :size, '1gb',class: 'defsizeinput',:checked => true %>
 		    </div><!--
 		 --><div class="btn sizes">
 					<div class="nodis prices text">
