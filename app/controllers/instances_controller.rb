@@ -14,7 +14,7 @@ class InstancesController < ApplicationController
 	end
 	#List all Instances of A Particular User
 	def index
-		@instances = current_user.instances
+		@instances = current_user.instances.createdby
 	end
 	#Start an Instance
 	def start

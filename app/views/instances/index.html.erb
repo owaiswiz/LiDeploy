@@ -66,24 +66,29 @@
   <script>
     var refreshInstances;
     var autoRefresh;
+    var timeouts = [];
+    var loadState = true;
+    var clearTimeoutsAndInterval = function(){
+      clearInterval(autoRefresh);
+      for (var i=0; i<timeouts.length; i++) {
+        clearTimeout(timeouts[i]);
+      }
+    }
     $(document).ready(function(){
       var instances = $(".trow");
       var intervalDuration = 15000 * (instances.length);
-      console.log("ID=" + intervalDuration);
-      console.log("IL=" + instances.length);
       refreshInstances = function(offset){
         var timeoutDuration = 0;
-        console.log("RefreshInstances was called with offset="+offset);
         $(instances).each(function(){
           var id=$(this).attr('id');
           if(!$(this).hasClass("loading"))
           {
             $(this).addClass("loading");
-            var t = setTimeout(function() {
+            timeouts.push(setTimeout(function() {
               $("#" + id).load('/api/get/instances?id=' + id,function(){
                 $('#' + id).removeClass("loading");
               });
-            }, timeoutDuration);
+            }, timeoutDuration));
             timeoutDuration += offset;
           }
         });
@@ -94,7 +99,17 @@
       }
     });
     $(window).unload(function(){
-      clearInterval(autoRefresh);
+      clearTimeoutsAndInterval();
+    });
+    $(document).on("turbolinks:click",function(){clearTimeoutsAndInterval();});
+    $(document).one('click','.button_to',function(){
+      if(loadState){
+        loadState = false;
+        $.notifyClose();
+        $('body').append('<div class="ajax-loading"></div>');
+        clearTimeoutsAndInterval();
+        loadState = true;
+      }
     });
   </script>
 <% end %>
@@ -153,20 +168,20 @@
   								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
   								<div class="dropdown-menu">
                     <% if inst.status == "Powered Off" %>
-                      <%= button_to "Start",start_instance_path(:id=> inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Start Instance" %>
+                      <%= button_to "Start",start_instance_path(:id=> inst.id),method: :post,remote: true,:class => "btn btn-primary dropdown-item",:title => "Start Instance" %>
                     <% else %>
-                      <%= button_to "Shutdown",shutdown_instance_path(:id=>inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Shutdown Instance" %>
-                      <%= button_to "Restart",restart_instance_path(:id => inst.id),method: :post,:class => "btn btn-primary dropdown-item",:title => "Restart Instance" %>
+                      <%= button_to "Shutdown",shutdown_instance_path(:id=>inst.id),method: :post,remote: true,:class => "btn btn-primary dropdown-item",:title => "Shutdown Instance" %>
+                      <%= button_to "Restart",restart_instance_path(:id => inst.id),method: :post,remote: true,:class => "btn btn-primary dropdown-item",:title => "Restart Instance" %>
                     <% end %>
-                    <%= button_to "Renew",renew_put_instance_path(:id => inst.id),method: :put,:class => "btn btn-primary dropdown-item",:title => "Renew Instance" %>
-                    <%= button_to "Resize",resize_instance_path(:id => inst.id),method: :post,:class => "btn btn-primary dropdown-item",:titke => "Resize Instance" %>
-                    <%= button_to "Destroy",instances_path(:id => inst.id),method: :delete,:class => "btn btn-primary destroy dropdown-item",:title => "Destroy this Instance?",data: {:confirm => "This Action is irreversible<br/>Be Certain!"}%>
+                    <%= link_to "Renew",renew_put_instance_path(:id => inst.id),method: :put,remote: true,:class => "button_to btn btn-primary dropdown-item",:title => "Renew Instance" %>
+                    <%= button_to "Resize",resize_instance_path(:id => inst.id),method: :post,remote: true,:class => "btn btn-primary dropdown-item",:titke => "Resize Instance" %>
+                    <%= button_to "Destroy",instances_path(:id => inst.id),method: :delete,remote: true,:class => "btn btn-primary destroy dropdown-item",:title => "Destroy this Instance?",data: {:confirm => "This Action is irreversible<br/>Be Certain!"}%>
                   </div>
                 <% end %>
   						</div>
               <% else%>
                 <% if inst.status != "new" %>
-                  <%= button_to "Delete",instances_path(:id => inst.id),method: :delete,:class => "btn btn-primary destroy dropdown-item" %>
+                  <%= button_to "Delete",instances_path(:id => inst.id),method: :delete,remote: true,:class => "btn btn-primary destroy dropdown-item" %>
                 <%end%>
             <% end %>
   					</td>

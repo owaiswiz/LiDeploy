@@ -11,13 +11,10 @@ class RecordsController < ApplicationController
       client = DropletKit::Client.new(access_token: newdomain.api_key)
       domain = DropletKit::Domain.new(name: newdomain.name, ip_address: newdomain.ip_address)
       client.domains.create(domain)
-      if newdomain.save
-        default_record = (client.domain_records.all(for_domain: newdomain.name).to_a)[-1]
-        newdomain.records.create(record_type:'A',name:'@',data: newdomain.ip_address,record_id: default_record.id)
-        flash[:notice] = "Domain Record Created."
-      else
-        flash[:notice] = "Domain Record not created."
-      end
+      default_record = (client.domain_records.all(for_domain: newdomain.name).to_a)[-1]
+      newdomain.save
+      newdomain.records.create(record_type:'A',name:'@',data: newdomain.ip_address,record_id: default_record.id)
+      flash[:notice] = "Domain Record Created."
     rescue => e
       if e.message.match(/"message":"(.*)"/)
         if $1.match(/Name Only valid hostname/)
@@ -92,7 +89,6 @@ class RecordsController < ApplicationController
       record.update_attributes(name: crecord.name,data: crecord.data,port:crecord.port,weight:crecord.weight,priority: crecord.priority)
       flash[:notice] = "Record Updated"
     rescue => e
-      puts e
       if e.message.match(/"message":"(.*)"/)
         if $1.match(/Name Only valid hostname/)
           exception_message = "Only valid hostname characters are allowed. (a-z, a-z, 0-9, ., and -) or a single record of '@'."

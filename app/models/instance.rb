@@ -1,5 +1,6 @@
 class Instance < ActiveRecord::Base
   belongs_to :user
+  scope :createdby,-> {order('created_at DESC')}
   def paypal_url(inst)
     if inst.temp_status.nil?
       if inst.duration == 1
