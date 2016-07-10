@@ -168,3 +168,16 @@
   text-align: center;
   margin: 0 auto;
 }
+
+h3.tut-link{
+  a{
+    font-family: 'quicksandregular' !important;
+    font-weight: bold;
+    border: 0;
+    color: #3190e7;
+    transition: all 0.5s ease;
+    &:hover{
+      color: #2773b8 !important;
+    }
+  }
+}
