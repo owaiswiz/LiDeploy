@@ -5,14 +5,12 @@
   outline: 0 !important;
   border: 0 !important;
 }
-.alert{
-  margin-top: 20px;
-}
 .distro{
   height: 100px;
   width: 100px;
   background-position: center !important;
   background-repeat: no-repeat !important;
+  border-radius: 2% !important;
   p{
     padding-top:70px;
     font-family: 'quicksandbold';
@@ -26,28 +24,28 @@
   }
 }
 .ubuntu{
-  background: image-url('ubuntu.png') #f2f2f2;
+  background-image: image-url('ubuntu.png') !important;
 }
 .ubuntu.active{
   background-image: image-url('ubuntu-active.png') !important;
 }
 
 .fedora{
-  background: image-url('fedora.png') #f2f2f2;
+  background-image: image-url('fedora.png') !important;
 }
 .fedora.active{
   background-image: image-url('fedora-active.png') !important;
 }
 
 .centos{
-  background: image-url('centos.png') #f2f2f2;
+  background-image: image-url('centos.png') !important;
 }
 .centos.active{
   background-image: image-url('centos-active.png') !important;
 }
 
 .debian{
-  background: image-url('debian.png') #f2f2f2;
+  background-image: image-url('debian.png') !important;
 }
 .debian.active{
   background-image: image-url('debian-active.png') !important;
@@ -59,8 +57,8 @@
   height: 280px;
   width: 250px;
   padding: 0;
-  border-color: #298eea;
-  border: solid 1px #298eea;
+  border: 1px solid #298eea;
+  border-radius: 1% !important;
   margin: 20px !important;
 }
 
@@ -69,7 +67,7 @@
   padding-bottom: 10px;
   font-family: 'quicksandbold';
   font-size: 1.2em;
-  border-bottom: solid 1px #CDCDCD;
+  border-bottom: 1px solid #CDCDCD;
   height: 102px;
   h5{
     font-size: 15px;
@@ -112,7 +110,7 @@
   width: 120px;
   background-repeat: no-repeat !important;
   background-position: center !important;
-  border: solid 0.2px #298eea;
+  border: solid 1px #298eea;
   margin:15px 0 15px 15px !important;
   float:none !important;
   text-align: center;
