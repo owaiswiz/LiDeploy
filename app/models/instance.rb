@@ -13,7 +13,11 @@ class Instance < ActiveRecord::Base
         end
       elsif inst.duration == 3
         if inst.size == "512mb"
-          price = '15.99'
+          if inst.user.had_instance  
+            price = '15.99'
+          else
+            price ='12'
+          end
         elsif inst.size == '1gb'
           price = '28.99'
         elsif inst.size == '2gb'
@@ -21,7 +25,11 @@ class Instance < ActiveRecord::Base
         end
       elsif inst.duration == 6
         if inst.size == "512mb"
-          price = '31.99'
+          if inst.user.had_instance  
+            price = '31.99'
+          else
+            price = '30'
+          end
         elsif inst.size == '1gb'
           price = '59.99'
         elsif inst.size == '2gb'

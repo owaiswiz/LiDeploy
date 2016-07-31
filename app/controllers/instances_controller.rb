@@ -9,7 +9,22 @@ class InstancesController < ApplicationController
 		createinstance= current_user.instances.new(instance_params)
 		createinstance.status = 'Waiting for Payment Confirmation'
 		if createinstance.save
-			redirect_to createinstance.paypal_url(createinstance)
+			#Free for 1st instance most basic plan
+			if !current_user.had_instance && createinstance.size == "512mb" && createinstance.duration == 1
+				begin
+					current_do_key = ENV["DO_SECRET_KEY"]
+					client = DropletKit::Client.new(access_token: current_do_key)
+					droplet = DropletKit::Droplet.new(name: createinstance.name,region: createinstance.region,size: createinstance.size,image: createinstance.image)
+					created = client.droplets.create(droplet)
+					current_user.update_attributes(had_instance: true)
+					createinstance.update_attributes(:instanceid => created.id,:status => created.status,:api_key => current_do_key,:expires => Time.now+ createinstance.duration.months,purchased_at: Time.now)
+				rescue
+					createinstance.update_attributes(status: "Error creating Instance")
+				end
+				redirect_to instances_path
+			else
+				redirect_to createinstance.paypal_url(createinstance)
+			end
 		end
 	end
 	#List all Instances of A Particular User
@@ -180,6 +195,7 @@ class InstancesController < ApplicationController
 					client = DropletKit::Client.new(access_token: current_do_key)
 					droplet = DropletKit::Droplet.new(name: instance.name,region: instance.region,size: instance.size,image: instance.image)
 					created = client.droplets.create(droplet)
+					instance.user.update_attributes(had_instance: true)
 					instance.update_attributes(:instanceid => created.id,:status => created.status,:api_key => current_do_key,:expires => Time.now+instance.duration.months)
 				end
 			else

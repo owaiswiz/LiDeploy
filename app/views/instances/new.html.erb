@@ -1,6 +1,23 @@
 <% title "Create Instance" %>
 <% content_for :head do %>
 	<script>
+		function oneMonthPrices(){
+			$("div.prices").hide();
+			$("div.nodis").show();
+			setCheckToDefaultPrices();
+		}
+		function threeMonthPrices(){
+			$("div.prices").hide();
+			$("div.dis").show();
+		}
+		function sixMonthPrices(){
+			$("div.prices").hide();
+			$("div.maxdis").show();
+		}
+		function setCheckToDefaultPrices(){
+			$(".btn.sizes").removeClass("active");
+			$(".defsize").addClass("active").find('input.defsizeinput').prop('checked',true);
+		}
 		$(document).on('turbolinks:load',function() {
 			//checks to see if host name is valid
 			$("#instance_name").on('keyup change',function(){
@@ -34,22 +51,13 @@
 		$(".centos").on("click", function() { $(".centosver").show("fadeIn").find('label.btn.btn-primary').removeClass('active').find('input.def').prop('checked',true).closest("label.btn.btn-primary").addClass('active'); });
 		$(".debian").on("click", function() { $(".debianver").show("fadeIn").find('label.btn.btn-primary').removeClass('active').find('input.def').prop('checked',true).closest("label.btn.btn-primary").addClass('active'); });
 		$("label.onemonth").on("click", function(){
-			$("div.prices").hide();
-			$("div.nodis").show();
-			$(".btn.sizes").removeClass("active");
-			$(".defsize").addClass("active").find('input.defsizeinput').prop('checked',true);
+			oneMonthPrices();
 		});
 		$("label.threemonth").on("click", function(){
-			$("div.prices").hide();
-			$("div.dis").show();
-			$(".btn.sizes").removeClass("active");
-			$(".defsize").addClass("active").find('input.defsizeinput').prop('checked',true);
+			threeMonthPrices();
 		});
 		$("label.sixmonth").on("click", function(){
-			$("div.prices").hide();
-			$("div.maxdis").show();
-			$(".btn.sizes").removeClass("active");
-			$(".defsize").addClass("active").find('input.defsizeinput').prop('checked',true);
+			sixMonthPrices();
 		});
 		$(".ubuntuver").show();
 	});
@@ -63,7 +71,15 @@
   		$('input[name="instance[distro]"]:checked').closest('label.distro').addClass("active");
   		$('input[name="instance[image]"]:checked').closest('label.btn-primary').addClass("active").closest("div.ver").show();
   		$('input[name="instance[size]"]:checked').closest('.btn.sizes').addClass("active");
-  		$('input[name="instance[duration]"]:checked').closest('label.inst-duration').addClass("active")
+  		var currentSelectedPrice = $('input[name="instance[duration]"]:checked').closest('label.inst-duration').addClass("active");
+  		
+  		if (currentSelectedPrice.hasClass('onemonth'))
+  			oneMonthPrices();
+  		else if (currentSelectedPrice.hasClass('threemonth'))
+  			threeMonthPrices();
+  		else
+  			sixMonthPrices();
+
   		$('input[name="instance[region]"]:checked').closest('div.region').addClass("active")
 	});
 	</script>
@@ -226,16 +242,28 @@
 				<br>
 	  		<div class="btn sizes">
 					<div class="nodis prices text">
-						<h3><sup>$</sup>6/Month</h3>
+						<% if current_user.had_instance %>
+							<h3><sup>$</sup>6/Month</h3>
+						<% else %>
+							<h3>Free for First Month</h3>
+						<% end %>
 					</div>
 	  			<div class="dis prices text">
-		  			<h4><sup>$</sup>3.99/First Month</h4>
+	  				<% if current_user.had_instance %>	
+		  				<h4><sup>$</sup>3.99/First Month</h4>
+	  				<% else %>
+						<h4>Free for First Month</h4>
+					<% end %>
 		  			<h5><sup>$</sup>6/Thereafter</h5>
 	  			</div>
-					<div class="maxdis prices text">
+				<div class="maxdis prices text">
+					<% if current_user.had_instance %>	
 						<h4><sup>$</sup>1.99/First Month</h4>
-						<h5><sup>$</sup>6/Thereafter</h5>
-					</div>
+					<% else %>
+						<h4>Free for First Month</h4>
+					<% end %>
+					<h5><sup>$</sup>6/Thereafter</h5>
+				</div>
 	  			<div class="specs">
 		  			<ul>
 			  			<li><span>512 MB</span> RAM</li>

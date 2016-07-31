@@ -184,3 +184,17 @@ p {
   line-height: 150%;
   font-size: 1.25em;
 }
+.custom-primary-button{
+  padding: 15px;
+  border-radius: 3px !important;
+  min-width: 250px;
+  margin-bottom: 35px;
+  margin-top: 30px;
+  font-family: 'Oswald';
+  font-size: 1.4em;
+  letter-spacing: 3px;
+  background-color: transparent !important;
+}
+.free-plan p,.free-plan a{
+  font-size: 1.4em;
+}
