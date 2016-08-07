@@ -165,7 +165,8 @@ li .navbar-btn{
   align-items: flex-start;
   cursor: pointer;
   display: block;
-  font-family: 'quicksandbold';
+  font-family: 'quicksandregular' !important;
+  font-weight: bolder !important;
   transition: all 0.5s ease;
 }
 .signupbutton{
