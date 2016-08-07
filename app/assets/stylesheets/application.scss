@@ -114,7 +114,8 @@ li .navbar-btn{
 .grey{
   color:#777 !important;
   &.btn{
-    font-family: 'quicksandbold';
+    font-family: 'quicksandregular';
+    font-weight: bolder !important;
     &:hover{
       color:#3190e7;
       border-top:2px solid #3190e7;
