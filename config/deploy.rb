@@ -8,7 +8,7 @@ set :repo_url, 'https://owaiswiz:Owaiskhan1@github.com/owaiswiz/host.git'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 # Default deploy_to directory is /var/www/my_app
-set :deploy_to, '/home/deploy/lideploy'
+set :deploy_to, '/home/ubuntu/lideploy'
 # Default value for :scm is :git
 # set :scm, :git
 
