@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160730150304) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
     t.integer  "attempts",   default: 0, null: false
@@ -27,7 +30,7 @@ ActiveRecord::Schema.define(version: 20160730150304) do
     t.datetime "updated_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "domains", force: :cascade do |t|
     t.string   "name"
@@ -38,7 +41,7 @@ ActiveRecord::Schema.define(version: 20160730150304) do
     t.string   "api_key"
   end
 
-  add_index "domains", ["user_id"], name: "index_domains_on_user_id"
+  add_index "domains", ["user_id"], name: "index_domains_on_user_id", using: :btree
 
   create_table "instances", force: :cascade do |t|
     t.integer  "user_id"
@@ -66,7 +69,7 @@ ActiveRecord::Schema.define(version: 20160730150304) do
     t.string   "price"
   end
 
-  add_index "instances", ["user_id"], name: "index_instances_on_user_id"
+  add_index "instances", ["user_id"], name: "index_instances_on_user_id", using: :btree
 
   create_table "records", force: :cascade do |t|
     t.string   "record_type"
@@ -81,7 +84,7 @@ ActiveRecord::Schema.define(version: 20160730150304) do
     t.integer  "record_id"
   end
 
-  add_index "records", ["domain_id"], name: "index_records_on_domain_id"
+  add_index "records", ["domain_id"], name: "index_records_on_domain_id", using: :btree
 
   create_table "replies", force: :cascade do |t|
     t.text     "reply"
@@ -91,7 +94,7 @@ ActiveRecord::Schema.define(version: 20160730150304) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "replies", ["ticket_id"], name: "index_replies_on_ticket_id"
+  add_index "replies", ["ticket_id"], name: "index_replies_on_ticket_id", using: :btree
 
   create_table "tickets", force: :cascade do |t|
     t.integer  "user_id"
@@ -124,9 +127,9 @@ ActiveRecord::Schema.define(version: 20160730150304) do
     t.boolean  "had_instance",           default: false
   end
 
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end
