@@ -1,0 +1,32 @@
+# SQLite version 3.x
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem 'sqlite3'
+#
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+
+development:
+  <<: *default
+  host: localhost
+  username: <%= ENV['RAILS_DB_USERNAME'] %>
+  database: lideploy_dev
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: lideploy_test
+
+production:
+  <<: *default
+  database: lideploy_prod
+  username: lideploy
+  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
+
