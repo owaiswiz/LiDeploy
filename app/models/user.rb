@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :domains
   has_many :instances
   has_many :tickets
-  devise :database_authenticatable, :registerable, :confirmable,
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   validates :username,
   :presence => true,
