@@ -21,8 +21,15 @@ module Demo
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.serve_static_assets = true
+    config.serve_static_files = true
     config.active_record.raise_in_transactional_callbacks = true
     config.action_controller.default_url_options = { :trailing_slash => true }
+
+    config.before_configuration do
+      env_file = File.join(Rails.root, 'config', 'local_env.yml')
+      YAML.load(File.open(env_file)).each do |key, value|
+        ENV[key.to_s] = value
+      end if File.exists?(env_file)
+    end
   end
 end

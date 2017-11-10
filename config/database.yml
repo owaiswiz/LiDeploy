@@ -29,4 +29,3 @@ production:
   database: lideploy_prod
   username: lideploy
   password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
-
