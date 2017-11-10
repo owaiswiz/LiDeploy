@@ -1,5 +1,6 @@
-# ![alt text](https://github.com/owaiswiz/LiDeploy/raw/master/app/assets/images/Lideploylogo.png "Logo Title Text 1") 
-##### _A DigitalOcean Reseller written with Ruby on Rails utilizing [droplet_kit](https://github.com/digitalocean/droplet_kit)_
+# ![LiDeploy](https://github.com/owaiswiz/LiDeploy/raw/master/app/assets/images/Lideploylogo.png "Logo Title Text 1") 
+#### _A DigitalOcean Reseller written with Ruby on Rails utilizing [droplet_kit](https://github.com/digitalocean/droplet_kit)_
+##### Live Demo - https://lideploy.herokuapp.com
 
 ## Supports
 1. Creating/Deleting/Starting/Shutting Down instance
@@ -9,7 +10,7 @@
 5. Admin panel at /admin - only accessible by user which has admin attribute true (use irb to do this)
 ## Installation
 Following things need to be done to ensure proper execution:
-* Set Environment variable `SECRET_KEY_BASE` to a secret key(generate via rake)
+* Set Environment variable `SECRET_KEY_BASE` to a secret key(generate via `rake secret`)
 * Set Environment variable `DO_SECRET_KEY` to your DigitalOcean API Key
 * Set Environment variable `SMTP_USERNAME` and `SMTP_PASSWORD` to your SMTP server's credential (used for sending emails - password resets, confirmation emails, etc.)
 * Execute `rake db:setup` or `rake db:migrate` - To Create Database and apply pending migrations
